@@ -1,0 +1,12 @@
+= CONO-PLI API REST Docs
+CONO-PLI Music Domain Server
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 2
+:sectlinks:
+
+[[MusicDomain-API]]
+
+== Generator Server API
