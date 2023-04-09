@@ -8,7 +8,7 @@ import com.sideproject.conopli.music.dto.PopularRequestDto;
 import com.sideproject.conopli.music.dto.PopularResponseDto;
 import com.sideproject.conopli.music.dto.SearchRequestDto;
 import com.sideproject.conopli.music.entity.TjMusic;
-import com.sideproject.conopli.repository.MusicRepository;
+import com.sideproject.conopli.repository.TjMusicRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.jsoup.Jsoup;
@@ -27,7 +27,7 @@ import static com.sideproject.conopli.utils.CrawlingUrlUtil.*;
 @Transactional
 public class CrawlingService {
 
-    private final MusicRepository musicRepository;
+    private final TjMusicRepository tjMusicRepository;
 
     public ResponseDto getSearchCrawling(SearchRequestDto dto) {
         try {
@@ -103,7 +103,7 @@ public class CrawlingService {
                     MusicDto of = MusicDto.of(bodyList, searchNation);
                     response.add(of);
                     TjMusic entity = TjMusic.of(of);
-                    musicRepository.saveMusic(entity);
+                    tjMusicRepository.saveMusic(entity);
                 }
             }
             return ResponseDto.of(response);
