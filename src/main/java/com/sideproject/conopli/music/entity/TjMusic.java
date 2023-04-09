@@ -1,23 +1,22 @@
 package com.sideproject.conopli.music.entity;
 
 
+import com.sideproject.conopli.audit.Auditable;
 import com.sideproject.conopli.constant.MusicNation;
+import com.sideproject.conopli.music.dto.MusicDto;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
 
-import java.time.LocalDateTime;
 
 @Getter
 @NoArgsConstructor
 @Entity
 @Builder
 @AllArgsConstructor
-public class Music {
+public class TjMusic extends Auditable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long musicId;
@@ -26,7 +25,7 @@ public class Music {
     @Enumerated(value = EnumType.STRING)
     MusicNation nation;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     String num;
 
     @Column(nullable = false)
@@ -44,10 +43,17 @@ public class Music {
     @Column(nullable = false)
     String youtubeUrl;
 
-    @CreatedDate
-    LocalDateTime createAt;
+    public static TjMusic of(MusicDto dto) {
+        return new TjMusic(dto);
+    }
 
-    @LastModifiedDate
-    LocalDateTime modifyAt;
-
+    TjMusic(MusicDto dto) {
+        this.num = dto.getNum();
+        this.title = dto.getTitle();
+        this.singer = dto.getSinger();
+        this.lyricist = dto.getLyricist();
+        this.composer = dto.getComposer();
+        this.youtubeUrl = dto.getYoutubeUrl();
+        this.nation = MusicNation.valueOf(dto.getNation());
+    }
 }
