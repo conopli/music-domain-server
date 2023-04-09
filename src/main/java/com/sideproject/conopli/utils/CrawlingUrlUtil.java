@@ -3,8 +3,6 @@ package com.sideproject.conopli.utils;
 import com.sideproject.conopli.music.dto.PopularRequestDto;
 import com.sideproject.conopli.music.dto.SearchRequestDto;
 import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 
@@ -12,8 +10,8 @@ import org.springframework.stereotype.Component;
 @AllArgsConstructor
 public class CrawlingUrlUtil {
 
-    @Value("${CRAWLING_URL}")
-    private static String crawlingUrl;
+//    @Value("${CRAWLING_URL}")
+    private static final String crawlingUrl = "http://tjmedia.com/tjsong/";
 
     public static String createSearchUrl(SearchRequestDto dto) {
         // 1 = 제목, 2 가수 , 4 작사가 , 8 작곡가, 16 곡번호
