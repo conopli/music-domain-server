@@ -5,6 +5,7 @@ import lombok.Getter;
 public enum ErrorCode {
     BAD_REQUEST(400, "BAD REQUEST"),
     ARGUMENT_MISMATCH_BAD_REQUEST(400, "Argument Mismatch Bad Request" ),
+    EXISTS_MUSIC_NUM(400, "Exists Music Number" ),
     ACCESS_DENIED(403, "ACCESS DENIED"),
     NOT_FOUND(404, "NOT FOUND"),
     INTERNAL_SERVER_ERROR(500, "Internal Server Error" ),
