@@ -9,7 +9,7 @@ CONO-PLI Music Domain Server
 
 [[MusicDomain-API]]
 
-== Generator Server API
+== Music Domain Server API
 
 
 [[New-Music-GET-API]]
