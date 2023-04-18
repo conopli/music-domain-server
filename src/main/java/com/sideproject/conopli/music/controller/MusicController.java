@@ -30,7 +30,7 @@ public class MusicController {
     @GetMapping("/search")
     public ResponseEntity<?> searchMusic(
             @RequestBody SearchRequestDto requestDto,
-            @PageableDefault(page = 0, size = 10, sort = "updateAt", direction = Sort.Direction.DESC)
+            @PageableDefault(page = 0, size = 10, sort = "num", direction = Sort.Direction.DESC)
             Pageable pageable
             ) {
 

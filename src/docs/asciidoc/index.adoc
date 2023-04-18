@@ -10,3 +10,19 @@ CONO-PLI Music Domain Server
 [[MusicDomain-API]]
 
 == Generator Server API
+
+
+[[New-Music-GET-API]]
+=== New Music GET API
+operation::NewMusicGetAPI[snippets='http-request,request-body,http-response,response-body,response-fields']
+
+
+
+[[Popular-Music-GET-API]]
+=== Popular Music GET API
+operation::PopularMusicGetAPI[snippets='http-request,request-fields,request-body,http-response,response-body,response-fields']
+
+
+[[Music-Search-GET-API]]
+=== Music Search GET API
+operation::SearchMusicGetAPI[snippets='http-request,request-fields,request-body,http-response,response-body,response-fields']
