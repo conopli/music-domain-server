@@ -14,10 +14,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/music")
@@ -28,8 +25,8 @@ public class MusicController {
     private final MusicService musicService;
 
     @GetMapping("/search")
-    public ResponseEntity<?> searchMusic(
-            @RequestBody SearchRequestDto requestDto,
+    public ResponseEntity<PageResponseDto> searchMusic(
+            @ModelAttribute SearchRequestDto requestDto,
             @PageableDefault(page = 0, size = 10, sort = "num", direction = Sort.Direction.DESC)
             Pageable pageable
             ) {
@@ -44,14 +41,14 @@ public class MusicController {
     }
 
     @GetMapping("/new-music")
-    public ResponseEntity<?> findNewMusic() {
+    public ResponseEntity<ResponseDto> findNewMusic() {
         ResponseDto response = musicService.searchNewMusic();
         return ResponseEntity.ok(response);
     }
 
     @GetMapping("/popular")
-    public ResponseEntity<?> findPopularMusic(
-            @RequestBody PopularRequestDto requestDto
+    public ResponseEntity<ResponseDto> findPopularMusic(
+            @ModelAttribute PopularRequestDto requestDto
     ) {
         ResponseDto response = musicService.searchPopularMusic(requestDto);
         return ResponseEntity.ok(response);
