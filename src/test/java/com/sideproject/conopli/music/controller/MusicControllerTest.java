@@ -18,11 +18,13 @@ import org.springframework.restdocs.payload.JsonFieldType;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.RequestBuilder;
+import org.springframework.restdocs.request.RequestDocumentation;
 
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
+import static org.springframework.restdocs.request.RequestDocumentation.*;
 import static org.springframework.restdocs.payload.PayloadDocumentation.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -46,16 +48,11 @@ class MusicControllerTest {
     @DisplayName("[API][GET] Music Search")
     void givenSearchRequestWhenResultThenRequestKeyWord() throws Exception {
         //Given
-        SearchRequestDto searchRequestDto = new SearchRequestDto(
-                1, 0,"아리랑","KOR"
-        );
-        String content = mapper.writeValueAsString(searchRequestDto);
         //When
         RequestBuilder result = RestDocumentationRequestBuilders
-                .get("/api/music/search")
+                .get("/api/music/search?searchType=1&searchKeyWord=아리랑&searchNation=KOR&page=0")
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON)
-                .content(content)
                 .characterEncoding(StandardCharsets.UTF_8.displayName());
 
         //Then
@@ -65,14 +62,11 @@ class MusicControllerTest {
                         document("SearchMusicGetAPI",
                                 ApiDocumentUtils.getRequestPreProcessor(),
                                 ApiDocumentUtils.getResponsePreProcessor(),
-                                requestFields(
-                                        List.of(
-                                                fieldWithPath("searchType").type(JsonFieldType.NUMBER).description("검색 타입"),
-                                                fieldWithPath("searchPage").type(JsonFieldType.NUMBER).description("검색 페이지"),
-                                                fieldWithPath("searchKeyWord").type(JsonFieldType.STRING).description("검색 키워드"),
-                                                fieldWithPath("searchNation").type(JsonFieldType.STRING).description("검색 국가")
-                                        )
-
+                                queryParameters(
+                                        parameterWithName("page").description("요청 페이지 정보"),
+                                        parameterWithName("searchType").description("검색 타입 (1 = 제목, 2 = 가수 , 4 = 작사가 , 8 = 작곡가, 16 = 곡번호)"),
+                                        parameterWithName("searchKeyWord").description("검색 키워드"),
+                                        parameterWithName("searchNation").description("검색 국가")
                                 ),
                                 responseFields(
                                         List.of(
@@ -136,16 +130,11 @@ class MusicControllerTest {
     @DisplayName("[API][GET] Popular Music")
     void givenNoneWhenResultThenPopularMusic() throws Exception {
         //Given
-        PopularRequestDto popularRequestDto = new PopularRequestDto(
-                "1","2023","04","2023","04"
-        );
-        String content = mapper.writeValueAsString(popularRequestDto);
         //When
         RequestBuilder result = RestDocumentationRequestBuilders
-                .get("/api/music/popular")
+                .get("/api/music/popular?searchType=1&syy=2023&smm=04&eyy=2023&emm=04")
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON)
-                .content(content)
                 .characterEncoding(StandardCharsets.UTF_8.displayName());
 
         //Then
@@ -155,15 +144,12 @@ class MusicControllerTest {
                         document("PopularMusicGetAPI",
                                 ApiDocumentUtils.getRequestPreProcessor(),
                                 ApiDocumentUtils.getResponsePreProcessor(),
-                                requestFields(
-                                        List.of(
-                                                fieldWithPath("searchType").type(JsonFieldType.STRING).description("검색 타입"),
-                                                fieldWithPath("syy").type(JsonFieldType.STRING).description("시작 연도"),
-                                                fieldWithPath("smm").type(JsonFieldType.STRING).description("시작 월"),
-                                                fieldWithPath("eyy").type(JsonFieldType.STRING).description("종료 연도"),
-                                                fieldWithPath("emm").type(JsonFieldType.STRING).description("종료 월")
-                                        )
-
+                                queryParameters(
+                                        parameterWithName("searchType").description("검색 타입 (1 = 가요 2 = POP 3 = J-POP)"),
+                                        parameterWithName("syy").description("시작 연도(ex. 2023)"),
+                                        parameterWithName("smm").description("시작 월(ex. 04)"),
+                                        parameterWithName("eyy").description("종료 연도(ex. 2023)"),
+                                        parameterWithName("emm").description("종료 월(ex. 04)")
                                 ),
                                 responseFields(
                                         List.of(

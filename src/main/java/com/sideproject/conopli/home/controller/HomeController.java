@@ -8,13 +8,13 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 @RestController
-@RequestMapping
+@RequestMapping("/docs")
 @Slf4j
 @RequiredArgsConstructor
 public class HomeController {
 
 
-    @GetMapping("/")
+    @GetMapping
     public ModelAndView home() {
         return new ModelAndView("docs/index");
     }

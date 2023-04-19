@@ -449,7 +449,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#MusicDomain-API">Generator Server API</a>
+<li><a href="#MusicDomain-API">Music Domain Server API</a>
 <ul class="sectlevel2">
 <li><a href="#New-Music-GET-API">New Music GET API</a></li>
 <li><a href="#Popular-Music-GET-API">Popular Music GET API</a></li>
@@ -461,7 +461,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 <div id="content">
 <div class="sect1">
-<h2 id="MusicDomain-API"><a class="link" href="#MusicDomain-API">Generator Server API</a></h2>
+<h2 id="MusicDomain-API"><a class="link" href="#MusicDomain-API">Music Domain Server API</a></h2>
 <div class="sectionbody">
 <div class="sect2">
 <h3 id="New-Music-GET-API"><a class="link" href="#New-Music-GET-API">New Music GET API</a></h3>
@@ -477,865 +477,103 @@ Host: localhost:8080</code></pre>
 </div>
 </div>
 <div class="sect3">
-<h4 id="New-Music-GET-API_request_body"><a class="link" href="#New-Music-GET-API_request_body">Request body</a></h4>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight nowrap"><code class="language-json hljs" data-lang="json"></code></pre>
-</div>
-</div>
-</div>
-<div class="sect3">
 <h4 id="New-Music-GET-API_http_response"><a class="link" href="#New-Music-GET-API_http_response">HTTP response</a></h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">HTTP/1.1 200 OK
 Content-Type: application/json
-Content-Length: 29788
+Content-Length: 32847
 
 {
   "data" : [ {
-    "num" : "83433",
-    "title" : "비나리",
-    "singer" : "송가인",
-    "lyricist" : "심수봉",
-    "composer" : "심수봉",
-    "youtubeUrl" : "https://www.youtube.com/user/ziller/search?query=83433",
+    "num" : "83459",
+    "title" : "Need you",
+    "singer" : "쏠,성시경",
+    "lyricist" : "안신애,이지민",
+    "composer" : "안신애",
+    "youtubeUrl" : "https://www.youtube.com/user/ziller/search?query=83459",
     "nation" : "NEW"
   }, {
-    "num" : "68764",
-    "title" : "ワタシノミカタ",
-    "singer" : "夏川椎菜(Feat.HoneyWorks)",
-    "lyricist" : "GOM,SHITO",
-    "composer" : "GOM",
-    "youtubeUrl" : "https://www.youtube.com/user/ziller/search?query=68764",
+    "num" : "83458",
+    "title" : "빛이나는너에게",
+    "singer" : "던(DAWN)",
+    "lyricist" : "DAWN,GROOVYROOM1,GROOVYROOM2,KWACA,황유빈,HA:TFELT(핫펠트)",
+    "composer" : "DAWN,GROOVYROOM1,GROOVYROOM2,KWACA",
+    "youtubeUrl" : "https://www.youtube.com/user/ziller/search?query=83458",
     "nation" : "NEW"
   }, {
-    "num" : "68763",
-    "title" : "忘れてやらない('ぼっち・ざ・ろっく！' OST)",
-    "singer" : "結束バンド",
-    "lyricist" : "ZAQ",
-    "composer" : "吉岡大地",
-    "youtubeUrl" : "https://www.youtube.com/user/ziller/search?query=68763",
+    "num" : "83441",
+    "title" : "조금씩, 천천히, 너에게",
+    "singer" : "적재,백아",
+    "lyricist" : "권순관,TUNE",
+    "composer" : "권순관",
+    "youtubeUrl" : "https://www.youtube.com/user/ziller/search?query=83441",
     "nation" : "NEW"
   }, {
-    "num" : "83449",
-    "title" : "KNOCK",
-    "singer" : "이채연",
-    "lyricist" : "서용배,유주이",
-    "composer" : "서용배,유주이",
-    "youtubeUrl" : "https://www.youtube.com/user/ziller/search?query=83449",
+    "num" : "83440",
+    "title" : "봄노래",
+    "singer" : "LAS(라스)(Feat.미연((여자)아이들))",
+    "lyricist" : "아빈(AVIN),SLAY,이재영",
+    "composer" : "아빈(AVIN),SLAY,CHASE",
+    "youtubeUrl" : "https://www.youtube.com/user/ziller/search?query=83440",
     "nation" : "NEW"
   }, {
-    "num" : "83432",
-    "title" : "술한잔해요",
-    "singer" : "홍진영",
-    "lyricist" : "원태연,최은하",
-    "composer" : "이주호",
-    "youtubeUrl" : "https://www.youtube.com/user/ziller/search?query=83432",
-    "nation" : "NEW"
-  }, {
-    "num" : "83431",
-    "title" : "Golden Hour",
-    "singer" : "마크(MARK)",
-    "lyricist" : "마크,JANE,RON",
-    "composer" : "DRESS,마크,시온",
-    "youtubeUrl" : "https://www.youtube.com/user/ziller/search?query=83431",
-    "nation" : "NEW"
-  }, {
-    "num" : "83430",
-    "title" : "안녕하세오삼푸애요(I AM...)",
-    "singer" : "비비(BIBI)",
-    "lyricist" : "비비(BIBI)",
-    "composer" : "비비(BIBI),박진수",
-    "youtubeUrl" : "https://www.youtube.com/user/ziller/search?query=83430",
-    "nation" : "NEW"
-  }, {
-    "num" : "83429",
-    "title" : "내세상을주고싶어",
-    "singer" : "송이한",
-    "lyricist" : "송이한",
-    "composer" : "송이한,토마조(TOMAJO)",
-    "youtubeUrl" : "https://www.youtube.com/user/ziller/search?query=83429",
-    "nation" : "NEW"
-  }, {
-    "num" : "83428",
-    "title" : "후우(Who?)",
-    "singer" : "시우민(XIUMIN),은하(EUNHA)",
-    "lyricist" : "진리",
-    "composer" : "진리,영광의얼굴들1",
-    "youtubeUrl" : "https://www.youtube.com/user/ziller/search?query=83428",
-    "nation" : "NEW"
-  }, {
-    "num" : "49271",
-    "title" : "두발로",
-    "singer" : "창호",
-    "lyricist" : "창호,윤태지",
-    "composer" : "박현진",
-    "youtubeUrl" : "https://www.youtube.com/user/ziller/search?query=49271",
-    "nation" : "NEW"
-  }, {
-    "num" : "49270",
-    "title" : "WONDER BLANK",
-    "singer" : "이프랜디스(ifLANDIES)",
-    "lyricist" : "페이퍼플래닛(PAPER PLANET),BACADI",
-    "composer" : "페이퍼플래닛(PAPER PLANET),BACADI",
-    "youtubeUrl" : "https://www.youtube.com/user/ziller/search?query=49270",
-    "nation" : "NEW"
-  }, {
-    "num" : "83426",
-    "title" : "우린시간앞에무엇을선택해야할까",
-    "singer" : "릴러말즈(Feat.22)(Prod.Way Ched)",
-    "lyricist" : "릴러말즈 (LEELLAMARZ)",
-    "composer" : "WAY CHED,릴러말즈 (LEELLAMARZ)",
-    "youtubeUrl" : "https://www.youtube.com/user/ziller/search?query=83426",
-    "nation" : "NEW"
-  }, {
-    "num" : "83425",
-    "title" : "스쳐지나",
-    "singer" : "닐로",
-    "lyricist" : "닐로(NILO)",
-    "composer" : "닐로(NILO)",
-    "youtubeUrl" : "https://www.youtube.com/user/ziller/search?query=83425",
-    "nation" : "NEW"
-  }, {
-    "num" : "83434",
-    "title" : "I AM",
-    "singer" : "IVE(아이브)",
-    "lyricist" : "김이나",
-    "composer" : "JHUN RYAN SEWON,SKOLEM KRISTIN,GULDBRANDSEN AUDUN AGNAR,ELINE NOELIA MYRENG",
-    "youtubeUrl" : "https://www.youtube.com/user/ziller/search?query=83434",
-    "nation" : "NEW"
-  }, {
-    "num" : "83427",
-    "title" : "사람 Pt.2",
-    "singer" : "Agust D(Feat.IU)",
-    "lyricist" : "AGUST D,EL CAPITXN",
-    "composer" : "AGUST D,EL CAPITXN",
-    "youtubeUrl" : "https://www.youtube.com/user/ziller/search?query=83427",
-    "nation" : "NEW"
-  }, {
-    "num" : "83424",
-    "title" : "가질수없는너",
-    "singer" : "#안녕",
-    "lyricist" : "강은경",
-    "composer" : "정시로",
-    "youtubeUrl" : "https://www.youtube.com/user/ziller/search?query=83424",
-    "nation" : "NEW"
-  }, {
-    "num" : "83423",
-    "title" : "SuperCharger",
-    "singer" : "NINTYSIX",
-    "lyricist" : "DANKE 2,DANKE 1,DANKE 3,올리,타쿠토,웅기 (TOO)",
-    "composer" : "DAVID AMBER,RIGO AUGUST,MONES SKYLAR",
-    "youtubeUrl" : "https://www.youtube.com/user/ziller/search?query=83423",
-    "nation" : "NEW"
-  }, {
-    "num" : "83422",
-    "title" : "Switch",
-    "singer" : "꾹꾹이",
-    "lyricist" : "이나래(온삼월)",
-    "composer" : "황유근,NANTES VINCENT M,JONG DE BAS, PLANDSOEN PATRICK C H H",
-    "youtubeUrl" : "https://www.youtube.com/user/ziller/search?query=83422",
-    "nation" : "NEW"
-  }, {
-    "num" : "83421",
-    "title" : "En Garde(준비,시작!)",
-    "singer" : "En Butter",
-    "lyricist" : "네이슨(NATHAN),KZ,박건욱,김규빈",
-    "composer" : "네이슨(NATHAN),KZ,RONNIE ICON,이기원,BURGRUST RICARDO M,로즈아나(ROSANNA),DAILY",
-    "youtubeUrl" : "https://www.youtube.com/user/ziller/search?query=83421",
-    "nation" : "NEW"
-  }, {
-    "num" : "83420",
-    "title" : "Over Me",
-    "singer" : "Overdose",
-    "lyricist" : "DINT,T-LACK(HIGHBRID),HERTZ,OSKAR(HIGHBRID),조유리,김혜정,이미소,이정현",
-    "composer" : "DINT,T-LACK(HIGHBRID),HERTZ,OSKAR(HIGHBRID)",
-    "youtubeUrl" : "https://www.youtube.com/user/ziller/search?query=83420",
-    "nation" : "NEW"
-  }, {
-    "num" : "83419",
-    "title" : "Say My Name",
-    "singer" : "Say Yes!",
-    "lyricist" : "손다슬,FLUM3N,보란,IRIS YERIN LEE,한유진",
-    "composer" : "FLUM3N,보란,IRIS YERIN LEE",
-    "youtubeUrl" : "https://www.youtube.com/user/ziller/search?query=83419",
-    "nation" : "NEW"
-  }, {
-    "num" : "83414",
-    "title" : "KISS ME",
-    "singer" : "기리보이(Feat.빅나티(서동현))",
-    "lyricist" : "기리보이(GIRIBOY),BIG NAUGHTY(서동현)",
-    "composer" : "기리보이(GIRIBOY),BIG NAUGHTY(서동현)",
-    "youtubeUrl" : "https://www.youtube.com/user/ziller/search?query=83414",
-    "nation" : "NEW"
-  }, {
-    "num" : "83413",
-    "title" : "빙글빙글",
-    "singer" : "헤이즈(Prod.R.Tee)",
-    "lyricist" : "HEIZE,VVN,KUSH",
-    "composer" : "R.TEE,HEIZE,VVN,KUSH",
-    "youtubeUrl" : "https://www.youtube.com/user/ziller/search?query=83413",
-    "nation" : "NEW"
-  }, {
-    "num" : "83312",
-    "title" : "나야나공주",
-    "singer" : "핑크퐁",
-    "lyricist" : "핑크퐁",
-    "composer" : "핑크퐁",
-    "youtubeUrl" : "https://www.youtube.com/user/ziller/search?query=83312",
-    "nation" : "NEW"
-  }, {
-    "num" : "83311",
-    "title" : "생일축하송",
-    "singer" : "핑크퐁",
-    "lyricist" : "핑크퐁",
-    "composer" : "핑크퐁",
-    "youtubeUrl" : "https://www.youtube.com/user/ziller/search?query=83311",
-    "nation" : "NEW"
-  }, {
-    "num" : "83310",
-    "title" : "정글붐붐",
-    "singer" : "핑크퐁",
-    "lyricist" : "핑크퐁",
-    "composer" : "핑크퐁",
-    "youtubeUrl" : "https://www.youtube.com/user/ziller/search?query=83310",
-    "nation" : "NEW"
-  }, {
-    "num" : "83309",
-    "title" : "아프리카사바나",
-    "singer" : "핑크퐁",
-    "lyricist" : "핑크퐁",
-    "composer" : "핑크퐁",
-    "youtubeUrl" : "https://www.youtube.com/user/ziller/search?query=83309",
-    "nation" : "NEW"
-  }, {
-    "num" : "83410",
-    "title" : "내가야! 하면넌예!",
-    "singer" : "윤딴딴(Feat.경서)",
-    "lyricist" : "김태우",
-    "composer" : "김태우",
-    "youtubeUrl" : "https://www.youtube.com/user/ziller/search?query=83410",
-    "nation" : "NEW"
-  }, {
-    "num" : "83409",
-    "title" : "나는잘지내",
-    "singer" : "정키(Feat.정승환)",
-    "lyricist" : "정키",
-    "composer" : "정키",
-    "youtubeUrl" : "https://www.youtube.com/user/ziller/search?query=83409",
-    "nation" : "NEW"
-  }, {
-    "num" : "83408",
-    "title" : "세글자",
-    "singer" : "남승민",
-    "lyricist" : "김순곤",
-    "composer" : "임종수,임지상,임지선",
-    "youtubeUrl" : "https://www.youtube.com/user/ziller/search?query=83408",
-    "nation" : "NEW"
-  }, {
-    "num" : "83308",
-    "title" : "공룡ABC",
-    "singer" : "핑크퐁",
-    "lyricist" : "핑크퐁",
-    "composer" : "핑크퐁",
-    "youtubeUrl" : "https://www.youtube.com/user/ziller/search?query=83308",
-    "nation" : "NEW"
-  }, {
-    "num" : "83307",
-    "title" : "펭귄댄스",
-    "singer" : "핑크퐁",
-    "lyricist" : "핑크퐁",
-    "composer" : "핑크퐁",
-    "youtubeUrl" : "https://www.youtube.com/user/ziller/search?query=83307",
-    "nation" : "NEW"
-  }, {
-    "num" : "83306",
-    "title" : "몽키바나나",
-    "singer" : "핑크퐁",
-    "lyricist" : "핑크퐁",
-    "composer" : "핑크퐁",
-    "youtubeUrl" : "https://www.youtube.com/user/ziller/search?query=83306",
-    "nation" : "NEW"
-  }, {
-    "num" : "83305",
-    "title" : "티라노사우루스",
-    "singer" : "핑크퐁",
-    "lyricist" : "핑크퐁",
-    "composer" : "핑크퐁",
-    "youtubeUrl" : "https://www.youtube.com/user/ziller/search?query=83305",
-    "nation" : "NEW"
-  }, {
-    "num" : "49269",
-    "title" : "맛(고진감래)(DISCO Ver.)",
-    "singer" : "노수현",
-    "lyricist" : "이익현",
-    "composer" : "이익현",
-    "youtubeUrl" : "https://www.youtube.com/user/ziller/search?query=49269",
-    "nation" : "NEW"
-  }, {
-    "num" : "90189",
-    "title" : "卿卿(影视剧(祝卿好)的主题曲)",
-    "singer" : "周深",
-    "lyricist" : "张鹏鹏",
-    "composer" : "王耀光",
-    "youtubeUrl" : "https://www.youtube.com/user/ziller/search?query=90189",
-    "nation" : "NEW"
-  }, {
-    "num" : "90188",
-    "title" : "姑娘在远方",
-    "singer" : "柯柯柯啊",
-    "lyricist" : "柯柯柯啊",
-    "composer" : "柯柯柯啊",
-    "youtubeUrl" : "https://www.youtube.com/user/ziller/search?query=90188",
-    "nation" : "NEW"
-  }, {
-    "num" : "90183",
-    "title" : "落纸三千",
-    "singer" : "刘珂矣",
-    "lyricist" : "刘珂矣",
-    "composer" : "刘凯",
-    "youtubeUrl" : "https://www.youtube.com/user/ziller/search?query=90183",
-    "nation" : "NEW"
-  }, {
-    "num" : "90180",
-    "title" : "我是大东家((我是大东家)手游同名主题曲)",
-    "singer" : "邓寓君(等什么君)",
-    "lyricist" : "江山",
-    "composer" : "夏艺韩",
-    "youtubeUrl" : "https://www.youtube.com/user/ziller/search?query=90180",
-    "nation" : "NEW"
-  }, {
-    "num" : "90170",
-    "title" : "可能",
-    "singer" : "程响",
-    "lyricist" : "宁缺",
-    "composer" : "宁缺",
-    "youtubeUrl" : "https://www.youtube.com/user/ziller/search?query=90170",
-    "nation" : "NEW"
-  }, {
-    "num" : "83406",
-    "title" : "가라지",
-    "singer" : "손태진",
-    "lyricist" : "추세호",
-    "composer" : "추세호",
-    "youtubeUrl" : "https://www.youtube.com/user/ziller/search?query=83406",
-    "nation" : "NEW"
-  }, {
-    "num" : "83405",
-    "title" : "백년의약속",
-    "singer" : "황영웅",
-    "lyricist" : "김종환",
-    "composer" : "김종환",
-    "youtubeUrl" : "https://www.youtube.com/user/ziller/search?query=83405",
-    "nation" : "NEW"
-  }, {
-    "num" : "83403",
-    "title" : "그이름엄마",
-    "singer" : "정다경",
-    "lyricist" : "혼수상태",
+    "num" : "83439",
+    "title" : "예쁜사랑(Beautiful love)",
+    "singer" : "정다경,안성훈",
+    "lyricist" : "알고보니,혼수상태",
     "composer" : "알고보니,혼수상태",
-    "youtubeUrl" : "https://www.youtube.com/user/ziller/search?query=83403",
+    "youtubeUrl" : "https://www.youtube.com/user/ziller/search?query=83439",
     "nation" : "NEW"
   }, {
-    "num" : "83304",
-    "title" : "경찰차",
-    "singer" : "핑크퐁",
-    "lyricist" : "핑크퐁",
-    "composer" : "핑크퐁",
-    "youtubeUrl" : "https://www.youtube.com/user/ziller/search?query=83304",
+    "num" : "83438",
+    "title" : "해",
+    "singer" : "장기하",
+    "lyricist" : "장기하",
+    "composer" : "장기하",
+    "youtubeUrl" : "https://www.youtube.com/user/ziller/search?query=83438",
     "nation" : "NEW"
   }, {
-    "num" : "83303",
-    "title" : "동물의왕사자",
-    "singer" : "핑크퐁",
-    "lyricist" : "핑크퐁",
-    "composer" : "핑크퐁",
-    "youtubeUrl" : "https://www.youtube.com/user/ziller/search?query=83303",
+    "num" : "83437",
+    "title" : "Lips",
+    "singer" : "IVE(아이브)",
+    "lyricist" : "김솔희,엑시",
+    "composer" : "JHUN RYAN SEWON 외 6명",
+    "youtubeUrl" : "https://www.youtube.com/user/ziller/search?query=83437",
     "nation" : "NEW"
   }, {
-    "num" : "83302",
-    "title" : "아기상어",
-    "singer" : "핑크퐁",
-    "lyricist" : "핑크퐁",
-    "composer" : "핑크퐁",
-    "youtubeUrl" : "https://www.youtube.com/user/ziller/search?query=83302",
+    "num" : "83436",
+    "title" : "Giddy",
+    "singer" : "Kep1er",
+    "lyricist" : "황유빈",
+    "composer" : "STAINBOYS3 외 10명",
+    "youtubeUrl" : "https://www.youtube.com/user/ziller/search?query=83436",
     "nation" : "NEW"
   }, {
-    "num" : "83301",
-    "title" : "Baby Shark",
-    "singer" : "핑크퐁",
-    "lyricist" : "핑크퐁",
-    "composer" : "핑크퐁",
-    "youtubeUrl" : "https://www.youtube.com/user/ziller/search?query=83301",
+    "num" : "83435",
+    "title" : "Blue Blood",
+    "singer" : "IVE(아이브)",
+    "lyricist" : "서지음",
+    "composer" : "HAHN NICK,PETERS ELEANOR FLORA JANE,BRENAN SOPHIA LOUISE",
+    "youtubeUrl" : "https://www.youtube.com/user/ziller/search?query=83435",
     "nation" : "NEW"
   }, {
-    "num" : "79151",
-    "title" : "Honeymoon",
-    "singer" : "Johnny Stimson",
-    "lyricist" : "STIMSON JONATHAN GRAHAM",
-    "composer" : "STIMSON JONATHAN GRAHAM",
-    "youtubeUrl" : "https://www.youtube.com/user/ziller/search?query=79151",
+    "num" : "68770",
+    "title" : "My All",
+    "singer" : "BoA",
+    "lyricist" : "BOA",
+    "composer" : "KAWAGUCHI DAISUKE",
+    "youtubeUrl" : "https://www.youtube.com/user/ziller/search?query=68770",
     "nation" : "NEW"
   }, {
-    "num" : "49268",
-    "title" : "여수",
-    "singer" : "천주아",
-    "lyricist" : "천주아",
-    "composer" : "정윤수",
-    "youtubeUrl" : "https://www.youtube.com/user/ziller/search?query=49268",
+    "num" : "68765",
+    "title" : "雨模様",
+    "singer" : "ツユ",
+    "lyricist" : "ぷす",
+    "composer" : "ぷす",
+    "youtubeUrl" : "https://www.youtube.com/user/ziller/search?query=68765",
     "nation" : "NEW"
   }, {
-    "num" : "83412",
-    "title" : "D N D",
-    "singer" : "에이핑크",
-    "lyricist" : "DANKE 2,DANKE 1,DANKE 3,장한빛",
-    "composer" : "권덕근,CLOVD,PUFF,신은지",
-    "youtubeUrl" : "https://www.youtube.com/user/ziller/search?query=83412",
-    "nation" : "NEW"
-  }, {
-    "num" : "83411",
-    "title" : "가장아름다운시간이었다",
-    "singer" : "주호",
-    "lyricist" : "B.O.K,이주호",
-    "composer" : "B.O.K,이주호",
-    "youtubeUrl" : "https://www.youtube.com/user/ziller/search?query=83411",
-    "nation" : "NEW"
-  }, {
-    "num" : "83399",
-    "title" : "Summer Tights",
-    "singer" : "DPR LIVE",
-    "lyricist" : "DPR LIVE(디피알 라이브)",
-    "composer" : "DPR CREAM,DPR LIVE(디피알 라이브),AMPOFF",
-    "youtubeUrl" : "https://www.youtube.com/user/ziller/search?query=83399",
-    "nation" : "NEW"
-  }, {
-    "num" : "83398",
-    "title" : "바람이될게",
-    "singer" : "스트레이(The Stray)",
-    "lyricist" : "L.NDN",
-    "composer" : "JACK,L.NDN",
-    "youtubeUrl" : "https://www.youtube.com/user/ziller/search?query=83398",
-    "nation" : "NEW"
-  }, {
-    "num" : "83396",
-    "title" : "Run away(조선변호사OST)",
-    "singer" : "이창섭",
-    "lyricist" : "소지혁,김민재,핼로우굿보이,이동영,김민규",
-    "composer" : "핼로우굿보이,이동영,김민규",
-    "youtubeUrl" : "https://www.youtube.com/user/ziller/search?query=83396",
-    "nation" : "NEW"
-  }, {
-    "num" : "79150",
-    "title" : "Gimme Gimme",
-    "singer" : "Johnny Stimson",
-    "lyricist" : "STIMSON JONATHAN GRAHAM",
-    "composer" : "STIMSON JONATHAN GRAHAM",
-    "youtubeUrl" : "https://www.youtube.com/user/ziller/search?query=79150",
-    "nation" : "NEW"
-  }, {
-    "num" : "68760",
-    "title" : "麻痺('2.43 清陰高校男子バレー部' OP)",
-    "singer" : "yama",
-    "lyricist" : "TOOBOE",
-    "composer" : "TOOBOE",
-    "youtubeUrl" : "https://www.youtube.com/user/ziller/search?query=68760",
-    "nation" : "NEW"
-  }, {
-    "num" : "68759",
-    "title" : "すずめ(映画 'すずめの戸締まり' OST)",
-    "singer" : "RADWIMPS(Feat.十明)",
-    "lyricist" : "NODA YOJIRO",
-    "composer" : "NODA YOJIRO",
-    "youtubeUrl" : "https://www.youtube.com/user/ziller/search?query=68759",
-    "nation" : "NEW"
-  }, {
-    "num" : "83392",
-    "title" : "Go Away",
-    "singer" : "한요한(Feat.GEMma)",
-    "lyricist" : "한요한,GEMMA",
-    "composer" : "한요한,박경민,GEMMA",
-    "youtubeUrl" : "https://www.youtube.com/user/ziller/search?query=83392",
-    "nation" : "NEW"
-  }, {
-    "num" : "83390",
-    "title" : "인정하기싫어",
-    "singer" : "방찬(스트레이키즈)",
-    "lyricist" : "방찬(3RACHA)",
-    "composer" : "방찬(3RACHA)",
-    "youtubeUrl" : "https://www.youtube.com/user/ziller/search?query=83390",
-    "nation" : "NEW"
-  }, {
-    "num" : "83407",
-    "title" : "지명해줄래",
-    "singer" : "다나카(TANAKA)(Feat.Vince)",
-    "lyricist" : "VINCE,KUSH",
-    "composer" : "VINCE",
-    "youtubeUrl" : "https://www.youtube.com/user/ziller/search?query=83407",
-    "nation" : "NEW"
-  }, {
-    "num" : "83389",
-    "title" : "동화는무슨",
-    "singer" : "티키틱",
-    "lyricist" : "이신혁",
-    "composer" : "이신혁",
-    "youtubeUrl" : "https://www.youtube.com/user/ziller/search?query=83389",
-    "nation" : "NEW"
-  }, {
-    "num" : "79149",
-    "title" : "07 Britney",
-    "singer" : "Chelsea Collins",
-    "lyricist" : "COLLINS CHELSEA ANN,COLLINS NICOLAS LAWRENCE,LONGSTAFFE HEATHER E,LORENZO ROMAIN CHARLES",
-    "composer" : "COLLINS CHELSEA ANN,COLLINS NICOLAS LAWRENCE,LONGSTAFFE HEATHER E,LORENZO ROMAIN CHARLES",
-    "youtubeUrl" : "https://www.youtube.com/user/ziller/search?query=79149",
-    "nation" : "NEW"
-  }, {
-    "num" : "83401",
-    "title" : "Dawn",
-    "singer" : "김우석",
-    "lyricist" : "DANKE 2,강은정,DANKE 1,DANKE 3,VENDORS(CALI),김우석",
-    "composer" : "DE VIEW,LEEZ,WONDER B(WONCHA),VENDORS(CALI),김우석,WONDER B(DOBEE)",
-    "youtubeUrl" : "https://www.youtube.com/user/ziller/search?query=83401",
-    "nation" : "NEW"
-  }, {
-    "num" : "83400",
-    "title" : "Zero",
-    "singer" : "NewJeans",
-    "lyricist" : "GIGI,DIMBERG YLVA ANNA BIRGITTA",
-    "composer" : "DIMBERG YLVA ANNA BIRGITTA,MONRO",
-    "youtubeUrl" : "https://www.youtube.com/user/ziller/search?query=83400",
-    "nation" : "NEW"
-  }, {
-    "num" : "83384",
-    "title" : "TOK! TOK! TOK!",
-    "singer" : "LENA",
-    "lyricist" : "심재용,스타트랙2,스타트랙1",
-    "composer" : "심재용,스타트랙2,스타트랙1",
-    "youtubeUrl" : "https://www.youtube.com/user/ziller/search?query=83384",
-    "nation" : "NEW"
-  }, {
-    "num" : "83383",
-    "title" : "하굣길",
-    "singer" : "투모로우바이투게더",
-    "lyricist" : "조은희,ADORA,박우현,김수빈,이희주 외 8명",
-    "composer" : "조은희,ADORA,박우현,김수빈,이희주 외 8명",
-    "youtubeUrl" : "https://www.youtube.com/user/ziller/search?query=83383",
-    "nation" : "NEW"
-  }, {
-    "num" : "83382",
-    "title" : "Moscow Moscow",
-    "singer" : "온앤오프",
-    "lyricist" : "지들로(GDLO),황현",
-    "composer" : "황현",
-    "youtubeUrl" : "https://www.youtube.com/user/ziller/search?query=83382",
-    "nation" : "NEW"
-  }, {
-    "num" : "83381",
-    "title" : "운명처럼(Like a star)",
-    "singer" : "소녀리버스(GIRL'S RE:VERSE)",
-    "lyricist" : "허타",
-    "composer" : "허타,JOSEPH K,AFTRSHOK 2,AFTRSHOK 1",
-    "youtubeUrl" : "https://www.youtube.com/user/ziller/search?query=83381",
-    "nation" : "NEW"
-  }, {
-    "num" : "83380",
-    "title" : "그대내친구여",
-    "singer" : "손태진",
-    "lyricist" : "하광훈",
-    "composer" : "하광훈",
-    "youtubeUrl" : "https://www.youtube.com/user/ziller/search?query=83380",
-    "nation" : "NEW"
-  }, {
-    "num" : "83379",
-    "title" : "Vroong",
-    "singer" : "릴러말즈,NSW yoon,Street Baby",
-    "lyricist" : "릴러말즈 (LEELLAMARZ),NSW YOON,STREET BABY",
-    "composer" : "MIDAS P,릴러말즈 (LEELLAMARZ),NSW YOON,STREET BABY",
-    "youtubeUrl" : "https://www.youtube.com/user/ziller/search?query=83379",
-    "nation" : "NEW"
-  }, {
-    "num" : "83394",
-    "title" : "All Eyes On Me",
-    "singer" : "지수(JISOO)",
-    "lyricist" : "TEDDY,VINCE",
-    "composer" : "TEDDY,R.TEE,24,VVN",
-    "youtubeUrl" : "https://www.youtube.com/user/ziller/search?query=83394",
-    "nation" : "NEW"
-  }, {
-    "num" : "83393",
-    "title" : "사랑하지않아서그랬어",
-    "singer" : "임한별",
-    "lyricist" : "박강일",
-    "composer" : "박강일",
-    "youtubeUrl" : "https://www.youtube.com/user/ziller/search?query=83393",
-    "nation" : "NEW"
-  }, {
-    "num" : "83375",
-    "title" : "The Crown",
-    "singer" : "슈퍼주니어",
-    "lyricist" : "이유진,DANKE 2,JAKE K,DANKE 1,DANKE 3,LOVE ANDY,PITTSINGER NICOLAS KARL",
-    "composer" : "JAKE K,LOVE ANDY,PITTSINGER NICOLAS KARL",
-    "youtubeUrl" : "https://www.youtube.com/user/ziller/search?query=83375",
-    "nation" : "NEW"
-  }, {
-    "num" : "83374",
-    "title" : "So Good",
-    "singer" : "레드벨벳",
-    "lyricist" : "김인형,DEEZ,BONNICK GREG PAUL STEPHEN,CHAPMAN HAYDEN,BERG TOLLBOM ELLEN ANNIE BEATA",
-    "composer" : "DEEZ,BONNICK GREG PAUL STEPHEN,CHAPMAN HAYDEN,BERG TOLLBOM ELLEN ANNIE BEATA",
-    "youtubeUrl" : "https://www.youtube.com/user/ziller/search?query=83374",
-    "nation" : "NEW"
-  }, {
-    "num" : "83373",
-    "title" : "Back to you",
-    "singer" : "eldon",
-    "lyricist" : "ELDON",
-    "composer" : "폴카이트,ELDON",
-    "youtubeUrl" : "https://www.youtube.com/user/ziller/search?query=83373",
-    "nation" : "NEW"
-  }, {
-    "num" : "83372",
-    "title" : "ACT!VE VOLCANO",
-    "singer" : "Zior Park(Feat.Tabber)",
-    "lyricist" : "김현준,ZIOR PAPK,TABBER",
-    "composer" : "ROCKITMAN,김현준,ZIOR PAPK,TABBER",
-    "youtubeUrl" : "https://www.youtube.com/user/ziller/search?query=83372",
-    "nation" : "NEW"
-  }, {
-    "num" : "83371",
-    "title" : "EUNOIA",
-    "singer" : "Billlie",
-    "lyricist" : "리먼",
-    "composer" : "PIXELWAVE(1),PIXELWAVE(2),YOUHA",
-    "youtubeUrl" : "https://www.youtube.com/user/ziller/search?query=83371",
-    "nation" : "NEW"
-  }, {
-    "num" : "79157",
-    "title" : "Play It Cool",
-    "singer" : "Steve Aoki,MONSTA X",
-    "lyricist" : "COREY SANDERS,DAVID MORUP,SIVERTSEN SYLVESTER WILLY,STEVE AOKI,COFFEE CLARENCE BERNARD",
-    "composer" : "COREY SANDERS,DAVID MORUP,SIVERTSEN SYLVESTER WILLY,STEVE AOKI,COFFEE CLARENCE BERNARD",
-    "youtubeUrl" : "https://www.youtube.com/user/ziller/search?query=79157",
-    "nation" : "NEW"
-  }, {
-    "num" : "79156",
-    "title" : "Love Without Reason",
-    "singer" : "THE WONS",
-    "lyricist" : "박원재,김인건,박석원",
-    "composer" : "박원재,김인건,박석원",
-    "youtubeUrl" : "https://www.youtube.com/user/ziller/search?query=79156",
-    "nation" : "NEW"
-  }, {
-    "num" : "49267",
-    "title" : "Hello Goodbye",
-    "singer" : "딕 훼밀리(Dig Family)",
-    "lyricist" : "추가열",
-    "composer" : "추가열",
-    "youtubeUrl" : "https://www.youtube.com/user/ziller/search?query=49267",
-    "nation" : "NEW"
-  }, {
-    "num" : "83386",
-    "title" : "발걸음",
-    "singer" : "DK(디셈버)",
-    "lyricist" : "지우",
-    "composer" : "김영석",
-    "youtubeUrl" : "https://www.youtube.com/user/ziller/search?query=83386",
-    "nation" : "NEW"
-  }, {
-    "num" : "83385",
-    "title" : "꽃",
-    "singer" : "지수(JISOO)",
-    "lyricist" : "VINCE,VVN,KUSH,TEDDY",
-    "composer" : "24,VVN,KUSH",
-    "youtubeUrl" : "https://www.youtube.com/user/ziller/search?query=83385",
-    "nation" : "NEW"
-  }, {
-    "num" : "83368",
-    "title" : "tokyo",
-    "singer" : "RM",
-    "lyricist" : "SUPREME BOI,RM",
-    "composer" : "SUPREME BOI,RM",
-    "youtubeUrl" : "https://www.youtube.com/user/ziller/search?query=83368",
-    "nation" : "NEW"
-  }, {
-    "num" : "83367",
-    "title" : "행복지수",
-    "singer" : "이우,유주(YUJU)",
-    "lyricist" : "김현석,신현우,오성훈",
-    "composer" : "김현석,신현우,오성훈",
-    "youtubeUrl" : "https://www.youtube.com/user/ziller/search?query=83367",
-    "nation" : "NEW"
-  }, {
-    "num" : "83366",
-    "title" : "빛나주세요",
-    "singer" : "재하",
-    "lyricist" : "록(ROK),현모,재하",
-    "composer" : "록(ROK),재하",
-    "youtubeUrl" : "https://www.youtube.com/user/ziller/search?query=83366",
-    "nation" : "NEW"
-  }, {
-    "num" : "83365",
-    "title" : "미친거니",
-    "singer" : "4MEN",
-    "lyricist" : "류재현,박경진",
-    "composer" : "류재현",
-    "youtubeUrl" : "https://www.youtube.com/user/ziller/search?query=83365",
-    "nation" : "NEW"
-  }, {
-    "num" : "83364",
-    "title" : "Shine",
-    "singer" : "코드쿤스트(Feat.우원재,타이거JK,저스디스)",
-    "lyricist" : "우원재,TIGER JK,JUSTHIS(저스디스)",
-    "composer" : "코드쿤스트,우원재",
-    "youtubeUrl" : "https://www.youtube.com/user/ziller/search?query=83364",
-    "nation" : "NEW"
-  }, {
-    "num" : "83363",
-    "title" : "YnR Shit",
-    "singer" : "OXYNOVA,수퍼비,LIL GIMCHI,UNEDUCATED KID,KHAN",
-    "lyricist" : "OXYNOVA,KHAN,슈퍼비(SUPERBEE),LIL GIMCHI,UNEDUCATED KID",
-    "composer" : "OXYNOVA,TIMPANI BEATZ",
-    "youtubeUrl" : "https://www.youtube.com/user/ziller/search?query=83363",
-    "nation" : "NEW"
-  }, {
-    "num" : "68756",
-    "title" : "a.m.3:21- From THE FIRST TAKE",
-    "singer" : "yama",
-    "lyricist" : "くじら",
-    "composer" : "くじら",
-    "youtubeUrl" : "https://www.youtube.com/user/ziller/search?query=68756",
-    "nation" : "NEW"
-  }, {
-    "num" : "68755",
-    "title" : "No.1",
-    "singer" : "夏川椎菜(Feat.HoneyWorks)",
-    "lyricist" : "GOM,SHITO",
-    "composer" : "SHITO",
-    "youtubeUrl" : "https://www.youtube.com/user/ziller/search?query=68755",
-    "nation" : "NEW"
-  }, {
-    "num" : "49266",
-    "title" : "기다려라",
-    "singer" : "주재형",
-    "lyricist" : "리틀자이언트",
-    "composer" : "위종수",
-    "youtubeUrl" : "https://www.youtube.com/user/ziller/search?query=49266",
-    "nation" : "NEW"
-  }, {
-    "num" : "49265",
-    "title" : "화무는십일홍",
-    "singer" : "김가현",
-    "lyricist" : "리틀자이언트",
-    "composer" : "위종수",
-    "youtubeUrl" : "https://www.youtube.com/user/ziller/search?query=49265",
-    "nation" : "NEW"
-  }, {
-    "num" : "83378",
-    "title" : "빛을따라서(Shining Bright)",
-    "singer" : "첫사랑(CSR)",
-    "lyricist" : "DINT,KZ",
-    "composer" : "NTHONIUS,MEISOBO,DINT,KZ",
-    "youtubeUrl" : "https://www.youtube.com/user/ziller/search?query=83378",
-    "nation" : "NEW"
-  }, {
-    "num" : "83377",
-    "title" : "GGBB",
-    "singer" : "마마무+",
-    "lyricist" : "서용배,유주이,INNER CHILD,김도훈,이상호",
-    "composer" : "서용배,유주이,INNER CHILD,김도훈,이상호",
-    "youtubeUrl" : "https://www.youtube.com/user/ziller/search?query=83377",
-    "nation" : "NEW"
-  }, {
-    "num" : "83360",
-    "title" : "TAG",
-    "singer" : "던말릭(Feat.키드밀리)",
-    "lyricist" : "DON MALIK(던말릭),KIDMILLI",
-    "composer" : "DON MALIK(던말릭),WAY CHED",
-    "youtubeUrl" : "https://www.youtube.com/user/ziller/search?query=83360",
-    "nation" : "NEW"
-  }, {
-    "num" : "83359",
-    "title" : "외로운술잔",
-    "singer" : "성빈(최윤하)",
-    "lyricist" : "임석호",
-    "composer" : "임석호",
-    "youtubeUrl" : "https://www.youtube.com/user/ziller/search?query=83359",
-    "nation" : "NEW"
-  }, {
-    "num" : "83358",
-    "title" : "PSYCHO LOVE",
-    "singer" : "Zior Park",
-    "lyricist" : "ZIOR PAPK",
-    "composer" : "ROCKITMAN,ZIOR PAPK",
-    "youtubeUrl" : "https://www.youtube.com/user/ziller/search?query=83358",
-    "nation" : "NEW"
-  }, {
-    "num" : "83357",
-    "title" : "Alone",
-    "singer" : "지민(방탄소년단)",
-    "lyricist" : "JIMIN,GHSTLOOP,EVAN,PDOGG",
-    "composer" : "JIMIN,GHSTLOOP,EVAN,PDOGG",
-    "youtubeUrl" : "https://www.youtube.com/user/ziller/search?query=83357",
-    "nation" : "NEW"
-  }, {
-    "num" : "83356",
-    "title" : "Face-off",
-    "singer" : "지민(방탄소년단)",
-    "lyricist" : "RM,JIMIN,GHSTLOOP,EVAN,PDOGG",
-    "composer" : "RM,JIMIN,GHSTLOOP,EVAN,PDOGG",
-    "youtubeUrl" : "https://www.youtube.com/user/ziller/search?query=83356",
-    "nation" : "NEW"
-  }, {
-    "num" : "83355",
-    "title" : "그대발길머무는곳에(진짜가나타났다! OST)",
-    "singer" : "김희재",
-    "lyricist" : "하지영",
-    "composer" : "이호준",
-    "youtubeUrl" : "https://www.youtube.com/user/ziller/search?query=83355",
-    "nation" : "NEW"
-  }, {
-    "num" : "49264",
-    "title" : "천년사랑",
-    "singer" : "김가현",
-    "lyricist" : "주재형",
-    "composer" : "위종수",
-    "youtubeUrl" : "https://www.youtube.com/user/ziller/search?query=49264",
-    "nation" : "NEW"
-  }, {
-    "num" : "49263",
-    "title" : "사랑이뭐길래",
-    "singer" : "김가현",
-    "lyricist" : "김광철",
-    "composer" : "SKY",
-    "youtubeUrl" : "https://www.youtube.com/user/ziller/search?query=49263",
-    "nation" : "NEW"
-  }, {
-    "num" : "83352",
-    "title" : "다시보고싶은영화가있어",
-    "singer" : "로키드(Lokid),영화(mu.b)",
-    "lyricist" : "민연재,LOKID",
-    "composer" : "김동휘,LOKID",
-    "youtubeUrl" : "https://www.youtube.com/user/ziller/search?query=83352",
-    "nation" : "NEW"
-  }, {
-    "num" : "83351",
-    "title" : "우리",
-    "singer" : "이데아(idea)",
-    "lyricist" : "이데아(IDEA)",
-    "composer" : "NEVERFOREVER",
-    "youtubeUrl" : "https://www.youtube.com/user/ziller/search?query=83351",
-    "nation" : "NEW"
-  } ]
-}</code></pre>
-</div>
-</div>
-</div>
-<div class="sect3">
-<h4 id="New-Music-GET-API_response_body"><a class="link" href="#New-Music-GET-API_response_body">Response body</a></h4>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight nowrap"><code class="language-json hljs" data-lang="json">{
-  "data" : [ {
     "num" : "83433",
     "title" : "비나리",
     "singer" : "송가인",
@@ -2238,79 +1476,49 @@ Content-Length: 29788
 <h4 id="Popular-Music-GET-API_http_request"><a class="link" href="#Popular-Music-GET-API_http_request">HTTP request</a></h4>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">GET /api/music/popular HTTP/1.1
+<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">GET /api/music/popular?searchType=1&amp;syy=2023&amp;smm=04&amp;eyy=2023&amp;emm=04 HTTP/1.1
 Content-Type: application/json;charset=UTF-8
 Accept: application/json
-Content-Length: 98
-Host: localhost:8080
-
-{
-  "searchType" : "1",
-  "syy" : "2023",
-  "smm" : "04",
-  "eyy" : "2023",
-  "emm" : "04"
-}</code></pre>
+Host: localhost:8080</code></pre>
 </div>
 </div>
 </div>
 <div class="sect3">
-<h4 id="Popular-Music-GET-API_request_fields"><a class="link" href="#Popular-Music-GET-API_request_fields">Request fields</a></h4>
+<h4 id="Popular-Music-GET-API_query_parameters"><a class="link" href="#Popular-Music-GET-API_query_parameters">Query parameters</a></h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
-<col style="width: 33.3333%;">
-<col style="width: 33.3333%;">
-<col style="width: 33.3334%;">
+<col style="width: 50%;">
+<col style="width: 50%;">
 </colgroup>
 <thead>
 <tr>
-<th class="tableblock halign-left valign-top">Path</th>
-<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Parameter</th>
 <th class="tableblock halign-left valign-top">Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>searchType</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">검색 타입</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">검색 타입 (1 = 가요 2 = POP 3 = J-POP)</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>syy</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">시작 연도</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">시작 연도(ex. 2023)</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>smm</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">시작 월</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">시작 월(ex. 04)</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>eyy</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">종료 연도</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">종료 연도(ex. 2023)</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>emm</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">종료 월</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">종료 월(ex. 04)</p></td>
 </tr>
 </tbody>
 </table>
-</div>
-<div class="sect3">
-<h4 id="Popular-Music-GET-API_request_body"><a class="link" href="#Popular-Music-GET-API_request_body">Request body</a></h4>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight nowrap"><code class="language-json hljs" data-lang="json">{
-  "searchType" : "1",
-  "syy" : "2023",
-  "smm" : "04",
-  "eyy" : "2023",
-  "emm" : "04"
-}</code></pre>
-</div>
-</div>
 </div>
 <div class="sect3">
 <h4 id="Popular-Music-GET-API_http_response"><a class="link" href="#Popular-Music-GET-API_http_response">HTTP response</a></h4>
@@ -2433,19 +1641,19 @@ Content-Length: 11943
     "singer" : "성시경"
   }, {
     "ranking" : "23",
-    "num" : "82072",
-    "title" : "Hype boy",
-    "singer" : "NewJeans"
-  }, {
-    "ranking" : "24",
     "num" : "81776",
     "title" : "해요(2022)",
     "singer" : "#안녕"
   }, {
-    "ranking" : "25",
+    "ranking" : "24",
     "num" : "96763",
     "title" : "꿈속에너",
     "singer" : "에이치코드(Feat.전상근)"
+  }, {
+    "ranking" : "25",
+    "num" : "82072",
+    "title" : "Hype boy",
+    "singer" : "NewJeans"
   }, {
     "ranking" : "26",
     "num" : "91507",
@@ -2493,14 +1701,14 @@ Content-Length: 11943
     "singer" : "야다"
   }, {
     "ranking" : "35",
-    "num" : "6093",
-    "title" : "낭만고양이",
-    "singer" : "체리필터"
-  }, {
-    "ranking" : "36",
     "num" : "46490",
     "title" : "너였다면(또오해영OST)",
     "singer" : "정승환"
+  }, {
+    "ranking" : "36",
+    "num" : "6093",
+    "title" : "낭만고양이",
+    "singer" : "체리필터"
   }, {
     "ranking" : "37",
     "num" : "11019",
@@ -2538,14 +1746,14 @@ Content-Length: 11943
     "singer" : "데이식스"
   }, {
     "ranking" : "44",
-    "num" : "36707",
-    "title" : "봄봄봄",
-    "singer" : "로이킴"
-  }, {
-    "ranking" : "45",
     "num" : "81061",
     "title" : "호랑수월가",
     "singer" : "탑현"
+  }, {
+    "ranking" : "45",
+    "num" : "36707",
+    "title" : "봄봄봄",
+    "singer" : "로이킴"
   }, {
     "ranking" : "46",
     "num" : "34687",
@@ -2553,14 +1761,14 @@ Content-Length: 11943
     "singer" : "정준일"
   }, {
     "ranking" : "47",
-    "num" : "83063",
-    "title" : "파이팅해야지",
-    "singer" : "부석순(세븐틴)(Feat.이영지)"
-  }, {
-    "ranking" : "48",
     "num" : "35198",
     "title" : "나를사랑했던사람아",
     "singer" : "허각"
+  }, {
+    "ranking" : "48",
+    "num" : "83063",
+    "title" : "파이팅해야지",
+    "singer" : "부석순(세븐틴)(Feat.이영지)"
   }, {
     "ranking" : "49",
     "num" : "76385",
@@ -2578,14 +1786,14 @@ Content-Length: 11943
     "singer" : "서인국,정은지"
   }, {
     "ranking" : "52",
-    "num" : "18470",
-    "title" : "다시만난세계",
-    "singer" : "소녀시대"
-  }, {
-    "ranking" : "53",
     "num" : "39361",
     "title" : "스토커",
     "singer" : "10cm"
+  }, {
+    "ranking" : "53",
+    "num" : "18470",
+    "title" : "다시만난세계",
+    "singer" : "소녀시대"
   }, {
     "ranking" : "54",
     "num" : "9281",
@@ -2593,14 +1801,14 @@ Content-Length: 11943
     "singer" : "플라워"
   }, {
     "ranking" : "55",
-    "num" : "89245",
-    "title" : "아로하(슬기로운의사생활OST)",
-    "singer" : "조정석"
-  }, {
-    "ranking" : "56",
     "num" : "97404",
     "title" : "지나오다",
     "singer" : "닐로"
+  }, {
+    "ranking" : "56",
+    "num" : "89245",
+    "title" : "아로하(슬기로운의사생활OST)",
+    "singer" : "조정석"
   }, {
     "ranking" : "57",
     "num" : "34683",
@@ -2613,34 +1821,34 @@ Content-Length: 11943
     "singer" : "박명수"
   }, {
     "ranking" : "59",
-    "num" : "35184",
-    "title" : "벚꽃엔딩",
-    "singer" : "버스커버스커"
-  }, {
-    "ranking" : "60",
     "num" : "46716",
     "title" : "이소설의끝을다시써보려해",
     "singer" : "한동근"
   }, {
-    "ranking" : "61",
+    "ranking" : "60",
     "num" : "82838",
     "title" : "Say I Love You",
     "singer" : "우디"
   }, {
-    "ranking" : "62",
+    "ranking" : "61",
     "num" : "14832",
     "title" : "사랑했나봐",
     "singer" : "윤도현"
   }, {
-    "ranking" : "63",
-    "num" : "82793",
-    "title" : "Candy",
-    "singer" : "NCT DREAM"
-  }, {
-    "ranking" : "64",
+    "ranking" : "62",
     "num" : "3800",
     "title" : "발걸음",
     "singer" : "에메랄드캐슬"
+  }, {
+    "ranking" : "63",
+    "num" : "35184",
+    "title" : "벚꽃엔딩",
+    "singer" : "버스커버스커"
+  }, {
+    "ranking" : "64",
+    "num" : "82793",
+    "title" : "Candy",
+    "singer" : "NCT DREAM"
   }, {
     "ranking" : "65",
     "num" : "10052",
@@ -2648,14 +1856,14 @@ Content-Length: 11943
     "singer" : "얀"
   }, {
     "ranking" : "66",
-    "num" : "16677",
-    "title" : "기다리다",
-    "singer" : "윤하"
-  }, {
-    "ranking" : "67",
     "num" : "10594",
     "title" : "One Love",
     "singer" : "MC THE MAX"
+  }, {
+    "ranking" : "67",
+    "num" : "16677",
+    "title" : "기다리다",
+    "singer" : "윤하"
   }, {
     "ranking" : "68",
     "num" : "14828",
@@ -2668,24 +1876,24 @@ Content-Length: 11943
     "singer" : "멜로망스"
   }, {
     "ranking" : "70",
-    "num" : "82467",
-    "title" : "ANTIFRAGILE",
-    "singer" : "LE SSERAFIM(르세라핌)"
-  }, {
-    "ranking" : "71",
     "num" : "31943",
     "title" : "형(兄)",
     "singer" : "노라조"
   }, {
-    "ranking" : "72",
-    "num" : "82885",
-    "title" : "OMG",
-    "singer" : "NewJeans"
+    "ranking" : "71",
+    "num" : "82467",
+    "title" : "ANTIFRAGILE",
+    "singer" : "LE SSERAFIM(르세라핌)"
   }, {
-    "ranking" : "73",
+    "ranking" : "72",
     "num" : "38263",
     "title" : "야생화",
     "singer" : "박효신"
+  }, {
+    "ranking" : "73",
+    "num" : "82885",
+    "title" : "OMG",
+    "singer" : "NewJeans"
   }, {
     "ranking" : "74",
     "num" : "81898",
@@ -2708,14 +1916,14 @@ Content-Length: 11943
     "singer" : "다이나믹듀오"
   }, {
     "ranking" : "78",
-    "num" : "82075",
-    "title" : "새벽에걸려온너의전화는",
-    "singer" : "한동근"
-  }, {
-    "ranking" : "79",
     "num" : "13584",
     "title" : "나였으면(황태자의첫사랑OST)",
     "singer" : "나윤권"
+  }, {
+    "ranking" : "79",
+    "num" : "82075",
+    "title" : "새벽에걸려온너의전화는",
+    "singer" : "한동근"
   }, {
     "ranking" : "80",
     "num" : "14238",
@@ -2728,19 +1936,19 @@ Content-Length: 11943
     "singer" : "장범준"
   }, {
     "ranking" : "82",
+    "num" : "83361",
+    "title" : "Kitsch",
+    "singer" : "IVE(아이브)"
+  }, {
+    "ranking" : "83",
     "num" : "80788",
     "title" : "오르트구름",
     "singer" : "윤하"
   }, {
-    "ranking" : "83",
+    "ranking" : "84",
     "num" : "4074",
     "title" : "금지된사랑",
     "singer" : "김경호"
-  }, {
-    "ranking" : "84",
-    "num" : "30868",
-    "title" : "8282",
-    "singer" : "다비치"
   }, {
     "ranking" : "85",
     "num" : "82475",
@@ -2748,9 +1956,9 @@ Content-Length: 11943
     "singer" : "임한별"
   }, {
     "ranking" : "86",
-    "num" : "49522",
-    "title" : "홍연",
-    "singer" : "안예은"
+    "num" : "31981",
+    "title" : "술한잔해요",
+    "singer" : "지아"
   }, {
     "ranking" : "87",
     "num" : "96806",
@@ -2758,534 +1966,24 @@ Content-Length: 11943
     "singer" : "이수"
   }, {
     "ranking" : "88",
-    "num" : "83361",
-    "title" : "Kitsch",
-    "singer" : "IVE(아이브)"
+    "num" : "49522",
+    "title" : "홍연",
+    "singer" : "안예은"
   }, {
     "ranking" : "89",
-    "num" : "31981",
-    "title" : "술한잔해요",
-    "singer" : "지아"
-  }, {
-    "ranking" : "90",
-    "num" : "98727",
-    "title" : "너를만나",
-    "singer" : "폴킴"
-  }, {
-    "ranking" : "91",
-    "num" : "98866",
-    "title" : "그대가내안에박혔다",
-    "singer" : "황치열"
-  }, {
-    "ranking" : "92",
-    "num" : "35884",
-    "title" : "바람기억",
-    "singer" : "나얼"
-  }, {
-    "ranking" : "93",
-    "num" : "53651",
-    "title" : "주저하는연인들을위해",
-    "singer" : "잔나비"
-  }, {
-    "ranking" : "94",
-    "num" : "83108",
-    "title" : "Teddy Bear",
-    "singer" : "STAYC(스테이씨)"
-  }, {
-    "ranking" : "95",
-    "num" : "16223",
-    "title" : "비행기",
-    "singer" : "거북이"
-  }, {
-    "ranking" : "96",
-    "num" : "96391",
-    "title" : "폰서트",
-    "singer" : "10cm"
-  }, {
-    "ranking" : "97",
-    "num" : "11932",
-    "title" : "오리날다",
-    "singer" : "체리필터"
-  }, {
-    "ranking" : "98",
-    "num" : "97017",
-    "title" : "그날처럼",
-    "singer" : "장덕철"
-  }, {
-    "ranking" : "99",
-    "num" : "81601",
-    "title" : "오르막길",
-    "singer" : "윤종신"
-  }, {
-    "ranking" : "100",
-    "num" : "98245",
-    "title" : "축가",
-    "singer" : "전우성(노을)"
-  } ]
-}</code></pre>
-</div>
-</div>
-</div>
-<div class="sect3">
-<h4 id="Popular-Music-GET-API_response_body"><a class="link" href="#Popular-Music-GET-API_response_body">Response body</a></h4>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight nowrap"><code class="language-json hljs" data-lang="json">{
-  "data" : [ {
-    "ranking" : "1",
-    "num" : "83138",
-    "title" : "심(心)",
-    "singer" : "DK(디셈버)"
-  }, {
-    "ranking" : "2",
-    "num" : "81425",
-    "title" : "사건의지평선",
-    "singer" : "윤하"
-  }, {
-    "ranking" : "3",
-    "num" : "14515",
-    "title" : "응급실(쾌걸춘향OST)",
-    "singer" : "izi"
-  }, {
-    "ranking" : "4",
-    "num" : "46108",
-    "title" : "다시사랑한다면(니글니글버터플라이)",
-    "singer" : "김필"
-  }, {
-    "ranking" : "5",
-    "num" : "82308",
-    "title" : "Monologue",
-    "singer" : "tei"
-  }, {
-    "ranking" : "6",
-    "num" : "47835",
-    "title" : "그대라는사치",
-    "singer" : "한동근"
-  }, {
-    "ranking" : "7",
-    "num" : "46009",
-    "title" : "어디에도",
-    "singer" : "MC THE MAX"
-  }, {
-    "ranking" : "8",
-    "num" : "46213",
-    "title" : "Marry Me",
-    "singer" : "마크툽(MAKTUB),구윤회"
-  }, {
-    "ranking" : "9",
-    "num" : "81405",
-    "title" : "내가아니라도",
-    "singer" : "주호"
-  }, {
-    "ranking" : "10",
-    "num" : "38028",
-    "title" : "너의모든순간(별에서온그대OST)",
-    "singer" : "성시경"
-  }, {
-    "ranking" : "11",
-    "num" : "49818",
-    "title" : "좋니",
-    "singer" : "윤종신"
-  }, {
-    "ranking" : "12",
-    "num" : "82802",
-    "title" : "Ditto",
-    "singer" : "NewJeans"
-  }, {
-    "ranking" : "13",
-    "num" : "2730",
-    "title" : "가질수없는너",
-    "singer" : "뱅크"
-  }, {
-    "ranking" : "14",
-    "num" : "11491",
-    "title" : "소주한잔",
-    "singer" : "임창정"
-  }, {
-    "ranking" : "15",
-    "num" : "48470",
-    "title" : "첫눈처럼너에게가겠다(도깨비OST)",
-    "singer" : "에일리"
-  }, {
-    "ranking" : "16",
-    "num" : "48462",
-    "title" : "나에게로의초대(이상한나라의앨리스,하트다하트여왕)",
-    "singer" : "조유진,박기영"
-  }, {
-    "ranking" : "17",
-    "num" : "78872",
-    "title" : "첫사랑",
-    "singer" : "백아"
-  }, {
-    "ranking" : "18",
-    "num" : "80906",
-    "title" : "취중고백",
-    "singer" : "김민석"
-  }, {
-    "ranking" : "19",
-    "num" : "17489",
-    "title" : "비밀번호 486",
-    "singer" : "윤하"
-  }, {
-    "ranking" : "20",
-    "num" : "13588",
-    "title" : "삭제",
-    "singer" : "이승기"
-  }, {
-    "ranking" : "21",
-    "num" : "9986",
-    "title" : "그래서그대는",
-    "singer" : "얀"
-  }, {
-    "ranking" : "22",
-    "num" : "10842",
-    "title" : "희재(국화꽃향기OST)",
-    "singer" : "성시경"
-  }, {
-    "ranking" : "23",
-    "num" : "82072",
-    "title" : "Hype boy",
-    "singer" : "NewJeans"
-  }, {
-    "ranking" : "24",
-    "num" : "81776",
-    "title" : "해요(2022)",
-    "singer" : "#안녕"
-  }, {
-    "ranking" : "25",
-    "num" : "96763",
-    "title" : "꿈속에너",
-    "singer" : "에이치코드(Feat.전상근)"
-  }, {
-    "ranking" : "26",
-    "num" : "91507",
-    "title" : "포장마차",
-    "singer" : "황인욱"
-  }, {
-    "ranking" : "27",
-    "num" : "46262",
-    "title" : "봄이좋냐??",
-    "singer" : "10cm"
-  }, {
-    "ranking" : "28",
-    "num" : "34409",
-    "title" : "Hello",
-    "singer" : "허각"
-  }, {
-    "ranking" : "29",
-    "num" : "82666",
-    "title" : "와스레나이",
-    "singer" : "다나카(TANAKA)(Prod By 디핵(D-Hack))"
-  }, {
-    "ranking" : "30",
-    "num" : "82692",
-    "title" : "잘가요",
-    "singer" : "주호"
-  }, {
-    "ranking" : "31",
-    "num" : "80548",
-    "title" : "사랑은늘도망가(신사와아가씨OST)",
-    "singer" : "임영웅"
-  }, {
-    "ranking" : "32",
-    "num" : "35819",
-    "title" : "오래된노래",
-    "singer" : "스탠딩에그"
-  }, {
-    "ranking" : "33",
-    "num" : "80469",
-    "title" : "찰나가영원이될때(The Eternal Moment)",
-    "singer" : "마크툽(MAKTUB)"
-  }, {
-    "ranking" : "34",
-    "num" : "8122",
-    "title" : "이미슬픈사랑",
-    "singer" : "야다"
-  }, {
-    "ranking" : "35",
-    "num" : "6093",
-    "title" : "낭만고양이",
-    "singer" : "체리필터"
-  }, {
-    "ranking" : "36",
-    "num" : "46490",
-    "title" : "너였다면(또오해영OST)",
-    "singer" : "정승환"
-  }, {
-    "ranking" : "37",
-    "num" : "11019",
-    "title" : "체념",
-    "singer" : "빅마마"
-  }, {
-    "ranking" : "38",
-    "num" : "14684",
-    "title" : "가시",
-    "singer" : "버즈"
-  }, {
-    "ranking" : "39",
-    "num" : "91725",
-    "title" : "한페이지가될수있게",
-    "singer" : "데이식스"
-  }, {
-    "ranking" : "40",
-    "num" : "8797",
-    "title" : "Tears",
-    "singer" : "소찬휘"
-  }, {
-    "ranking" : "41",
-    "num" : "54825",
-    "title" : "너의번호를누르고",
-    "singer" : "#안녕(Prod.영화처럼)"
-  }, {
-    "ranking" : "42",
-    "num" : "37545",
-    "title" : "스물다섯,스물하나",
-    "singer" : "자우림"
-  }, {
-    "ranking" : "43",
-    "num" : "48585",
-    "title" : "예뻤어",
-    "singer" : "데이식스"
-  }, {
-    "ranking" : "44",
-    "num" : "36707",
-    "title" : "봄봄봄",
-    "singer" : "로이킴"
-  }, {
-    "ranking" : "45",
-    "num" : "81061",
-    "title" : "호랑수월가",
-    "singer" : "탑현"
-  }, {
-    "ranking" : "46",
-    "num" : "34687",
-    "title" : "안아줘",
-    "singer" : "정준일"
-  }, {
-    "ranking" : "47",
-    "num" : "83063",
-    "title" : "파이팅해야지",
-    "singer" : "부석순(세븐틴)(Feat.이영지)"
-  }, {
-    "ranking" : "48",
-    "num" : "35198",
-    "title" : "나를사랑했던사람아",
-    "singer" : "허각"
-  }, {
-    "ranking" : "49",
-    "num" : "76385",
-    "title" : "추억은만남보다이별에남아",
-    "singer" : "정동하"
-  }, {
-    "ranking" : "50",
-    "num" : "97511",
-    "title" : "모든날, 모든순간(Every Day, Every Moment)(키스먼저할까요? OST)",
-    "singer" : "폴킴"
-  }, {
-    "ranking" : "51",
-    "num" : "35774",
-    "title" : "All For You(응답하라1997 OST)",
-    "singer" : "서인국,정은지"
-  }, {
-    "ranking" : "52",
-    "num" : "18470",
-    "title" : "다시만난세계",
-    "singer" : "소녀시대"
-  }, {
-    "ranking" : "53",
-    "num" : "39361",
-    "title" : "스토커",
-    "singer" : "10cm"
-  }, {
-    "ranking" : "54",
-    "num" : "9281",
-    "title" : "Endless",
-    "singer" : "플라워"
-  }, {
-    "ranking" : "55",
-    "num" : "89245",
-    "title" : "아로하(슬기로운의사생활OST)",
-    "singer" : "조정석"
-  }, {
-    "ranking" : "56",
-    "num" : "97404",
-    "title" : "지나오다",
-    "singer" : "닐로"
-  }, {
-    "ranking" : "57",
-    "num" : "34683",
-    "title" : "흰수염고래",
-    "singer" : "윤도현밴드"
-  }, {
-    "ranking" : "58",
-    "num" : "19440",
-    "title" : "바보에게…바보가",
-    "singer" : "박명수"
-  }, {
-    "ranking" : "59",
-    "num" : "35184",
-    "title" : "벚꽃엔딩",
-    "singer" : "버스커버스커"
-  }, {
-    "ranking" : "60",
-    "num" : "46716",
-    "title" : "이소설의끝을다시써보려해",
-    "singer" : "한동근"
-  }, {
-    "ranking" : "61",
-    "num" : "82838",
-    "title" : "Say I Love You",
-    "singer" : "우디"
-  }, {
-    "ranking" : "62",
-    "num" : "14832",
-    "title" : "사랑했나봐",
-    "singer" : "윤도현"
-  }, {
-    "ranking" : "63",
-    "num" : "82793",
-    "title" : "Candy",
-    "singer" : "NCT DREAM"
-  }, {
-    "ranking" : "64",
-    "num" : "3800",
-    "title" : "발걸음",
-    "singer" : "에메랄드캐슬"
-  }, {
-    "ranking" : "65",
-    "num" : "10052",
-    "title" : "심",
-    "singer" : "얀"
-  }, {
-    "ranking" : "66",
-    "num" : "16677",
-    "title" : "기다리다",
-    "singer" : "윤하"
-  }, {
-    "ranking" : "67",
-    "num" : "10594",
-    "title" : "One Love",
-    "singer" : "MC THE MAX"
-  }, {
-    "ranking" : "68",
-    "num" : "14828",
-    "title" : "나에게로떠나는여행",
-    "singer" : "버즈"
-  }, {
-    "ranking" : "69",
-    "num" : "81242",
-    "title" : "사랑인가봐(사내맞선OST)",
-    "singer" : "멜로망스"
-  }, {
-    "ranking" : "70",
-    "num" : "82467",
-    "title" : "ANTIFRAGILE",
-    "singer" : "LE SSERAFIM(르세라핌)"
-  }, {
-    "ranking" : "71",
-    "num" : "31943",
-    "title" : "형(兄)",
-    "singer" : "노라조"
-  }, {
-    "ranking" : "72",
-    "num" : "82885",
-    "title" : "OMG",
-    "singer" : "NewJeans"
-  }, {
-    "ranking" : "73",
-    "num" : "38263",
-    "title" : "야생화",
-    "singer" : "박효신"
-  }, {
-    "ranking" : "74",
-    "num" : "81898",
-    "title" : "그라데이션",
-    "singer" : "10cm"
-  }, {
-    "ranking" : "75",
-    "num" : "18446",
-    "title" : "우리의꿈(원피스 OP)",
-    "singer" : "코요태"
-  }, {
-    "ranking" : "76",
-    "num" : "12291",
-    "title" : "Monologue",
-    "singer" : "버즈"
-  }, {
-    "ranking" : "77",
-    "num" : "31729",
-    "title" : "죽일놈(Guilty)",
-    "singer" : "다이나믹듀오"
-  }, {
-    "ranking" : "78",
-    "num" : "82075",
-    "title" : "새벽에걸려온너의전화는",
-    "singer" : "한동근"
-  }, {
-    "ranking" : "79",
-    "num" : "13584",
-    "title" : "나였으면(황태자의첫사랑OST)",
-    "singer" : "나윤권"
-  }, {
-    "ranking" : "80",
-    "num" : "14238",
-    "title" : "눈의꽃(미안하다사랑한다OST)",
-    "singer" : "박효신"
-  }, {
-    "ranking" : "81",
-    "num" : "53705",
-    "title" : "노래방에서",
-    "singer" : "장범준"
-  }, {
-    "ranking" : "82",
-    "num" : "80788",
-    "title" : "오르트구름",
-    "singer" : "윤하"
-  }, {
-    "ranking" : "83",
-    "num" : "4074",
-    "title" : "금지된사랑",
-    "singer" : "김경호"
-  }, {
-    "ranking" : "84",
     "num" : "30868",
     "title" : "8282",
     "singer" : "다비치"
   }, {
-    "ranking" : "85",
-    "num" : "82475",
-    "title" : "떠나보낼준비해둘걸그랬어",
-    "singer" : "임한별"
-  }, {
-    "ranking" : "86",
-    "num" : "49522",
-    "title" : "홍연",
-    "singer" : "안예은"
-  }, {
-    "ranking" : "87",
-    "num" : "96806",
-    "title" : "My Way(돈꽃OST)",
-    "singer" : "이수"
-  }, {
-    "ranking" : "88",
-    "num" : "83361",
-    "title" : "Kitsch",
-    "singer" : "IVE(아이브)"
-  }, {
-    "ranking" : "89",
-    "num" : "31981",
-    "title" : "술한잔해요",
-    "singer" : "지아"
-  }, {
     "ranking" : "90",
-    "num" : "98727",
-    "title" : "너를만나",
-    "singer" : "폴킴"
-  }, {
-    "ranking" : "91",
     "num" : "98866",
     "title" : "그대가내안에박혔다",
     "singer" : "황치열"
+  }, {
+    "ranking" : "91",
+    "num" : "98727",
+    "title" : "너를만나",
+    "singer" : "폴킴"
   }, {
     "ranking" : "92",
     "num" : "35884",
@@ -3387,72 +2085,45 @@ Content-Length: 11943
 <h4 id="Music-Search-GET-API_http_request"><a class="link" href="#Music-Search-GET-API_http_request">HTTP request</a></h4>
 <div class="listingblock">
 <div class="content">
-<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">GET /api/music/search HTTP/1.1
+<pre class="highlightjs highlight nowrap"><code class="language-http hljs" data-lang="http">GET /api/music/search?searchType=1&amp;searchKeyWord=%EC%95%84%EB%A6%AC%EB%9E%91&amp;searchNation=KOR&amp;page=0 HTTP/1.1
 Content-Type: application/json;charset=UTF-8
 Accept: application/json
-Content-Length: 106
-Host: localhost:8080
-
-{
-  "searchType" : 1,
-  "searchPage" : 0,
-  "searchKeyWord" : "아리랑",
-  "searchNation" : "KOR"
-}</code></pre>
+Host: localhost:8080</code></pre>
 </div>
 </div>
 </div>
 <div class="sect3">
-<h4 id="Music-Search-GET-API_request_fields"><a class="link" href="#Music-Search-GET-API_request_fields">Request fields</a></h4>
+<h4 id="Music-Search-GET-API_query_parameters"><a class="link" href="#Music-Search-GET-API_query_parameters">Query parameters</a></h4>
 <table class="tableblock frame-all grid-all stretch">
 <colgroup>
-<col style="width: 33.3333%;">
-<col style="width: 33.3333%;">
-<col style="width: 33.3334%;">
+<col style="width: 50%;">
+<col style="width: 50%;">
 </colgroup>
 <thead>
 <tr>
-<th class="tableblock halign-left valign-top">Path</th>
-<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Parameter</th>
 <th class="tableblock halign-left valign-top">Description</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>searchType</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">검색 타입</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>page</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">요청 페이지 정보</p></td>
 </tr>
 <tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>searchPage</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Number</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">검색 페이지</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>searchType</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">검색 타입 (1 = 제목, 2 = 가수 , 4 = 작사가 , 8 = 작곡가, 16 = 곡번호)</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>searchKeyWord</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">검색 키워드</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>searchNation</code></p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">검색 국가</p></td>
 </tr>
 </tbody>
 </table>
-</div>
-<div class="sect3">
-<h4 id="Music-Search-GET-API_request_body"><a class="link" href="#Music-Search-GET-API_request_body">Request body</a></h4>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight nowrap"><code class="language-json hljs" data-lang="json">{
-  "searchType" : 1,
-  "searchPage" : 0,
-  "searchKeyWord" : "아리랑",
-  "searchNation" : "KOR"
-}</code></pre>
-</div>
-</div>
 </div>
 <div class="sect3">
 <h4 id="Music-Search-GET-API_http_response"><a class="link" href="#Music-Search-GET-API_http_response">HTTP response</a></h4>
@@ -3463,112 +2134,6 @@ Content-Type: application/json
 Content-Length: 2928
 
 {
-  "data" : [ {
-    "musicId" : 47387,
-    "num" : "99686",
-    "title" : "소백산아리랑",
-    "singer" : "조윤선",
-    "lyricist" : "이용백",
-    "composer" : "문정기",
-    "youtubeUrl" : "https://www.youtube.com/user/ziller/search?query=99686",
-    "nation" : "KOR"
-  }, {
-    "musicId" : 7624,
-    "num" : "9877",
-    "title" : "아리랑(붉은악마국민응원가)",
-    "singer" : "윤도현밴드",
-    "lyricist" : "민요",
-    "composer" : "민요",
-    "youtubeUrl" : "https://www.youtube.com/user/ziller/search?query=9877",
-    "nation" : "KOR"
-  }, {
-    "musicId" : 46880,
-    "num" : "98645",
-    "title" : "상주아리랑",
-    "singer" : "김정아",
-    "lyricist" : "김정아",
-    "composer" : "유하정",
-    "youtubeUrl" : "https://www.youtube.com/user/ziller/search?query=98645",
-    "nation" : "KOR"
-  }, {
-    "musicId" : 46046,
-    "num" : "97810",
-    "title" : "홀로아리랑",
-    "singer" : "부활",
-    "lyricist" : "한돌",
-    "composer" : "한돌",
-    "youtubeUrl" : "https://www.youtube.com/user/ziller/search?query=97810",
-    "nation" : "KOR"
-  }, {
-    "musicId" : 44196,
-    "num" : "95959",
-    "title" : "서천아리랑",
-    "singer" : "임채희",
-    "lyricist" : "박용갑",
-    "composer" : "황선우",
-    "youtubeUrl" : "https://www.youtube.com/user/ziller/search?query=95959",
-    "nation" : "KOR"
-  }, {
-    "musicId" : 43684,
-    "num" : "95447",
-    "title" : "행복아리랑",
-    "singer" : "김진이",
-    "lyricist" : "김진이",
-    "composer" : "최석원",
-    "youtubeUrl" : "https://www.youtube.com/user/ziller/search?query=95447",
-    "nation" : "KOR"
-  }, {
-    "musicId" : 43561,
-    "num" : "95324",
-    "title" : "대구아리랑",
-    "singer" : "홍나영",
-    "lyricist" : "홍나영",
-    "composer" : "이재인",
-    "youtubeUrl" : "https://www.youtube.com/user/ziller/search?query=95324",
-    "nation" : "KOR"
-  }, {
-    "musicId" : 43415,
-    "num" : "95178",
-    "title" : "대장부아리랑",
-    "singer" : "황인성",
-    "lyricist" : "황인성",
-    "composer" : "송결",
-    "youtubeUrl" : "https://www.youtube.com/user/ziller/search?query=95178",
-    "nation" : "KOR"
-  }, {
-    "musicId" : 42399,
-    "num" : "89905",
-    "title" : "청춘아리랑",
-    "singer" : "최연수",
-    "lyricist" : "송광호",
-    "composer" : "송광호",
-    "youtubeUrl" : "https://www.youtube.com/user/ziller/search?query=89905",
-    "nation" : "KOR"
-  }, {
-    "musicId" : 6317,
-    "num" : "8562",
-    "title" : "울산아리랑",
-    "singer" : "오은정",
-    "lyricist" : "오은정",
-    "composer" : "김정일",
-    "youtubeUrl" : "https://www.youtube.com/user/ziller/search?query=8562",
-    "nation" : "KOR"
-  } ],
-  "pageInfo" : {
-    "page" : 0,
-    "size" : 10,
-    "totalElements" : 59,
-    "totalPages" : 6
-  }
-}</code></pre>
-</div>
-</div>
-</div>
-<div class="sect3">
-<h4 id="Music-Search-GET-API_response_body"><a class="link" href="#Music-Search-GET-API_response_body">Response body</a></h4>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight nowrap"><code class="language-json hljs" data-lang="json">{
   "data" : [ {
     "musicId" : 47387,
     "num" : "99686",
@@ -3766,7 +2331,7 @@ Content-Length: 2928
 <div id="footer">
 <div id="footer-text">
 Version 0.0.1<br>
-Last updated 2023-04-18 10:55:12 +0900
+Last updated 2023-04-19 10:30:25 +0900
 </div>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.3/highlight.min.js"></script>

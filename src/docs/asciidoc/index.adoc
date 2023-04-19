@@ -14,15 +14,15 @@ CONO-PLI Music Domain Server
 
 [[New-Music-GET-API]]
 === New Music GET API
-operation::NewMusicGetAPI[snippets='http-request,request-body,http-response,response-body,response-fields']
+operation::NewMusicGetAPI[snippets='http-request,http-response,response-fields']
 
 
 
 [[Popular-Music-GET-API]]
 === Popular Music GET API
-operation::PopularMusicGetAPI[snippets='http-request,request-fields,request-body,http-response,response-body,response-fields']
+operation::PopularMusicGetAPI[snippets='http-request,query-parameters,http-response,response-fields']
 
 
 [[Music-Search-GET-API]]
 === Music Search GET API
-operation::SearchMusicGetAPI[snippets='http-request,request-fields,request-body,http-response,response-body,response-fields']
+operation::SearchMusicGetAPI[snippets='http-request,query-parameters,http-response,response-fields']
