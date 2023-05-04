@@ -7,6 +7,7 @@ import com.sideproject.conopli.dto.ResponseDto;
 import com.sideproject.conopli.music.dto.MusicDto;
 import com.sideproject.conopli.music.dto.MusicQueryDto;
 import com.sideproject.conopli.music.dto.PopularRequestDto;
+import com.sideproject.conopli.music.entity.TjMusic;
 import com.sideproject.conopli.repository.TjMusicRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -36,6 +37,11 @@ public class MusicService {
     ) {
         Page<MusicQueryDto> queryMusic = tjMusicRepository.findQueryMusic(nation, searchType, keyWord, pageable);
         return PageResponseDto.of(queryMusic.getContent(), queryMusic);
+    }
+
+    public ResponseDto searchMusicByNum(String musicNum) {
+        TjMusic tjMusicByNum = tjMusicRepository.findTjMusicByNum(musicNum);
+        return ResponseDto.of(MusicQueryDto.of(tjMusicByNum));
     }
 
     public ResponseDto searchNewMusic() {

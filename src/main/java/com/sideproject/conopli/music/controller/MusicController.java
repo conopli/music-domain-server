@@ -29,7 +29,7 @@ public class MusicController {
             @ModelAttribute SearchRequestDto requestDto,
             @PageableDefault(page = 0, size = 10, sort = "num", direction = Sort.Direction.DESC)
             Pageable pageable
-            ) {
+    ) {
 
         PageResponseDto response = musicService.searchMusic(
                 MusicNation.valueOf(requestDto.getSearchNation().toUpperCase()),
@@ -37,6 +37,14 @@ public class MusicController {
                 requestDto.getSearchKeyWord(),
                 pageable
         );
+        return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/search/{musicNum}")
+    public ResponseEntity<?> searchMusicByNum(
+            @PathVariable String musicNum
+    ) {
+        ResponseDto response = musicService.searchMusicByNum(musicNum);
         return ResponseEntity.ok(response);
     }
 
