@@ -163,4 +163,42 @@ class MusicControllerTest {
 
                         ));
     }
+
+    @Test
+    @DisplayName("[API][GET] Search Music By MusicNum")
+    void givenMusicNumWhenGetSearchMusicThenReturnSearchMusic() throws Exception {
+        //Given
+        String musicNum = "83138";
+        //When
+        RequestBuilder result = RestDocumentationRequestBuilders
+                .get("/api/music/search/{musicNum}", musicNum)
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON)
+                .characterEncoding(StandardCharsets.UTF_8.displayName());
+        //Then
+        mvc.perform(result)
+                .andExpect(status().isOk())
+                .andDo(
+                        document("SearchMusicByNumGetAPI",
+                                ApiDocumentUtils.getRequestPreProcessor(),
+                                ApiDocumentUtils.getResponsePreProcessor(),
+                                RequestDocumentation.pathParameters(
+                                        parameterWithName("musicNum").description("곡 번호")
+                                ),
+                                responseFields(
+                                        List.of(
+                                                fieldWithPath("data").type(JsonFieldType.OBJECT).description("결과 데이터"),
+                                                fieldWithPath("data.musicId").type(JsonFieldType.NUMBER).description("음악 식별자"),
+                                                fieldWithPath("data.num").type(JsonFieldType.STRING).description("곡번호"),
+                                                fieldWithPath("data.title").type(JsonFieldType.STRING).description("곡 제목"),
+                                                fieldWithPath("data.singer").type(JsonFieldType.STRING).description("가수"),
+                                                fieldWithPath("data.lyricist").type(JsonFieldType.STRING).description("작사"),
+                                                fieldWithPath("data.composer").type(JsonFieldType.STRING).description("작곡"),
+                                                fieldWithPath("data.youtubeUrl").type(JsonFieldType.STRING).description("YouTube URL"),
+                                                fieldWithPath("data.nation").type(JsonFieldType.STRING).description("국가")
+                                        )
+                                )
+
+                        ));
+    }
 }
