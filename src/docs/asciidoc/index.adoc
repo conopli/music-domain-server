@@ -26,3 +26,8 @@ operation::PopularMusicGetAPI[snippets='http-request,query-parameters,http-respo
 [[Music-Search-GET-API]]
 === Music Search GET API
 operation::SearchMusicGetAPI[snippets='http-request,query-parameters,http-response,response-fields']
+
+
+[[Music-Search-ByNum-GET-API]]
+=== Music Search By Num GET API
+operation::SearchMusicByNumGetAPI[snippets='http-request,path-parameters,http-response,response-fields']
