@@ -27,7 +27,7 @@ public class MusicController {
     @GetMapping("/search")
     public ResponseEntity<PageResponseDto> searchMusic(
             @ModelAttribute SearchRequestDto requestDto,
-            @PageableDefault(page = 0, size = 10, sort = "num", direction = Sort.Direction.DESC)
+            @PageableDefault(page = 0, size = 20, sort = "num", direction = Sort.Direction.DESC)
             Pageable pageable
     ) {
 
