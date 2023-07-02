@@ -6,15 +6,12 @@ import com.sideproject.conopli.constant.ErrorCode;
 import com.sideproject.conopli.constant.MusicNation;
 import com.sideproject.conopli.constant.SearchType;
 import com.sideproject.conopli.exception.ServiceLogicException;
-import com.sideproject.conopli.music.dto.MusicDto;
 import com.sideproject.conopli.music.dto.MusicQueryDto;
 import com.sideproject.conopli.music.entity.QTjMusic;
 import com.sideproject.conopli.music.entity.TjMusic;
 import com.sideproject.conopli.repository.TjMusicJpaRepository;
 import com.sideproject.conopli.repository.TjMusicRepository;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.*;
 import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport;
 import org.springframework.stereotype.Repository;
 
@@ -22,8 +19,8 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public class TjTjMusicRepositoryImpl extends QuerydslRepositorySupport implements TjMusicRepository {
-    public TjTjMusicRepositoryImpl(TjMusicJpaRepository jpaRepository) {
+public class TjMusicRepositoryImpl extends QuerydslRepositorySupport implements TjMusicRepository {
+    public TjMusicRepositoryImpl(TjMusicJpaRepository jpaRepository) {
         super(TjMusic.class);
         this.jpaRepository = jpaRepository;
     }
@@ -60,6 +57,7 @@ public class TjTjMusicRepositoryImpl extends QuerydslRepositorySupport implement
             Pageable pageable
     ) {
         QTjMusic tjMusic = QTjMusic.tjMusic;
+        String sortProperties = "";
         JPQLQuery<MusicQueryDto> query = from(tjMusic)
                 .select(
                         Projections.constructor(
@@ -83,30 +81,40 @@ public class TjTjMusicRepositoryImpl extends QuerydslRepositorySupport implement
                 query.where(
                         tjMusic.num.containsIgnoreCase(keyWord)
                 );
+                sortProperties = "num";
             } else if (searchType.equals(SearchType.SINGER)) {
                 query.where(
                         tjMusic.singer.containsIgnoreCase(keyWord)
                 );
+                sortProperties = "singer";
             } else if (searchType.equals(SearchType.LYRICIST)) {
                 query.where(
                         tjMusic.lyricist.containsIgnoreCase(keyWord)
                 );
+                sortProperties = "lyricist";
             } else if (searchType.equals(SearchType.COMPOSER)) {
                 query.where(
                         tjMusic.composer.containsIgnoreCase(keyWord)
                 );
+                sortProperties = "composer";
             } else if (searchType.equals(SearchType.TITLE)) {
                 query.where(
                         tjMusic.title.containsIgnoreCase(keyWord)
                 );
+                sortProperties = "title";
             }
         }
+        Pageable customPageable = PageRequest.of(
+                pageable.getPageNumber(),
+                pageable.getPageSize(),
+                Sort.by(sortProperties).ascending()
+        );
         List<MusicQueryDto> musicList = Optional.ofNullable(getQuerydsl())
                 .orElseThrow(() -> new ServiceLogicException(
                         ErrorCode.DATA_ACCESS_ERROR))
-                .applyPagination(pageable, query)
+                .applyPagination(customPageable, query)
                 .fetch();
-        return new PageImpl<>(musicList, pageable, query.fetchCount());
+        return new PageImpl<>(musicList, customPageable, query.fetchCount());
     }
 
     private void verifyMusic(String num) {
