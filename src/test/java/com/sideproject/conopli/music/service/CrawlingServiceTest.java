@@ -23,15 +23,15 @@ class CrawlingServiceTest {
 //            ResponseDto autoSearch = service.createMusicCrawling(num, MusicNation.KOR);
 //            System.out.println(MusicNation.KOR.getNation()+num +" = "+autoSearch);
 //        }
-        for (int i = 1; i <= 100000; i++) {
-            String num = String.valueOf(i);
-            ResponseDto autoSearch = service.createMusicCrawling(num, MusicNation.ENG);
-            System.out.println(MusicNation.ENG.getNation()+num + " = "+autoSearch);
-        }
-        for (int i = 1; i <= 100000; i++) {
-            String num = String.valueOf(i);
-            ResponseDto autoSearch = service.createMusicCrawling(num, MusicNation.JPN);
-            System.out.println(MusicNation.JPN.getNation()+num +" = "+autoSearch);
-        }
+//        for (int i = 1; i <= 100000; i++) {
+//            String num = String.valueOf(i);
+//            ResponseDto autoSearch = service.createMusicCrawling(num, MusicNation.ENG);
+//            System.out.println(MusicNation.ENG.getNation()+num + " = "+autoSearch);
+//        }
+//        for (int i = 1; i <= 100000; i++) {
+//            String num = String.valueOf(i);
+//            ResponseDto autoSearch = service.createMusicCrawling(num, MusicNation.JPN);
+//            System.out.println(MusicNation.JPN.getNation()+num +" = "+autoSearch);
+//        }
     }
 }
