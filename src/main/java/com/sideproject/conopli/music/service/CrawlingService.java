@@ -69,7 +69,7 @@ public class CrawlingService {
         }
     }
 
-    public ResponseDto getNewSongCrawling() {
+    public ResponseDto getNewMusicCrawling() {
         try {
             String newSongUrl = createNewSongUrl();
             Document doc = Jsoup.connect(newSongUrl).get();

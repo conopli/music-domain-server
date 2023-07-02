@@ -8,6 +8,8 @@ public enum ErrorCode {
     EXISTS_MUSIC_NUM(400, "Exists Music Number" ),
     ACCESS_DENIED(403, "ACCESS DENIED"),
     NOT_FOUND(404, "NOT FOUND"),
+    NOT_FOUND_MUSIC(404, "Not Found Music"),
+    NOT_FOUND_SEARCH_TYPE(404, "Not Found Search Type"),
     INTERNAL_SERVER_ERROR(500, "Internal Server Error" ),
     HTTP_REQUEST_IO_ERROR(500, "Generator Server Request I/O Exception" ),
     DATA_ACCESS_ERROR(500, "Data Access Error"),

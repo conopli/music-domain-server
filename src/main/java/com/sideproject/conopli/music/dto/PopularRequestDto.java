@@ -17,6 +17,4 @@ public class PopularRequestDto {
     String eyy;
     String emm;
 
-
-
 }
