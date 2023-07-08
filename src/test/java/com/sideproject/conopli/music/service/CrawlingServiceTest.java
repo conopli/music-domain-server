@@ -15,8 +15,8 @@ class CrawlingServiceTest {
     private CrawlingService service;
 
 
-    @Test
-    void test() {
+//    @Test
+//    void test() {
         // 35000 까지 완료
 //        for (int i = 35001; i <= 100000; i++) {
 //            String num = String.valueOf(i);
@@ -33,5 +33,5 @@ class CrawlingServiceTest {
 //            ResponseDto autoSearch = service.createMusicCrawling(num, MusicNation.JPN);
 //            System.out.println(MusicNation.JPN.getNation()+num +" = "+autoSearch);
 //        }
-    }
+//    }
 }
