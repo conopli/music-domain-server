@@ -57,7 +57,6 @@ public class TjMusicRepositoryImpl extends QuerydslRepositorySupport implements 
             Pageable pageable
     ) {
         QTjMusic tjMusic = QTjMusic.tjMusic;
-        String sortProperties = "";
         JPQLQuery<MusicQueryDto> query = from(tjMusic)
                 .select(
                         Projections.constructor(
@@ -81,40 +80,31 @@ public class TjMusicRepositoryImpl extends QuerydslRepositorySupport implements 
                 query.where(
                         tjMusic.num.containsIgnoreCase(keyWord)
                 );
-                sortProperties = "num";
             } else if (searchType.equals(SearchType.SINGER)) {
                 query.where(
                         tjMusic.singer.containsIgnoreCase(keyWord)
                 );
-                sortProperties = "singer";
             } else if (searchType.equals(SearchType.LYRICIST)) {
                 query.where(
                         tjMusic.lyricist.containsIgnoreCase(keyWord)
                 );
-                sortProperties = "lyricist";
             } else if (searchType.equals(SearchType.COMPOSER)) {
                 query.where(
                         tjMusic.composer.containsIgnoreCase(keyWord)
                 );
-                sortProperties = "composer";
             } else if (searchType.equals(SearchType.TITLE)) {
                 query.where(
                         tjMusic.title.containsIgnoreCase(keyWord)
                 );
-                sortProperties = "title";
             }
         }
-        Pageable customPageable = PageRequest.of(
-                pageable.getPageNumber(),
-                pageable.getPageSize(),
-                Sort.by(sortProperties).ascending()
-        );
+
         List<MusicQueryDto> musicList = Optional.ofNullable(getQuerydsl())
                 .orElseThrow(() -> new ServiceLogicException(
                         ErrorCode.DATA_ACCESS_ERROR))
-                .applyPagination(customPageable, query)
+                .applyPagination(pageable, query)
                 .fetch();
-        return new PageImpl<>(musicList, customPageable, query.fetchCount());
+        return new PageImpl<>(musicList, pageable, query.fetchCount());
     }
 
     private void verifyMusic(String num) {
