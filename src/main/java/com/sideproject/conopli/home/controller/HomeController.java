@@ -16,6 +16,6 @@ public class HomeController {
 
     @GetMapping
     public ModelAndView home() {
-        return new ModelAndView("docs/index");
+        return new ModelAndView("docs/index.html");
     }
 }
