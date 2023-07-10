@@ -7,6 +7,7 @@ spring:
     password: ${MAIN_DB_PW}
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
+    database: mysql
     hibernate:
       ddl-auto: none
     #    show-sql: true

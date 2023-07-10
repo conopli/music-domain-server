@@ -25,7 +25,7 @@ public class TjMusic extends Auditable {
     @Enumerated(value = EnumType.STRING)
     MusicNation nation;
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     String num;
 
     @Column(nullable = false)
