@@ -70,11 +70,7 @@ public class TjMusicRepositoryImpl extends QuerydslRepositorySupport implements 
                                 tjMusic.youtubeUrl,
                                 tjMusic.nation
                         ));
-        if (nation != null) {
-            query.where(
-                    tjMusic.nation.eq(nation)
-            );
-        }
+
         if (searchType != null) {
             if (searchType.equals(SearchType.NUM)) {
                 query.where(
@@ -82,21 +78,26 @@ public class TjMusicRepositoryImpl extends QuerydslRepositorySupport implements 
                 );
             } else if (searchType.equals(SearchType.SINGER)) {
                 query.where(
-                        tjMusic.singer.containsIgnoreCase(keyWord)
+                        tjMusic.singer.eq(keyWord).or(tjMusic.singer.containsIgnoreCase(keyWord))
                 );
             } else if (searchType.equals(SearchType.LYRICIST)) {
                 query.where(
-                        tjMusic.lyricist.containsIgnoreCase(keyWord)
+                        tjMusic.lyricist.eq(keyWord).or(tjMusic.lyricist.containsIgnoreCase(keyWord))
                 );
             } else if (searchType.equals(SearchType.COMPOSER)) {
                 query.where(
-                        tjMusic.composer.containsIgnoreCase(keyWord)
+                        tjMusic.composer.eq(keyWord).or(tjMusic.composer.containsIgnoreCase(keyWord))
                 );
             } else if (searchType.equals(SearchType.TITLE)) {
                 query.where(
-                        tjMusic.title.containsIgnoreCase(keyWord)
+                        tjMusic.title.eq(keyWord).or(tjMusic.title.containsIgnoreCase(keyWord))
                 );
             }
+        }
+        if (nation != null) {
+            query.where(
+                    tjMusic.nation.eq(nation)
+            );
         }
 
         List<MusicQueryDto> musicList = Optional.ofNullable(getQuerydsl())
