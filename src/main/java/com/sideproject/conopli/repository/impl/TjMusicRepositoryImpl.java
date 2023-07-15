@@ -73,31 +73,36 @@ public class TjMusicRepositoryImpl extends QuerydslRepositorySupport implements 
 
         if (searchType != null) {
             if (searchType.equals(SearchType.NUM)) {
+                System.out.println("1111111111111");
                 query.where(
                         tjMusic.num.containsIgnoreCase(keyWord)
+                                .and(tjMusic.nation.eq(nation))
                 );
             } else if (searchType.equals(SearchType.SINGER)) {
+                System.out.println("22222222222222");
                 query.where(
                         tjMusic.singer.eq(keyWord).or(tjMusic.singer.containsIgnoreCase(keyWord))
+                                .and(tjMusic.nation.eq(nation))
                 );
             } else if (searchType.equals(SearchType.LYRICIST)) {
+                System.out.println("333333333333333");
                 query.where(
                         tjMusic.lyricist.eq(keyWord).or(tjMusic.lyricist.containsIgnoreCase(keyWord))
+                                .and(tjMusic.nation.eq(nation))
                 );
             } else if (searchType.equals(SearchType.COMPOSER)) {
+                System.out.println("444444444444444");
                 query.where(
                         tjMusic.composer.eq(keyWord).or(tjMusic.composer.containsIgnoreCase(keyWord))
+                                .and(tjMusic.nation.eq(nation))
                 );
             } else if (searchType.equals(SearchType.TITLE)) {
+                System.out.println("55555555555555");
                 query.where(
                         tjMusic.title.eq(keyWord).or(tjMusic.title.containsIgnoreCase(keyWord))
+                                .and(tjMusic.nation.eq(nation))
                 );
             }
-        }
-        if (nation != null) {
-            query.where(
-                    tjMusic.nation.eq(nation)
-            );
         }
 
         List<MusicQueryDto> musicList = Optional.ofNullable(getQuerydsl())
