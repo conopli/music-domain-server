@@ -40,10 +40,16 @@ public class MusicService {
         Pageable customPageable = PageRequest.of(
                 pageable.getPageNumber(),
                 pageable.getPageSize(),
-                Sort.by(searchType.name().toLowerCase()).descending()
+                Sort.Direction.DESC,
+                searchType.name().toLowerCase(),
+                "title"
         );
-        Page<MusicQueryDto> queryMusic = tjMusicRepository.findQueryMusic(nation, searchType, keyWord, customPageable);
-        return PageResponseDto.of(queryMusic.getContent(), queryMusic);
+        Page<TjMusic> queryMusic = tjMusicRepository.findQueryMusic(nation, searchType, keyWord, customPageable);
+        return PageResponseDto.of(
+                queryMusic.getContent()
+                        .stream().map(MusicQueryDto::of)
+                        .toList()
+                , queryMusic);
     }
 
     public ResponseDto searchMusicByNum(String musicNum) {
