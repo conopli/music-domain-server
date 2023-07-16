@@ -1,6 +1,8 @@
 package com.sideproject.conopli.repository.impl;
 
 import com.querydsl.core.types.Projections;
+import com.querydsl.core.types.dsl.PathBuilder;
+import com.querydsl.core.types.dsl.PathBuilderFactory;
 import com.querydsl.jpa.JPQLQuery;
 import com.sideproject.conopli.constant.ErrorCode;
 import com.sideproject.conopli.constant.MusicNation;
@@ -11,12 +13,17 @@ import com.sideproject.conopli.music.entity.QTjMusic;
 import com.sideproject.conopli.music.entity.TjMusic;
 import com.sideproject.conopli.repository.TjMusicJpaRepository;
 import com.sideproject.conopli.repository.TjMusicRepository;
+import jakarta.persistence.EntityManager;
 import org.springframework.data.domain.*;
+import org.springframework.data.jpa.repository.support.Querydsl;
 import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
+
+import static com.querydsl.jpa.JPAExpressions.select;
+import static com.querydsl.jpa.JPAExpressions.selectFrom;
 
 @Repository
 public class TjMusicRepositoryImpl extends QuerydslRepositorySupport implements TjMusicRepository {
@@ -50,54 +57,37 @@ public class TjMusicRepositoryImpl extends QuerydslRepositorySupport implements 
     }
 
     @Override
-    public Page<MusicQueryDto> findQueryMusic(
+    public Page<TjMusic> findQueryMusic(
             MusicNation nation,
             SearchType searchType,
             String keyWord,
             Pageable pageable
     ) {
         QTjMusic tjMusic = QTjMusic.tjMusic;
-        JPQLQuery<MusicQueryDto> query = from(tjMusic)
-                .select(
-                        Projections.constructor(
-                                MusicQueryDto.class,
-                                tjMusic.musicId,
-                                tjMusic.num,
-                                tjMusic.title,
-                                tjMusic.singer,
-                                tjMusic.lyricist,
-                                tjMusic.composer,
-                                tjMusic.youtubeUrl,
-                                tjMusic.nation
-                        ));
 
+        JPQLQuery<TjMusic> query = from(tjMusic).select(tjMusic);
         if (searchType != null) {
             if (searchType.equals(SearchType.NUM)) {
-                System.out.println("1111111111111");
                 query.where(
                         tjMusic.num.containsIgnoreCase(keyWord)
                                 .and(tjMusic.nation.eq(nation))
                 );
             } else if (searchType.equals(SearchType.SINGER)) {
-                System.out.println("22222222222222");
                 query.where(
                         tjMusic.singer.eq(keyWord).or(tjMusic.singer.containsIgnoreCase(keyWord))
                                 .and(tjMusic.nation.eq(nation))
                 );
             } else if (searchType.equals(SearchType.LYRICIST)) {
-                System.out.println("333333333333333");
                 query.where(
                         tjMusic.lyricist.eq(keyWord).or(tjMusic.lyricist.containsIgnoreCase(keyWord))
                                 .and(tjMusic.nation.eq(nation))
                 );
             } else if (searchType.equals(SearchType.COMPOSER)) {
-                System.out.println("444444444444444");
                 query.where(
                         tjMusic.composer.eq(keyWord).or(tjMusic.composer.containsIgnoreCase(keyWord))
                                 .and(tjMusic.nation.eq(nation))
                 );
             } else if (searchType.equals(SearchType.TITLE)) {
-                System.out.println("55555555555555");
                 query.where(
                         tjMusic.title.eq(keyWord).or(tjMusic.title.containsIgnoreCase(keyWord))
                                 .and(tjMusic.nation.eq(nation))
@@ -105,7 +95,8 @@ public class TjMusicRepositoryImpl extends QuerydslRepositorySupport implements 
             }
         }
 
-        List<MusicQueryDto> musicList = Optional.ofNullable(getQuerydsl())
+
+        List<TjMusic> musicList = Optional.ofNullable(getQuerydsl())
                 .orElseThrow(() -> new ServiceLogicException(
                         ErrorCode.DATA_ACCESS_ERROR))
                 .applyPagination(pageable, query)
