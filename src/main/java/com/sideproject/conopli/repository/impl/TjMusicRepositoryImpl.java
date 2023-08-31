@@ -57,7 +57,7 @@ public class TjMusicRepositoryImpl extends QuerydslRepositorySupport implements 
     }
 
     @Override
-    public Page<TjMusic> findQueryMusic(
+    public Page<MusicQueryDto> findQueryMusic(
             MusicNation nation,
             SearchType searchType,
             String keyWord,
@@ -65,7 +65,20 @@ public class TjMusicRepositoryImpl extends QuerydslRepositorySupport implements 
     ) {
         QTjMusic tjMusic = QTjMusic.tjMusic;
 
-        JPQLQuery<TjMusic> query = from(tjMusic).select(tjMusic);
+        JPQLQuery<MusicQueryDto> query = from(tjMusic)
+                .select(
+                        Projections.constructor(
+                                MusicQueryDto.class,
+                                tjMusic.musicId,
+                                tjMusic.num,
+                                tjMusic.title,
+                                tjMusic.singer,
+                                tjMusic.lyricist,
+                                tjMusic.composer,
+                                tjMusic.youtubeUrl,
+                                tjMusic.nation
+                        )
+                );
         if (searchType != null) {
             if (searchType.equals(SearchType.NUM)) {
                 query.where(
@@ -96,7 +109,7 @@ public class TjMusicRepositoryImpl extends QuerydslRepositorySupport implements 
         }
 
 
-        List<TjMusic> musicList = Optional.ofNullable(getQuerydsl())
+        List<MusicQueryDto> musicList = Optional.ofNullable(getQuerydsl())
                 .orElseThrow(() -> new ServiceLogicException(
                         ErrorCode.DATA_ACCESS_ERROR))
                 .applyPagination(pageable, query)

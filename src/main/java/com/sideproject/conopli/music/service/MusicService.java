@@ -44,11 +44,9 @@ public class MusicService {
                 searchType.name().toLowerCase(),
                 "title"
         );
-        Page<TjMusic> queryMusic = tjMusicRepository.findQueryMusic(nation, searchType, keyWord, customPageable);
+        Page<MusicQueryDto> queryMusic = tjMusicRepository.findQueryMusic(nation, searchType, keyWord, customPageable);
         return PageResponseDto.of(
                 queryMusic.getContent()
-                        .stream().map(MusicQueryDto::of)
-                        .toList()
                 , queryMusic);
     }
 

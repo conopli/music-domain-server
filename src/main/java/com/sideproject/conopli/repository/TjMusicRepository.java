@@ -14,5 +14,5 @@ public interface TjMusicRepository {
 
     TjMusic findTjMusicByNum(String num);
 
-    Page<TjMusic> findQueryMusic(MusicNation nation, SearchType searchType, String keyWord, Pageable pageable);
+    Page<MusicQueryDto> findQueryMusic(MusicNation nation, SearchType searchType, String keyWord, Pageable pageable);
 }
