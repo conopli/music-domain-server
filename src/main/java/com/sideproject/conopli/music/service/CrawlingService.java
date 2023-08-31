@@ -11,12 +11,14 @@ import com.sideproject.conopli.music.entity.TjMusic;
 import com.sideproject.conopli.repository.TjMusicRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,6 +27,7 @@ import static com.sideproject.conopli.utils.CrawlingUrlUtil.*;
 @Service
 @RequiredArgsConstructor
 @Transactional
+@Slf4j
 public class CrawlingService {
 
     private final TjMusicRepository tjMusicRepository;
@@ -32,6 +35,7 @@ public class CrawlingService {
     public ResponseDto getSearchCrawling(SearchRequestDto dto) {
         try {
             String url = createSearchUrl(dto);
+            log.info("Request Url = {}", url);
             Document doc = Jsoup.connect(url).get();
             Elements list =doc.select(".board_type1 tbody>tr");
             List<MusicDto> response = new ArrayList<>();
@@ -52,6 +56,7 @@ public class CrawlingService {
     public ResponseDto getPopularCrawling(PopularRequestDto dto) {
         try {
             String popularUrl = createPopularUrl(dto);
+            log.info("Request Url = {}", popularUrl);
             Document doc = Jsoup.connect(popularUrl).get();
             Elements list =doc.select(".board_type1 tbody>tr");
             List<PopularResponseDto> response = new ArrayList<>();
@@ -71,7 +76,12 @@ public class CrawlingService {
 
     public ResponseDto getNewMusicCrawling() {
         try {
-            String newSongUrl = createNewSongUrl();
+
+            String newSongUrl = createNewSongUrl(
+                    String.valueOf(LocalDateTime.now().getYear()),
+                    String.format("%02d", LocalDateTime.now().getMonthValue()-1)
+            );
+            log.info("Request Url = {}", newSongUrl);
             Document doc = Jsoup.connect(newSongUrl).get();
             Elements list =doc.select(".board_type1 tbody>tr");
             List<MusicDto> response = new ArrayList<>();

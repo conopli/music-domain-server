@@ -57,10 +57,12 @@ public class CrawlingUrlUtil {
         sb.append(emm);
         return sb.toString();
     }
-    public static String createNewSongUrl() {
+    public static String createNewSongUrl(
+            String year, String month
+    ) {
         StringBuilder sb = new StringBuilder();
         sb.append(crawlingUrl);
-        sb.append("song_monthNew.asp");
+        sb.append("song_monthNew.asp?YY="+year+"&MM="+month);
         return sb.toString();
     }
 
