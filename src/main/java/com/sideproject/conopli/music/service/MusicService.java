@@ -19,8 +19,6 @@ import org.springframework.data.domain.Sort;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -31,12 +29,12 @@ public class MusicService {
 
     private final TjMusicRepository tjMusicRepository;
 
-    private final CrawlingService crawlingService;
+    private final TjMusicCrawlingService tjMusicCrawlingService;
 
     public PageResponseDto searchMusic(
             MusicNation nation,
             SearchType searchType,
-            String keyWord,
+            List<String> keyWord,
             Pageable pageable
     ) {
         Pageable customPageable = PageRequest.of(
@@ -58,22 +56,22 @@ public class MusicService {
     }
 
     public ResponseDto searchNewMusic() {
-        return crawlingService.getNewMusicCrawling();
+        return tjMusicCrawlingService.getNewMusicCrawling();
     }
 
     public ResponseDto searchPopularMusic(PopularRequestDto requestDto) {
-        return crawlingService.getPopularCrawling(requestDto);
+        return tjMusicCrawlingService.getPopularCrawling(requestDto);
     }
 
 
     @Scheduled(cron = "0 0 05 * * *")
     public void saveNewSong() {
         log.info("@@ Start SaveNewSong Task!");
-        ResponseDto newMusicCrawling = crawlingService.getNewMusicCrawling();
+        ResponseDto newMusicCrawling = tjMusicCrawlingService.getNewMusicCrawling();
         List<MusicDto> newMusic = (List<MusicDto>) newMusicCrawling.getData();
-        newMusic.forEach(music -> crawlingService.createMusicCrawling(music.getNum(), MusicNation.KOR));
-        newMusic.forEach(music -> crawlingService.createMusicCrawling(music.getNum(), MusicNation.JPN));
-        newMusic.forEach(music -> crawlingService.createMusicCrawling(music.getNum(), MusicNation.ENG));
+        newMusic.forEach(music -> tjMusicCrawlingService.createMusicCrawling(music.getNum(), MusicNation.KOR));
+        newMusic.forEach(music -> tjMusicCrawlingService.createMusicCrawling(music.getNum(), MusicNation.JPN));
+        newMusic.forEach(music -> tjMusicCrawlingService.createMusicCrawling(music.getNum(), MusicNation.ENG));
         log.info("@@ Finish SaveNewSong Task!");
     }
 

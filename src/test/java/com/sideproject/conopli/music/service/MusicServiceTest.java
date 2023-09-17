@@ -27,13 +27,13 @@ class MusicServiceTest {
         Pageable pageable = PageRequest.of(1, 10);
         MusicNation nation = MusicNation.KOR;
         SearchType searchType = SearchType.TITLE;
-        String keyWord = "아리랑";
+        List<String> keyWord = List.of("아리랑");
         // When
         PageResponseDto pageResponseDto = service.searchMusic(nation, searchType, keyWord, pageable);
         List<MusicQueryDto> data = (List<MusicQueryDto>) pageResponseDto.getData();
         String title = data.get(0).getTitle();
         // Then
-        Assertions.assertThat(title.contains(keyWord)).isTrue();
+        Assertions.assertThat(title.contains(keyWord.get(0))).isTrue();
 
     }
 

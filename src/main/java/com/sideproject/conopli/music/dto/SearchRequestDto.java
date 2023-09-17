@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -12,7 +14,7 @@ public class SearchRequestDto {
     int searchType;
     int searchPage;
     // 검색어 없으면 에러
-    String searchKeyWord;
+    List<String> searchKeyWord;
     // KOR, ENG, JPN
     String searchNation;
 }
