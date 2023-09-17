@@ -28,13 +28,13 @@ import static com.sideproject.conopli.utils.CrawlingUrlUtil.*;
 @RequiredArgsConstructor
 @Transactional
 @Slf4j
-public class CrawlingService {
+public class TjMusicCrawlingService {
 
     private final TjMusicRepository tjMusicRepository;
 
     public ResponseDto getSearchCrawling(SearchRequestDto dto) {
         try {
-            String url = createSearchUrl(dto);
+            String url = createTjSearchUrl(dto);
             log.info("Request Url = {}", url);
             Document doc = Jsoup.connect(url).get();
             Elements list =doc.select(".board_type1 tbody>tr");
@@ -55,7 +55,7 @@ public class CrawlingService {
 
     public ResponseDto getPopularCrawling(PopularRequestDto dto) {
         try {
-            String popularUrl = createPopularUrl(dto);
+            String popularUrl = createTjPopularUrl(dto);
             log.info("Request Url = {}", popularUrl);
             Document doc = Jsoup.connect(popularUrl).get();
             Elements list =doc.select(".board_type1 tbody>tr");
@@ -76,8 +76,8 @@ public class CrawlingService {
 
     public ResponseDto getNewMusicCrawling() {
         try {
-
-            String newSongUrl = createNewSongUrl(
+//Todo 달 변경으로 인해 정상 파싱 되지 않음 임시 조치
+            String newSongUrl = createTjNewSongUrl(
                     String.valueOf(LocalDateTime.now().getYear()),
                     String.format("%02d", LocalDateTime.now().getMonthValue()-1)
             );
@@ -102,7 +102,7 @@ public class CrawlingService {
     public ResponseDto createMusicCrawling(String searchKeyWord, MusicNation nation) {
         try {
             String searchNation = nation.getNation();
-            String autoSearchUrl = createAutoSearchUrl(searchKeyWord, searchNation);
+            String autoSearchUrl = createTjAutoSearchUrl(searchKeyWord, searchNation);
             Document doc = Jsoup.connect(autoSearchUrl).get();
             Elements list = doc.select(".board_type1 tbody>tr");
             List<MusicDto> response = new ArrayList<>();
@@ -123,3 +123,4 @@ public class CrawlingService {
     }
 
 }
+
