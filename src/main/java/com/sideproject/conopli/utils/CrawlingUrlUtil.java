@@ -11,17 +11,27 @@ import org.springframework.stereotype.Component;
 public class CrawlingUrlUtil {
 
 //    @Value("${CRAWLING_URL}")
-    private static final String crawlingUrl = "http://tjmedia.com/tjsong/";
+    private static final String TjCrawlingUrl = "http://tjmedia.com/tjsong/";
+    private static final String KyCrawlingUrl = "https://kysing.kr/search/";
 
-    public static String createSearchUrl(SearchRequestDto dto) {
+    public static String createKySearchUrl(String key) {
+        StringBuilder sb = new StringBuilder();
+        sb.append(KyCrawlingUrl);
+        sb.append("?category=1");
+        sb.append("&keyword="+key);
+        return sb.toString();
+    }
+
+    public static String createTjSearchUrl(SearchRequestDto dto) {
         // 1 = 제목, 2 가수 , 4 작사가 , 8 작곡가, 16 곡번호
         int searchType = dto.getSearchType();
         int searchPage = dto.getSearchPage();
-        String searchKeyWord = dto.getSearchKeyWord();
+        //Todo 임시 수정
+        String searchKeyWord = dto.getSearchKeyWord().get(0);
         // KOR, ENG, JPN
         String searchNation = dto.getSearchNation();
         StringBuilder sb = new StringBuilder();
-        sb.append(crawlingUrl);
+        sb.append(TjCrawlingUrl);
         sb.append("song_search_list.asp");
         sb.append("?strType=");
         sb.append(searchType);
@@ -35,7 +45,7 @@ public class CrawlingUrlUtil {
         return sb.toString();
     }
 
-    public static String createPopularUrl(PopularRequestDto dto) {
+    public static String createTjPopularUrl(PopularRequestDto dto) {
         String searchType = dto.getSearchType();
         String syy = dto.getSyy();
         String smm = dto.getSmm();
@@ -43,7 +53,7 @@ public class CrawlingUrlUtil {
         String emm = dto.getEmm();
 
         StringBuilder sb = new StringBuilder();
-        sb.append(crawlingUrl);
+        sb.append(TjCrawlingUrl);
         sb.append("song_monthPopular.asp");
         sb.append("?strType=");
         sb.append(searchType);
@@ -57,21 +67,21 @@ public class CrawlingUrlUtil {
         sb.append(emm);
         return sb.toString();
     }
-    public static String createNewSongUrl(
+    public static String createTjNewSongUrl(
             String year, String month
     ) {
         StringBuilder sb = new StringBuilder();
-        sb.append(crawlingUrl);
+        sb.append(TjCrawlingUrl);
         sb.append("song_monthNew.asp?YY="+year+"&MM="+month);
         return sb.toString();
     }
 
-    public static String createAutoSearchUrl(String searchKeyWord, String searchNation) {
+    public static String createTjAutoSearchUrl(String searchKeyWord, String searchNation) {
         int searchType = 16;
         int searchPage = 1;
         // KOR, ENG, JPN
         StringBuilder sb = new StringBuilder();
-        sb.append(crawlingUrl);
+        sb.append(TjCrawlingUrl);
         sb.append("song_search_list.asp");
         sb.append("?strType=");
         sb.append(searchType);
