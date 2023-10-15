@@ -4,10 +4,7 @@ package com.sideproject.conopli.music.entity;
 import com.sideproject.conopli.audit.Auditable;
 import com.sideproject.conopli.music.dto.MusicDto;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 
 @Getter
@@ -20,7 +17,7 @@ public class KyMusic extends Auditable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long musicId;
 
-    @Column(nullable = false,unique = true)
+    @Column(nullable = false, unique = true)
     String num;
 
     @Column(nullable = false)
@@ -36,6 +33,7 @@ public class KyMusic extends Auditable {
     String composer;
 
     @Column(nullable = false)
+    @Setter
     boolean tjMappedCheck;
 
 
