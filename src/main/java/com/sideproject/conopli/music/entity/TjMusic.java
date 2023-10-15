@@ -5,10 +5,7 @@ import com.sideproject.conopli.audit.Auditable;
 import com.sideproject.conopli.constant.MusicNation;
 import com.sideproject.conopli.music.dto.MusicDto;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 
 @Getter
@@ -44,7 +41,12 @@ public class TjMusic extends Auditable {
     String youtubeUrl;
 
     @Column(nullable = true)
+    @Setter
     String kyNum;
+
+    @Column(nullable = false)
+    @Setter
+    boolean mrSound;
 
     public static TjMusic of(MusicDto dto) {
         return new TjMusic(dto);
