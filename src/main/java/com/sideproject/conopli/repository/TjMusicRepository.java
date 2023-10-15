@@ -18,4 +18,8 @@ public interface TjMusicRepository {
 
     Page<MusicQueryDto> findQueryMusic(MusicNation nation, SearchType searchType, List<String> keyWord, Pageable pageable);
 
+    Page<MusicQueryDto> findQueryMusic(SearchType searchType, List<String> keyWords, Pageable pageable);
+
+    TjMusic findQueryMusic(List<String> title, List<String> signer);
+
 }
