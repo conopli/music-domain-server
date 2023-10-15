@@ -122,5 +122,23 @@ public class TjMusicCrawlingService {
         }
     }
 
+    private String filteringSingerChangeMatchingForKyMusic(String singer) {
+        if (singer.contains("트와이스")) {
+            return singer.replaceAll("트와이스", "트와이스(TWICE)");
+        } else if (singer.contains("IU")) {
+            return singer.replaceAll("IU", "아이유(IU)");
+        } else if (singer.contains("K.Will")) {
+            return singer.replaceAll("K.Will", "케이윌(K.Will)");
+        } else if (singer.contains("BTOB")) {
+            return singer.replaceAll("BTOB", "비투비(BTOB)");
+        } else if (singer.contains("워너원")) {
+            return singer.replaceAll("워너원", "워너원(Wanna One)");
+        } else if (singer.contains("tei")) {
+            return singer.replaceAll("tei", "테이(TEI)");
+        } else {
+            return singer;
+        }
+    }
+
 }
 
