@@ -7,7 +7,9 @@ import com.sideproject.conopli.dto.ResponseDto;
 import com.sideproject.conopli.music.dto.MusicDto;
 import com.sideproject.conopli.music.dto.MusicQueryDto;
 import com.sideproject.conopli.music.dto.PopularRequestDto;
+import com.sideproject.conopli.music.entity.KyMusic;
 import com.sideproject.conopli.music.entity.TjMusic;
+import com.sideproject.conopli.repository.KyMusicRepository;
 import com.sideproject.conopli.repository.TjMusicRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -19,6 +21,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -31,7 +34,9 @@ public class MusicService {
 
     private final TjMusicCrawlingService tjMusicCrawlingService;
 
-    public PageResponseDto searchMusic(
+    private final KyMusicRepository kyMusicRepository;
+
+    public Page<MusicQueryDto> searchMusic(
             MusicNation nation,
             SearchType searchType,
             List<String> keyWord,
@@ -44,15 +49,12 @@ public class MusicService {
                 searchType.name().toLowerCase(),
                 "title"
         );
-        Page<MusicQueryDto> queryMusic = tjMusicRepository.findQueryMusic(nation, searchType, keyWord, customPageable);
-        return PageResponseDto.of(
-                queryMusic.getContent()
-                , queryMusic);
+        return tjMusicRepository.findQueryMusic(nation, searchType, keyWord, customPageable);
     }
 
-    public ResponseDto searchMusicByNum(String musicNum) {
+    public MusicQueryDto searchMusicByNum(String musicNum) {
         TjMusic tjMusicByNum = tjMusicRepository.findTjMusicByNum(musicNum);
-        return ResponseDto.of(MusicQueryDto.of(tjMusicByNum));
+        return MusicQueryDto.of(tjMusicByNum);
     }
 
     public ResponseDto searchNewMusic() {
@@ -61,6 +63,57 @@ public class MusicService {
 
     public ResponseDto searchPopularMusic(PopularRequestDto requestDto) {
         return tjMusicCrawlingService.getPopularCrawling(requestDto);
+    }
+
+    public Long updateTjMusicByKyMusicId(Long kyMusicId) {
+        KyMusic findKyMusic = kyMusicRepository.findMusicById(kyMusicId);
+        String kyTitle = findKyMusic.getTitle();
+        List<String> title = filteringString(kyTitle);
+        String kySinger = findKyMusic.getSinger();
+        List<String> singer = filteringString(kySinger);
+        TjMusic findTjMusic = tjMusicRepository.findQueryMusic(title, singer);
+        if (findTjMusic != null) {
+            findTjMusic.setKyNum(findKyMusic.getNum());
+            findKyMusic.setTjMappedCheck(true);
+            return kyMusicId;
+        } else {
+            return null;
+        }
+    }
+
+    public Long updateTjMusicByTjMusicId(Long tjMusicId) {
+        TjMusic findTjMusic = tjMusicRepository.findTjMusicById(tjMusicId);
+        String tjTitle = findTjMusic.getTitle();
+        String tjSinger = findTjMusic.getSinger();
+        List<String> titleStrings = filteringTjMusicString(tjTitle);
+        List<String> singerStrings = filteringTjMusicString(tjSinger);
+        KyMusic findKyMusic = kyMusicRepository.findQueryMusic(titleStrings, singerStrings);
+        if (findKyMusic != null) {
+            findTjMusic.setKyNum(findKyMusic.getNum());
+            findKyMusic.setTjMappedCheck(true);
+            return findKyMusic.getMusicId();
+        } else {
+            return null;
+        }
+    }
+
+    private List<String> filteringString(String keyWord) {
+        // 괄호 안 문자 제거
+        String bracket = keyWord.replaceAll("\\([^)]*\\)", "");
+        // 특수문자 공백으로 변경
+        String characters = bracket.replaceAll("[\\{\\}\\[\\]\\/?.,;:|\\)*~`!^\\-_+<>@\\#$%&\\\\\\=\\(\\'\\\"]", " ");
+        String[] s00 = characters.split(" ");
+        return Arrays.stream(s00).filter(str -> (!str.isEmpty() && !str.equals(" "))).toList();
+    }
+
+    private List<String> filteringTjMusicString(String tjMusicTitle) {
+        // 괄호 안 문자 제거
+        String bracket = tjMusicTitle.replaceAll("\\([^)]*\\)", "");
+        // 특수문자 공백으로 변경
+        String characters = bracket.replaceAll("[\\{\\}\\[\\]\\/?.,;:|\\)*~`!^\\-_+<>@\\#$%&\\\\\\=\\(\\'\\\"]", " ");
+        String[] s00 = characters.split("");
+        return Arrays.stream(s00).filter(str -> (!str.isEmpty() && !str.equals(" "))).toList();
+
     }
 
 
