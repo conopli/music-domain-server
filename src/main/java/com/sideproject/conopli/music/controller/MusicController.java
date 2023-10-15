@@ -5,11 +5,13 @@ import com.sideproject.conopli.constant.MusicNation;
 import com.sideproject.conopli.constant.SearchType;
 import com.sideproject.conopli.dto.PageResponseDto;
 import com.sideproject.conopli.dto.ResponseDto;
+import com.sideproject.conopli.music.dto.MusicQueryDto;
 import com.sideproject.conopli.music.dto.PopularRequestDto;
 import com.sideproject.conopli.music.dto.SearchRequestDto;
 import com.sideproject.conopli.music.service.MusicService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
@@ -31,21 +33,24 @@ public class MusicController {
             Pageable pageable
     ) {
 
-        PageResponseDto response = musicService.searchMusic(
+        Page<MusicQueryDto> queryMusic = musicService.searchMusic(
                 MusicNation.valueOf(requestDto.getSearchNation().toUpperCase()),
                 SearchType.getSearchTypeName(requestDto.getSearchType()),
                 requestDto.getSearchKeyWord(),
                 pageable
         );
-        return ResponseEntity.ok(response);
+
+        return ResponseEntity.ok(
+                PageResponseDto.of(queryMusic.getContent(), queryMusic)
+        );
     }
 
     @GetMapping("/search/{musicNum}")
     public ResponseEntity<?> searchMusicByNum(
             @PathVariable String musicNum
     ) {
-        ResponseDto response = musicService.searchMusicByNum(musicNum);
-        return ResponseEntity.ok(response);
+        MusicQueryDto musicQueryDto = musicService.searchMusicByNum(musicNum);
+        return ResponseEntity.ok(ResponseDto.of(musicQueryDto));
     }
 
     @GetMapping("/new-music")
