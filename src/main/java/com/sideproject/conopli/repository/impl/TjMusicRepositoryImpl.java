@@ -1,8 +1,6 @@
 package com.sideproject.conopli.repository.impl;
 
 import com.querydsl.core.types.Projections;
-import com.querydsl.core.types.dsl.PathBuilder;
-import com.querydsl.core.types.dsl.PathBuilderFactory;
 import com.querydsl.jpa.JPQLQuery;
 import com.sideproject.conopli.constant.ErrorCode;
 import com.sideproject.conopli.constant.MusicNation;
@@ -13,17 +11,14 @@ import com.sideproject.conopli.music.entity.QTjMusic;
 import com.sideproject.conopli.music.entity.TjMusic;
 import com.sideproject.conopli.repository.TjMusicJpaRepository;
 import com.sideproject.conopli.repository.TjMusicRepository;
-import jakarta.persistence.EntityManager;
-import org.springframework.data.domain.*;
-import org.springframework.data.jpa.repository.support.Querydsl;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
-
-import static com.querydsl.jpa.JPAExpressions.select;
-import static com.querydsl.jpa.JPAExpressions.selectFrom;
 
 @Repository
 public class TjMusicRepositoryImpl extends QuerydslRepositorySupport implements TjMusicRepository {
@@ -60,7 +55,7 @@ public class TjMusicRepositoryImpl extends QuerydslRepositorySupport implements 
     public Page<MusicQueryDto> findQueryMusic(
             MusicNation nation,
             SearchType searchType,
-            String keyWord,
+            List<String> keyWords,
             Pageable pageable
     ) {
         QTjMusic tjMusic = QTjMusic.tjMusic;
@@ -76,35 +71,39 @@ public class TjMusicRepositoryImpl extends QuerydslRepositorySupport implements 
                                 tjMusic.lyricist,
                                 tjMusic.composer,
                                 tjMusic.youtubeUrl,
-                                tjMusic.nation
+                                tjMusic.nation,
+                                tjMusic.kyNum,
+                                tjMusic.mrSound
                         )
                 );
-        if (searchType != null) {
-            if (searchType.equals(SearchType.NUM)) {
-                query.where(
-                        tjMusic.num.containsIgnoreCase(keyWord)
-                                .and(tjMusic.nation.eq(nation))
-                );
-            } else if (searchType.equals(SearchType.SINGER)) {
-                query.where(
-                        tjMusic.singer.eq(keyWord).or(tjMusic.singer.containsIgnoreCase(keyWord))
-                                .and(tjMusic.nation.eq(nation))
-                );
-            } else if (searchType.equals(SearchType.LYRICIST)) {
-                query.where(
-                        tjMusic.lyricist.eq(keyWord).or(tjMusic.lyricist.containsIgnoreCase(keyWord))
-                                .and(tjMusic.nation.eq(nation))
-                );
-            } else if (searchType.equals(SearchType.COMPOSER)) {
-                query.where(
-                        tjMusic.composer.eq(keyWord).or(tjMusic.composer.containsIgnoreCase(keyWord))
-                                .and(tjMusic.nation.eq(nation))
-                );
-            } else if (searchType.equals(SearchType.TITLE)) {
-                query.where(
-                        tjMusic.title.eq(keyWord).or(tjMusic.title.containsIgnoreCase(keyWord))
-                                .and(tjMusic.nation.eq(nation))
-                );
+        for (String keyWord : keyWords) {
+            if (searchType != null) {
+                if (searchType.equals(SearchType.NUM)) {
+                    query.where(
+                            tjMusic.num.containsIgnoreCase(keyWord)
+                                    .and(tjMusic.nation.eq(nation))
+                    );
+                } else if (searchType.equals(SearchType.SINGER)) {
+                    query.where(
+                            tjMusic.singer.eq(keyWord).or(tjMusic.singer.containsIgnoreCase(keyWord))
+                                    .and(tjMusic.nation.eq(nation))
+                    );
+                } else if (searchType.equals(SearchType.LYRICIST)) {
+                    query.where(
+                            tjMusic.lyricist.eq(keyWord).or(tjMusic.lyricist.containsIgnoreCase(keyWord))
+                                    .and(tjMusic.nation.eq(nation))
+                    );
+                } else if (searchType.equals(SearchType.COMPOSER)) {
+                    query.where(
+                            tjMusic.composer.eq(keyWord).or(tjMusic.composer.containsIgnoreCase(keyWord))
+                                    .and(tjMusic.nation.eq(nation))
+                    );
+                } else if (searchType.equals(SearchType.TITLE)) {
+                    query.where(
+                            tjMusic.title.eq(keyWord).or(tjMusic.title.containsIgnoreCase(keyWord))
+                                    .and(tjMusic.nation.eq(nation))
+                    );
+                }
             }
         }
 
@@ -117,17 +116,100 @@ public class TjMusicRepositoryImpl extends QuerydslRepositorySupport implements 
         return new PageImpl<>(musicList, pageable, query.fetchCount());
     }
 
+    @Override
+    public Page<MusicQueryDto> findQueryMusic(SearchType searchType, List<String> keyWords, Pageable pageable) {
+        QTjMusic tjMusic = QTjMusic.tjMusic;
+
+        JPQLQuery<MusicQueryDto> query = from(tjMusic)
+                .select(
+                        Projections.constructor(
+                                MusicQueryDto.class,
+                                tjMusic.musicId,
+                                tjMusic.num,
+                                tjMusic.title,
+                                tjMusic.singer,
+                                tjMusic.lyricist,
+                                tjMusic.composer,
+                                tjMusic.youtubeUrl,
+                                tjMusic.nation,
+                                tjMusic.kyNum,
+                                tjMusic.mrSound
+                        )
+                );
+        for (String keyWord : keyWords) {
+            if (searchType != null) {
+                if (searchType.equals(SearchType.NUM)) {
+                    query.where(
+                            tjMusic.num.containsIgnoreCase(keyWord)
+                    );
+                } else if (searchType.equals(SearchType.SINGER)) {
+                    query.where(
+                            tjMusic.singer.eq(keyWord).or(tjMusic.singer.containsIgnoreCase(keyWord))
+                    );
+                } else if (searchType.equals(SearchType.LYRICIST)) {
+                    query.where(
+                            tjMusic.lyricist.eq(keyWord).or(tjMusic.lyricist.containsIgnoreCase(keyWord))
+                    );
+                } else if (searchType.equals(SearchType.COMPOSER)) {
+                    query.where(
+                            tjMusic.composer.eq(keyWord).or(tjMusic.composer.containsIgnoreCase(keyWord))
+                    );
+                } else if (searchType.equals(SearchType.TITLE)) {
+                    query.where(
+                            tjMusic.title.eq(keyWord).or(tjMusic.title.containsIgnoreCase(keyWord))
+                    );
+                }
+            }
+        }
+
+
+        List<MusicQueryDto> musicList = Optional.ofNullable(getQuerydsl())
+                .orElseThrow(() -> new ServiceLogicException(
+                        ErrorCode.DATA_ACCESS_ERROR))
+                .applyPagination(pageable, query)
+                .fetch();
+        return new PageImpl<>(musicList, pageable, query.fetchCount());
+    }
+
+    @Override
+    public TjMusic findQueryMusic(
+            List<String> title,
+            List<String> signer
+    ) {
+        QTjMusic tjMusic = QTjMusic.tjMusic;
+
+        JPQLQuery<TjMusic> query = from(tjMusic)
+                .select(
+                        tjMusic
+                );
+
+        for (String keyWord : title) {
+            query.where(
+                    tjMusic.title.eq(keyWord).or(tjMusic.title.containsIgnoreCase(keyWord))
+            );
+        }
+        for (String keyWord : signer) {
+            query.where(
+                    tjMusic.singer.eq(keyWord).or(tjMusic.singer.containsIgnoreCase(keyWord))
+            );
+        }
+        return query.fetchFirst();
+    }
+
+
     private void verifyMusic(String num) {
         if (jpaRepository.findByNum(num).isPresent()) {
             throw new ServiceLogicException(ErrorCode.EXISTS_MUSIC_NUM);
         }
     }
+
     private TjMusic verifiedMusic(String num) {
         return jpaRepository.findByNum(num)
                 .orElseThrow(
                         () -> new ServiceLogicException(ErrorCode.NOT_FOUND_MUSIC)
                 );
     }
+
     private TjMusic verifiedMusicById(Long musicId) {
         return jpaRepository.findById(musicId)
                 .orElseThrow(

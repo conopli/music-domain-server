@@ -28,6 +28,9 @@ public class MusicDto {
     public static MusicDto of(List<String> bodyList, String nation) {
         return new MusicDto(bodyList, nation);
     }
+    public static MusicDto of(String title,List<String> bodyList) {
+        return new MusicDto(title, bodyList);
+    }
     MusicDto(List<String> bodyList, String nation) {
         this.num = bodyList.get(0);
         this.title = bodyList.get(1);
@@ -37,5 +40,13 @@ public class MusicDto {
         this.youtubeUrl = "https://www.youtube.com/user/ziller/search?query=" + bodyList.get(0);
         this.nation = nation;
 
+    }
+
+    MusicDto(String title,List<String> bodyList) {
+        this.num = bodyList.get(1);
+        this.title = title;
+        this.singer = bodyList.get(3);
+        this.composer = bodyList.get(4);
+        this.lyricist = bodyList.get(5);
     }
 }

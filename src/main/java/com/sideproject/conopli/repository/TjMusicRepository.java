@@ -7,6 +7,8 @@ import com.sideproject.conopli.music.entity.TjMusic;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.util.List;
+
 public interface TjMusicRepository {
     TjMusic saveMusic(TjMusic music);
 
@@ -14,5 +16,10 @@ public interface TjMusicRepository {
 
     TjMusic findTjMusicByNum(String num);
 
-    Page<MusicQueryDto> findQueryMusic(MusicNation nation, SearchType searchType, String keyWord, Pageable pageable);
+    Page<MusicQueryDto> findQueryMusic(MusicNation nation, SearchType searchType, List<String> keyWord, Pageable pageable);
+
+    Page<MusicQueryDto> findQueryMusic(SearchType searchType, List<String> keyWords, Pageable pageable);
+
+    TjMusic findQueryMusic(List<String> title, List<String> signer);
+
 }

@@ -11,21 +11,25 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class MusicQueryDto {
 
-    public Long musicId;
+    private Long musicId;
 
-    public String num;
+    private String num;
 
-    public String title;
+    private String title;
 
-    public String singer;
+    private String singer;
 
-    public String lyricist;
+    private String lyricist;
 
-    public String composer;
+    private String composer;
 
-    public String youtubeUrl;
+    private String youtubeUrl;
 
-    public MusicNation nation;
+    private MusicNation nation;
+
+    private String kyNum;
+
+    private boolean mrSound;
 
     MusicQueryDto(TjMusic music) {
         this.musicId = music.getMusicId();
@@ -36,6 +40,8 @@ public class MusicQueryDto {
         this.composer = music.getComposer();
         this.youtubeUrl = music.getYoutubeUrl();
         this.nation = music.getNation();
+        this.kyNum = music.getKyNum();
+        this.mrSound = music.isMrSound();
     }
 
     public static MusicQueryDto of(TjMusic music) {
