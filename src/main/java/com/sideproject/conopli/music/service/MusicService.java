@@ -2,7 +2,6 @@ package com.sideproject.conopli.music.service;
 
 import com.sideproject.conopli.constant.MusicNation;
 import com.sideproject.conopli.constant.SearchType;
-import com.sideproject.conopli.dto.PageResponseDto;
 import com.sideproject.conopli.dto.ResponseDto;
 import com.sideproject.conopli.music.dto.MusicDto;
 import com.sideproject.conopli.music.dto.MusicQueryDto;
@@ -39,7 +38,7 @@ public class MusicService {
     public Page<MusicQueryDto> searchMusic(
             MusicNation nation,
             SearchType searchType,
-            List<String> keyWord,
+            String keyWord,
             Pageable pageable
     ) {
         Pageable customPageable = PageRequest.of(
@@ -49,7 +48,7 @@ public class MusicService {
                 searchType.name().toLowerCase(),
                 "title"
         );
-        return tjMusicRepository.findQueryMusic(nation, searchType, keyWord, customPageable);
+        return tjMusicRepository.findQueryMusic(nation, searchType, filteringDetailSplitString(keyWord), customPageable);
     }
 
     public MusicQueryDto searchMusicByNum(String musicNum) {
@@ -85,8 +84,8 @@ public class MusicService {
         TjMusic findTjMusic = tjMusicRepository.findTjMusicById(tjMusicId);
         String tjTitle = findTjMusic.getTitle();
         String tjSinger = findTjMusic.getSinger();
-        List<String> titleStrings = filteringTjMusicString(tjTitle);
-        List<String> singerStrings = filteringTjMusicString(tjSinger);
+        List<String> titleStrings = filteringDetailSplitString(tjTitle);
+        List<String> singerStrings = filteringDetailSplitString(tjSinger);
         KyMusic findKyMusic = kyMusicRepository.findQueryMusic(titleStrings, singerStrings);
         if (findKyMusic != null) {
             findTjMusic.setKyNum(findKyMusic.getNum());
@@ -106,9 +105,9 @@ public class MusicService {
         return Arrays.stream(s00).filter(str -> (!str.isEmpty() && !str.equals(" "))).toList();
     }
 
-    private List<String> filteringTjMusicString(String tjMusicTitle) {
+    private List<String> filteringDetailSplitString(String keyWord) {
         // 괄호 안 문자 제거
-        String bracket = tjMusicTitle.replaceAll("\\([^)]*\\)", "");
+        String bracket = keyWord.replaceAll("\\([^)]*\\)", "");
         // 특수문자 공백으로 변경
         String characters = bracket.replaceAll("[\\{\\}\\[\\]\\/?.,;:|\\)*~`!^\\-_+<>@\\#$%&\\\\\\=\\(\\'\\\"]", " ");
         String[] s00 = characters.split("");

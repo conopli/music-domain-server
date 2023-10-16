@@ -14,7 +14,7 @@ public class SearchRequestDto {
     int searchType;
     int searchPage;
     // 검색어 없으면 에러
-    List<String> searchKeyWord;
+    String searchKeyWord;
     // KOR, ENG, JPN
     String searchNation;
 }
