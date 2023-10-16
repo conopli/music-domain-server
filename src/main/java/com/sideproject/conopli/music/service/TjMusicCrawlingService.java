@@ -28,13 +28,13 @@ import static com.sideproject.conopli.utils.CrawlingUrlUtil.*;
 @RequiredArgsConstructor
 @Transactional
 @Slf4j
-public class CrawlingService {
+public class TjMusicCrawlingService {
 
     private final TjMusicRepository tjMusicRepository;
 
     public ResponseDto getSearchCrawling(SearchRequestDto dto) {
         try {
-            String url = createSearchUrl(dto);
+            String url = createTjSearchUrl(dto);
             log.info("Request Url = {}", url);
             Document doc = Jsoup.connect(url).get();
             Elements list =doc.select(".board_type1 tbody>tr");
@@ -55,7 +55,7 @@ public class CrawlingService {
 
     public ResponseDto getPopularCrawling(PopularRequestDto dto) {
         try {
-            String popularUrl = createPopularUrl(dto);
+            String popularUrl = createTjPopularUrl(dto);
             log.info("Request Url = {}", popularUrl);
             Document doc = Jsoup.connect(popularUrl).get();
             Elements list =doc.select(".board_type1 tbody>tr");
@@ -76,8 +76,8 @@ public class CrawlingService {
 
     public ResponseDto getNewMusicCrawling() {
         try {
-
-            String newSongUrl = createNewSongUrl(
+//Todo 달 변경으로 인해 정상 파싱 되지 않음 임시 조치
+            String newSongUrl = createTjNewSongUrl(
                     String.valueOf(LocalDateTime.now().getYear()),
                     String.format("%02d", LocalDateTime.now().getMonthValue()-1)
             );
@@ -102,7 +102,7 @@ public class CrawlingService {
     public ResponseDto createMusicCrawling(String searchKeyWord, MusicNation nation) {
         try {
             String searchNation = nation.getNation();
-            String autoSearchUrl = createAutoSearchUrl(searchKeyWord, searchNation);
+            String autoSearchUrl = createTjAutoSearchUrl(searchKeyWord, searchNation);
             Document doc = Jsoup.connect(autoSearchUrl).get();
             Elements list = doc.select(".board_type1 tbody>tr");
             List<MusicDto> response = new ArrayList<>();
@@ -122,4 +122,23 @@ public class CrawlingService {
         }
     }
 
+    private String filteringSingerChangeMatchingForKyMusic(String singer) {
+        if (singer.contains("트와이스")) {
+            return singer.replaceAll("트와이스", "트와이스(TWICE)");
+        } else if (singer.contains("IU")) {
+            return singer.replaceAll("IU", "아이유(IU)");
+        } else if (singer.contains("K.Will")) {
+            return singer.replaceAll("K.Will", "케이윌(K.Will)");
+        } else if (singer.contains("BTOB")) {
+            return singer.replaceAll("BTOB", "비투비(BTOB)");
+        } else if (singer.contains("워너원")) {
+            return singer.replaceAll("워너원", "워너원(Wanna One)");
+        } else if (singer.contains("tei")) {
+            return singer.replaceAll("tei", "테이(TEI)");
+        } else {
+            return singer;
+        }
+    }
+
 }
+
