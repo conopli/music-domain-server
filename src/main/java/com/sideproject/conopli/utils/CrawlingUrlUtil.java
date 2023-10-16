@@ -26,8 +26,7 @@ public class CrawlingUrlUtil {
         // 1 = 제목, 2 가수 , 4 작사가 , 8 작곡가, 16 곡번호
         int searchType = dto.getSearchType();
         int searchPage = dto.getSearchPage();
-        //Todo 임시 수정
-        String searchKeyWord = dto.getSearchKeyWord().get(0);
+        String searchKeyWord = dto.getSearchKeyWord();
         // KOR, ENG, JPN
         String searchNation = dto.getSearchNation();
         StringBuilder sb = new StringBuilder();
