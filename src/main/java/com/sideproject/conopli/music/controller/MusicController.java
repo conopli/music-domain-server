@@ -54,8 +54,11 @@ public class MusicController {
     }
 
     @GetMapping("/new-music")
-    public ResponseEntity<ResponseDto> findNewMusic() {
-        ResponseDto response = musicService.searchNewMusic();
+    public ResponseEntity<ResponseDto> findNewMusic(
+            @RequestParam String yy,
+            @RequestParam String mm
+    ) {
+        ResponseDto response = musicService.searchNewMusic(yy, mm);
         return ResponseEntity.ok(response);
     }
 

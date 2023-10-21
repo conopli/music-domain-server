@@ -14,7 +14,7 @@ CONO-PLI Music Domain Server
 
 [[New-Music-GET-API]]
 === New Music GET API
-operation::NewMusicGetAPI[snippets='http-request,http-response,response-fields']
+operation::NewMusicGetAPI[snippets='http-request,query-parameters,http-response,response-fields']
 
 
 

@@ -13,12 +13,21 @@ public class CrawlingUrlUtil {
 //    @Value("${CRAWLING_URL}")
     private static final String TjCrawlingUrl = "http://tjmedia.com/tjsong/";
     private static final String KyCrawlingUrl = "https://kysing.kr/search/";
+    private static final String KyCrawlingNewMusicUrl = "https://kysing.kr/latest/";
 
     public static String createKySearchUrl(String key) {
         StringBuilder sb = new StringBuilder();
         sb.append(KyCrawlingUrl);
         sb.append("?category=1");
         sb.append("&keyword="+key);
+        return sb.toString();
+    }
+
+    public static String createKyNewMusicUrl(String page) {
+        StringBuilder sb = new StringBuilder();
+        sb.append(KyCrawlingNewMusicUrl);
+        sb.append("?s_page=");
+        sb.append(page);
         return sb.toString();
     }
 
