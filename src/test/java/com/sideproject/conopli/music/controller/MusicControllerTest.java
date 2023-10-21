@@ -100,7 +100,7 @@ class MusicControllerTest {
         //Given
         //When
         RequestBuilder result = RestDocumentationRequestBuilders
-                .get("/api/music/new-music")
+                .get("/api/music/new-music?yy=2023&mm=09")
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON)
                 .characterEncoding(StandardCharsets.UTF_8.displayName());
@@ -112,6 +112,10 @@ class MusicControllerTest {
                         document("NewMusicGetAPI",
                                 ApiDocumentUtils.getRequestPreProcessor(),
                                 ApiDocumentUtils.getResponsePreProcessor(),
+                                queryParameters(
+                                        parameterWithName("yy").description("검색 년도"),
+                                        parameterWithName("mm").description("검색 월" )
+                                ),
                                 responseFields(
                                         List.of(
                                                 fieldWithPath("data[]").type(JsonFieldType.ARRAY).description("결과 데이터"),
