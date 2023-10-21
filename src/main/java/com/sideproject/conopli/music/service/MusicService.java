@@ -20,6 +20,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 
@@ -32,6 +33,8 @@ public class MusicService {
     private final TjMusicRepository tjMusicRepository;
 
     private final TjMusicCrawlingService tjMusicCrawlingService;
+
+    private final KyMusicCrawlingService kyMusicCrawlingService;
 
     private final KyMusicRepository kyMusicRepository;
 
@@ -56,8 +59,8 @@ public class MusicService {
         return MusicQueryDto.of(tjMusicByNum);
     }
 
-    public ResponseDto searchNewMusic() {
-        return tjMusicCrawlingService.getNewMusicCrawling();
+    public ResponseDto searchNewMusic(String yy, String mm) {
+        return tjMusicCrawlingService.getNewMusicCrawling(yy, mm);
     }
 
     public ResponseDto searchPopularMusic(PopularRequestDto requestDto) {
@@ -82,6 +85,15 @@ public class MusicService {
 
     public Long updateTjMusicByTjMusicId(Long tjMusicId) {
         TjMusic findTjMusic = tjMusicRepository.findTjMusicById(tjMusicId);
+        return mappingKyMusicByFindTjMusic(findTjMusic);
+    }
+
+    public Long updateTjMusicByTjMusicNum(String num) {
+        TjMusic findTjMusic = tjMusicRepository.findTjMusicByNum(num);
+        return mappingKyMusicByFindTjMusic(findTjMusic);
+    }
+
+    private Long mappingKyMusicByFindTjMusic(TjMusic findTjMusic) {
         String tjTitle = findTjMusic.getTitle();
         String tjSinger = findTjMusic.getSinger();
         List<String> titleStrings = filteringDetailSplitString(tjTitle);
@@ -119,11 +131,23 @@ public class MusicService {
     @Scheduled(cron = "0 0 05 * * *")
     public void saveNewSong() {
         log.info("@@ Start SaveNewSong Task!");
-        ResponseDto newMusicCrawling = tjMusicCrawlingService.getNewMusicCrawling();
+        ResponseDto newMusicCrawling = tjMusicCrawlingService.getNewMusicCrawling(
+                String.valueOf(LocalDateTime.now().getYear()),
+                String.format("%02d", LocalDateTime.now().getMonthValue())
+        );
+        List<KyMusic> kyMusics = kyMusicCrawlingService.kyNewMusicCrawling();
         List<MusicDto> newMusic = (List<MusicDto>) newMusicCrawling.getData();
         newMusic.forEach(music -> tjMusicCrawlingService.createMusicCrawling(music.getNum(), MusicNation.KOR));
         newMusic.forEach(music -> tjMusicCrawlingService.createMusicCrawling(music.getNum(), MusicNation.JPN));
         newMusic.forEach(music -> tjMusicCrawlingService.createMusicCrawling(music.getNum(), MusicNation.ENG));
+        newMusic.forEach(musicDto -> {
+            try {
+                updateTjMusicByTjMusicNum(musicDto.getNum());
+            } catch (Exception e) {
+                log.info("### CHINA MUSIC "+ musicDto.getNum());
+            }
+        });
+        kyMusics.forEach(kyMusic -> updateTjMusicByKyMusicId(kyMusic.getMusicId()));
         log.info("@@ Finish SaveNewSong Task!");
     }
 
