@@ -12,18 +12,18 @@ import java.util.List;
 @AllArgsConstructor
 public class MusicDto {
 
-    public String num;
-    public String title;
+    private String num;
+    private String title;
 
-    public String singer;
+    private String singer;
 
-    public String lyricist;
+    private String lyricist;
 
-    public String composer;
+    private String composer;
 
-    public String youtubeUrl;
+    private String youtubeUrl;
 
-    public String nation;
+    private String nation;
 
     public static MusicDto of(List<String> bodyList, String nation) {
         return new MusicDto(bodyList, nation);
