@@ -37,13 +37,13 @@ public class TjMusicCrawlingService {
             String url = createTjSearchUrl(dto);
             log.info("Request Url = {}", url);
             Document doc = Jsoup.connect(url).get();
-            Elements list =doc.select(".board_type1 tbody>tr");
+            Elements list = doc.select(".board_type1 tbody>tr");
             List<MusicDto> response = new ArrayList<>();
             for (Element element : list) {
                 Elements select = element.select("tr>td");
                 if (!select.isEmpty()) {
                     List<String> bodyList = select.stream().map(Element::text).toList();
-                    MusicDto of = MusicDto.of(bodyList,dto.getSearchNation());
+                    MusicDto of = MusicDto.of(bodyList, dto.getSearchNation());
                     response.add(of);
                 }
             }
@@ -58,7 +58,7 @@ public class TjMusicCrawlingService {
             String popularUrl = createTjPopularUrl(dto);
             log.info("Request Url = {}", popularUrl);
             Document doc = Jsoup.connect(popularUrl).get();
-            Elements list =doc.select(".board_type1 tbody>tr");
+            Elements list = doc.select(".board_type1 tbody>tr");
             List<PopularResponseDto> response = new ArrayList<>();
             for (Element element : list) {
                 Elements select = element.select("tr>td");
@@ -76,20 +76,20 @@ public class TjMusicCrawlingService {
 
     public ResponseDto getNewMusicCrawling(String yy, String mm) {
         try {
-        //Todo 달 변경으로 인해 정상 파싱 되지 않음 임시 조치
+            //Todo 달 변경으로 인해 정상 파싱 되지 않음 임시 조치
             String newSongUrl = createTjNewSongUrl(
                     yy,
                     mm
             );
             log.info("Request Url = {}", newSongUrl);
             Document doc = Jsoup.connect(newSongUrl).get();
-            Elements list =doc.select(".board_type1 tbody>tr");
+            Elements list = doc.select(".board_type1 tbody>tr");
             List<MusicDto> response = new ArrayList<>();
             for (Element element : list) {
                 Elements select = element.select("tr>td");
                 if (!select.isEmpty()) {
                     List<String> bodyList = select.stream().map(Element::text).toList();
-                    MusicDto of = MusicDto.of(bodyList,"NEW");
+                    MusicDto of = MusicDto.of(bodyList, "NEW");
                     response.add(of);
                 }
             }
@@ -110,10 +110,14 @@ public class TjMusicCrawlingService {
                 Elements select = element.select("tr>td");
                 if (!select.isEmpty()) {
                     List<String> bodyList = select.stream().map(Element::text).toList();
-                    MusicDto of = MusicDto.of(bodyList, searchNation);
-                    response.add(of);
-                    TjMusic entity = TjMusic.of(of);
-                    tjMusicRepository.saveMusic(entity);
+                    if (bodyList.get(0) != null && bodyList.size() > 3) {
+                        MusicDto of = MusicDto.of(bodyList, searchNation);
+                        String changeSinger = filteringSingerChangeMatchingForKyMusic(of.getSinger());
+                        of.setSinger(changeSinger);
+                        response.add(of);
+                        TjMusic entity = TjMusic.of(of);
+                        tjMusicRepository.saveMusic(entity);
+                    }
                 }
             }
             return ResponseDto.of(response);
