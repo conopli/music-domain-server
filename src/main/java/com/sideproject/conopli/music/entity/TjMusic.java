@@ -48,6 +48,15 @@ public class TjMusic extends Auditable {
     @Setter
     boolean mrSound;
 
+    @ToString.Exclude
+    @ManyToOne(cascade = CascadeType.DETACH, fetch = FetchType.LAZY)
+    private NewMusic newMusic;
+
+    public void addNewMusic(NewMusic newMusic) {
+        this.newMusic = newMusic;
+        newMusic.addMusic(this);
+    }
+
     public static TjMusic of(MusicDto dto) {
         return new TjMusic(dto);
     }
