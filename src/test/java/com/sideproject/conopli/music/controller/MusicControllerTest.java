@@ -100,7 +100,7 @@ class MusicControllerTest {
         //Given
         //When
         RequestBuilder result = RestDocumentationRequestBuilders
-                .get("/api/music/new-music?yy=2023&mm=09")
+                .get("/api/music/new-music?yy=2023&mm=09&page=0")
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON)
                 .characterEncoding(StandardCharsets.UTF_8.displayName());
@@ -114,18 +114,29 @@ class MusicControllerTest {
                                 ApiDocumentUtils.getResponsePreProcessor(),
                                 queryParameters(
                                         parameterWithName("yy").description("검색 년도"),
-                                        parameterWithName("mm").description("검색 월" )
+                                        parameterWithName("mm").description("검색 월" ),
+                                        parameterWithName("page").description("요청 페이지 정보")
                                 ),
                                 responseFields(
                                         List.of(
                                                 fieldWithPath("data[]").type(JsonFieldType.ARRAY).description("결과 데이터"),
+                                                fieldWithPath("data[].musicId").type(JsonFieldType.NUMBER).description("모델 식별자"),
                                                 fieldWithPath("data[].num").type(JsonFieldType.STRING).description("곡번호"),
                                                 fieldWithPath("data[].title").type(JsonFieldType.STRING).description("곡 제목"),
                                                 fieldWithPath("data[].singer").type(JsonFieldType.STRING).description("가수"),
                                                 fieldWithPath("data[].lyricist").type(JsonFieldType.STRING).description("작사"),
                                                 fieldWithPath("data[].composer").type(JsonFieldType.STRING).description("작곡"),
                                                 fieldWithPath("data[].youtubeUrl").type(JsonFieldType.STRING).description("YouTube URL"),
-                                                fieldWithPath("data[].nation").type(JsonFieldType.STRING).description("국가")
+                                                fieldWithPath("data[].nation").type(JsonFieldType.STRING).description("국가"),
+                                                fieldWithPath("data[].kyNum").type(JsonFieldType.STRING).description("KY 곡번호").optional(),
+                                                fieldWithPath("data[].mrSound").type(JsonFieldType.BOOLEAN).description("MR 음원 여부"),
+                                                fieldWithPath("pageInfo").type(JsonFieldType.OBJECT).description("페이지 정보"),
+                                                fieldWithPath("pageInfo.page").type(JsonFieldType.NUMBER).description("현재 페이지"),
+                                                fieldWithPath("pageInfo.size").type(JsonFieldType.NUMBER).description("페이지 요소 갯수"),
+                                                fieldWithPath("pageInfo.totalElements").type(JsonFieldType.NUMBER).description("총 요소"),
+                                                fieldWithPath("pageInfo.totalPages").type(JsonFieldType.NUMBER).description("총 페이지")
+
+
                                         )
                                 )
 
