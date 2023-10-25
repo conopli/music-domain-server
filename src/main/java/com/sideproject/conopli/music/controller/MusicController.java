@@ -54,12 +54,14 @@ public class MusicController {
     }
 
     @GetMapping("/new-music")
-    public ResponseEntity<ResponseDto> findNewMusic(
+    public ResponseEntity<PageResponseDto> findNewMusic(
             @RequestParam String yy,
-            @RequestParam String mm
+            @RequestParam String mm,
+            @PageableDefault(page = 0, size = 20)
+            Pageable pageable
     ) {
-        ResponseDto response = musicService.searchNewMusic(yy, mm);
-        return ResponseEntity.ok(response);
+        Page<MusicQueryDto> findNewMusic = musicService.searchNewMusic(yy, mm, pageable);
+        return ResponseEntity.ok(PageResponseDto.of(findNewMusic.getContent(), findNewMusic));
     }
 
     @GetMapping("/popular")
