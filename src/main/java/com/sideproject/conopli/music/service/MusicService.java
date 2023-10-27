@@ -142,6 +142,27 @@ public class MusicService {
                 String.valueOf(year),
                 String.format("%02d", month)
         );
+        List<MusicDto> newMusicList = (List<MusicDto>) newMusicCrawling.getData();
+        for (MusicNation musicNation : Arrays.asList(MusicNation.KOR, MusicNation.JPN, MusicNation.ENG)) {
+            newMusicList.forEach(music -> {
+                log.info("### # New TjMusic MUSIC = {}", music.getNum());
+                tjMusicCrawlingService.createMusicCrawling(music.getNum(), musicNation);
+            });
+        }
+        List<KyMusic> kyMusics = kyMusicCrawlingService.kyNewMusicCrawling();
+        updateKyNumForNewMusic(newMusicList, kyMusics);
+        log.info("@@ Finish SaveNewSong Task!");
+    }
+
+    @Scheduled(cron = "0 0 06 * * *")
+    public void updateNewMusicEntity() {
+        log.info("@@ Start UpdateNewMusicEntity Task!");
+        int year = LocalDateTime.now().getYear();
+        int month = LocalDateTime.now().getMonthValue();
+        ResponseDto newMusicCrawling = tjMusicCrawlingService.getNewMusicCrawling(
+                String.valueOf(year),
+                String.format("%02d", month)
+        );
         NewMusic findNewMusic = newMusicRepository.findNewMusic(year, month)
                 .orElse(
                         NewMusic.builder()
@@ -151,25 +172,22 @@ public class MusicService {
                                 .build()
                 );
 
-        List<KyMusic> kyMusics = kyMusicCrawlingService.kyNewMusicCrawling();
         List<MusicDto> newMusicList = (List<MusicDto>) newMusicCrawling.getData();
-        saveNewKyMusic(newMusicList, findNewMusic);
-        updateKyNumForNewMusic(newMusicList, kyMusics);
-        log.info("@@ Finish SaveNewSong Task!");
+        saveNewTjMusic(newMusicList, findNewMusic);
+        log.info("@@ Finish UpdateNewMusicEntity Task!");
+
     }
 
-    private void saveNewKyMusic(List<MusicDto> newMusicList, NewMusic findNewMusic) {
-        for (MusicNation musicNation : Arrays.asList(MusicNation.KOR, MusicNation.JPN, MusicNation.ENG)) {
-            newMusicList.forEach(music -> {
-                tjMusicCrawlingService.createMusicCrawling(music.getNum(), musicNation);
-                try {
-                    tjMusicRepository.findTjMusicByNum(music.getNum()).addNewMusic(findNewMusic);
-                } catch (Exception e) {
-                    log.info("### CHINA MUSIC "+ music.getNum());
-                }
-                newMusicRepository.saveNewMusic(findNewMusic);
-            });
-        }
+    private void saveNewTjMusic(List<MusicDto> newMusicList, NewMusic findNewMusic) {
+        newMusicList.forEach(music -> {
+            try {
+                tjMusicRepository.findTjMusicByNum(music.getNum()).addNewMusic(findNewMusic);
+            } catch (Exception e) {
+                log.info("### # CHINA MUSIC = {}", music.getNum());
+                log.info("### # Error Message = {}", e.getMessage());
+            }
+            newMusicRepository.saveNewMusic(findNewMusic);
+        });
     }
 
     private void updateKyNumForNewMusic(List<MusicDto> newMusicList, List<KyMusic> kyMusics) {
@@ -177,7 +195,8 @@ public class MusicService {
             try {
                 updateTjMusicByTjMusicNum(musicDto.getNum());
             } catch (Exception e) {
-                log.info("### CHINA MUSIC "+ musicDto.getNum());
+                log.info("### CHINA MUSIC = {}", musicDto.getNum());
+                log.info("### Error Message = {}", e.getMessage());
             }
         });
         kyMusics.forEach(kyMusic -> updateTjMusicByKyMusicId(kyMusic.getMusicId()));
