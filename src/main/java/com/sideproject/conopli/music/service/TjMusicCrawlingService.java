@@ -49,6 +49,7 @@ public class TjMusicCrawlingService {
             }
             return ResponseDto.of(response);
         } catch (Exception e) {
+            log.error("Error Message = {}", e.getMessage());
             return ResponseDto.of(e.getMessage());
         }
     }
@@ -70,6 +71,7 @@ public class TjMusicCrawlingService {
             }
             return ResponseDto.of(response);
         } catch (Exception e) {
+            log.error("Error Message = {}", e.getMessage());
             return ResponseDto.of(e.getMessage());
         }
     }
@@ -95,6 +97,7 @@ public class TjMusicCrawlingService {
             }
             return ResponseDto.of(response);
         } catch (Exception e) {
+            log.error("Error Message = {}", e.getMessage());
             return ResponseDto.of(e.getMessage());
         }
     }
@@ -102,7 +105,8 @@ public class TjMusicCrawlingService {
     public ResponseDto createMusicCrawling(String searchKeyWord, MusicNation nation) {
         try {
             String searchNation = nation.getNation();
-            String autoSearchUrl = createTjAutoSearchUrl(searchKeyWord, searchNation);
+            String autoSearchUrl = createTjSearchUrlByNum(searchKeyWord);
+            log.info("Request Url = {}", autoSearchUrl);
             Document doc = Jsoup.connect(autoSearchUrl).get();
             Elements list = doc.select(".board_type1 tbody>tr");
             List<MusicDto> response = new ArrayList<>();
@@ -122,6 +126,7 @@ public class TjMusicCrawlingService {
             }
             return ResponseDto.of(response);
         } catch (Exception e) {
+            log.error("Error Message = {}", e.getMessage());
             return ResponseDto.of(e.getMessage());
         }
     }
