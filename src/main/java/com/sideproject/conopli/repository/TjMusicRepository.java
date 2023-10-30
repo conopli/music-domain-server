@@ -20,7 +20,7 @@ public interface TjMusicRepository {
 
     Page<MusicQueryDto> findQueryMusic(SearchType searchType, List<String> keyWords, Pageable pageable);
 
-    Page<MusicQueryDto> findQueryMusicByYyMm(int yy, int mm, Pageable pageable);
+    Page<MusicQueryDto> findNewMusicByYyMm(int yy, int mm, Pageable pageable);
 
     TjMusic findQueryMusic(List<String> title, List<String> signer);
 

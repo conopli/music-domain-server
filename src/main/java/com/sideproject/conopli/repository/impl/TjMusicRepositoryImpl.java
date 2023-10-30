@@ -136,7 +136,7 @@ public class TjMusicRepositoryImpl extends QuerydslRepositorySupport implements 
     }
 
     @Override
-    public Page<MusicQueryDto> findQueryMusicByYyMm(int yy, int mm, Pageable pageable) {
+    public Page<MusicQueryDto> findNewMusicByYyMm(int yy, int mm, Pageable pageable) {
         JPQLQuery<MusicQueryDto> query = from(tjMusic)
                 .select(getMusicQueryDtoExpression());
         query.where(
