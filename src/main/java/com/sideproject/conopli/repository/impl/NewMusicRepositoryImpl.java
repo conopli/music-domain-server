@@ -13,7 +13,7 @@ import java.util.Optional;
 public class NewMusicRepositoryImpl extends QuerydslRepositorySupport implements NewMusicRepository {
 
     public NewMusicRepositoryImpl(NewMusicJpaRepository jpaRepository) {
-        super(KyMusic.class);
+        super(NewMusic.class);
         this.jpaRepository = jpaRepository;
     }
 
