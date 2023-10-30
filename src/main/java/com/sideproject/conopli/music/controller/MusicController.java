@@ -6,7 +6,7 @@ import com.sideproject.conopli.constant.SearchType;
 import com.sideproject.conopli.dto.PageResponseDto;
 import com.sideproject.conopli.dto.ResponseDto;
 import com.sideproject.conopli.music.dto.MusicQueryDto;
-import com.sideproject.conopli.music.dto.PopularRequestDto;
+import com.sideproject.conopli.music.dto.PopularMusicResponseDto;
 import com.sideproject.conopli.music.dto.SearchRequestDto;
 import com.sideproject.conopli.music.service.MusicService;
 import lombok.RequiredArgsConstructor;
@@ -65,10 +65,14 @@ public class MusicController {
     }
 
     @GetMapping("/popular")
-    public ResponseEntity<ResponseDto> findPopularMusic(
-            @ModelAttribute PopularRequestDto requestDto
+    public ResponseEntity<PageResponseDto> findPopularMusic(
+            @RequestParam String yy,
+            @RequestParam String mm,
+            @RequestParam String searchType,
+            @PageableDefault(page = 0, size = 20)
+            Pageable pageable
     ) {
-        ResponseDto response = musicService.searchPopularMusic(requestDto);
-        return ResponseEntity.ok(response);
+        Page<PopularMusicResponseDto> response = musicService.searchPopularMusic(yy, mm, searchType, pageable);
+        return ResponseEntity.ok(PageResponseDto.of(response.getContent(), response));
     }
 }

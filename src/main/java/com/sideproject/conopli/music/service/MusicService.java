@@ -1,17 +1,13 @@
 package com.sideproject.conopli.music.service;
 
+import com.sideproject.conopli.constant.ErrorCode;
 import com.sideproject.conopli.constant.MusicNation;
 import com.sideproject.conopli.constant.SearchType;
 import com.sideproject.conopli.dto.ResponseDto;
-import com.sideproject.conopli.music.dto.MusicDto;
-import com.sideproject.conopli.music.dto.MusicQueryDto;
-import com.sideproject.conopli.music.dto.PopularRequestDto;
-import com.sideproject.conopli.music.entity.KyMusic;
-import com.sideproject.conopli.music.entity.NewMusic;
-import com.sideproject.conopli.music.entity.TjMusic;
-import com.sideproject.conopli.repository.KyMusicRepository;
-import com.sideproject.conopli.repository.NewMusicRepository;
-import com.sideproject.conopli.repository.TjMusicRepository;
+import com.sideproject.conopli.exception.ServiceLogicException;
+import com.sideproject.conopli.music.dto.*;
+import com.sideproject.conopli.music.entity.*;
+import com.sideproject.conopli.repository.*;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -43,6 +39,10 @@ public class MusicService {
 
     private final NewMusicRepository newMusicRepository;
 
+    private final PopularMusicRepository popularMusicRepository;
+
+    private final PopMusicEntityRepository popMusicEntityRepository;
+
     public Page<MusicQueryDto> searchMusic(
             MusicNation nation,
             SearchType searchType,
@@ -65,11 +65,12 @@ public class MusicService {
     }
 
     public Page<MusicQueryDto> searchNewMusic(String yy, String mm, Pageable pageable) {
-        return tjMusicRepository.findQueryMusicByYyMm(Integer.parseInt(yy), Integer.parseInt(mm), pageable);
+        return tjMusicRepository.findNewMusicByYyMm(Integer.parseInt(yy), Integer.parseInt(mm), pageable);
     }
 
-    public ResponseDto searchPopularMusic(PopularRequestDto requestDto) {
-        return tjMusicCrawlingService.getPopularCrawling(requestDto);
+    public Page<PopularMusicResponseDto> searchPopularMusic(String yy, String mm, String searchType, Pageable pageable) {
+        return popMusicEntityRepository.findPopularMusic(Integer.parseInt(yy), Integer.parseInt(mm), Integer.parseInt(searchType), pageable)
+                .map(PopularMusicResponseDto::of);
     }
 
     public Long updateTjMusicByKyMusicId(Long kyMusicId) {
@@ -130,6 +131,43 @@ public class MusicService {
         String[] s00 = characters.split("");
         return Arrays.stream(s00).filter(str -> (!str.isEmpty() && !str.equals(" "))).toList();
 
+    }
+
+    public void savePopularMusic(int yy, int mm, int searchType) {
+        PopularRequestDto request = PopularRequestDto.builder()
+                .searchType(String.valueOf(searchType))
+                .syy(String.valueOf(yy))
+                .eyy(String.valueOf(yy))
+                .emm(String.format("%02d", mm))
+                .smm(String.format("%02d", mm))
+                .build();
+        PopularMusic popularMusic = PopularMusic.builder()
+                .yy(yy)
+                .mm(mm)
+                .searchType(searchType)
+                .musics(new LinkedHashSet<>())
+                .build();
+        PopularMusic savePopularMusic = popularMusicRepository.savePopularMusic(popularMusic);
+
+    }
+
+    public void savePopularMusicEntity(int yy, int mm, int searchType) {
+        PopularRequestDto request = PopularRequestDto.builder()
+                .searchType(String.valueOf(searchType))
+                .syy(String.valueOf(yy))
+                .eyy(String.valueOf(yy))
+                .emm(String.format("%02d", mm))
+                .smm(String.format("%02d", mm))
+                .build();
+        PopularMusic findPopularMusic = popularMusicRepository.findPopularMusic(yy, mm, searchType)
+                .orElseThrow(() -> new ServiceLogicException(ErrorCode.NOT_FOUND_MUSIC));
+        ResponseDto popularCrawling = tjMusicCrawlingService.getPopularCrawling(request);
+        for (PopularResponseDto music : (List<PopularResponseDto>) popularCrawling.getData()) {
+            TjMusic findTjMusic = tjMusicRepository.findTjMusicByNum(music.getNum());
+            PopularMusicEntity popularMusicEntity = PopularMusicEntity.of(findTjMusic, music.getRanking());
+            popularMusicEntity.addPopularMusic(findPopularMusic);
+            popularMusicRepository.savePopularMusic(findPopularMusic);
+        }
     }
 
 
@@ -195,8 +233,8 @@ public class MusicService {
             try {
                 updateTjMusicByTjMusicNum(musicDto.getNum());
             } catch (Exception e) {
-                log.info("### CHINA MUSIC = {}", musicDto.getNum());
                 log.info("### Error Message = {}", e.getMessage());
+                log.info("### Error MUSIC = {}", musicDto.getNum());
             }
         });
         kyMusics.forEach(kyMusic -> updateTjMusicByKyMusicId(kyMusic.getMusicId()));
