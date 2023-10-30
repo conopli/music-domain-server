@@ -149,7 +149,7 @@ class MusicControllerTest {
         //Given
         //When
         RequestBuilder result = RestDocumentationRequestBuilders
-                .get("/api/music/popular?searchType=1&syy=2023&smm=04&eyy=2023&emm=04")
+                .get("/api/music/popular?searchType=1&yy=2023&mm=04")
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON)
                 .characterEncoding(StandardCharsets.UTF_8.displayName());
@@ -163,18 +163,28 @@ class MusicControllerTest {
                                 ApiDocumentUtils.getResponsePreProcessor(),
                                 queryParameters(
                                         parameterWithName("searchType").description("검색 타입 (1 = 가요 2 = POP 3 = J-POP)"),
-                                        parameterWithName("syy").description("시작 연도(ex. 2023)"),
-                                        parameterWithName("smm").description("시작 월(ex. 04)"),
-                                        parameterWithName("eyy").description("종료 연도(ex. 2023)"),
-                                        parameterWithName("emm").description("종료 월(ex. 04)")
+                                        parameterWithName("yy").description("연도"),
+                                        parameterWithName("mm").description("월")
                                 ),
                                 responseFields(
                                         List.of(
                                                 fieldWithPath("data[]").type(JsonFieldType.ARRAY).description("결과 데이터"),
-                                                fieldWithPath("data[].ranking").type(JsonFieldType.STRING).description("순위"),
-                                                fieldWithPath("data[].num").type(JsonFieldType.STRING).description("곡 번호"),
+                                                fieldWithPath("data[].musicId").type(JsonFieldType.NUMBER).description("모델 식별자"),
+                                                fieldWithPath("data[].num").type(JsonFieldType.STRING).description("곡번호"),
                                                 fieldWithPath("data[].title").type(JsonFieldType.STRING).description("곡 제목"),
-                                                fieldWithPath("data[].singer").type(JsonFieldType.STRING).description("가수")
+                                                fieldWithPath("data[].singer").type(JsonFieldType.STRING).description("가수"),
+                                                fieldWithPath("data[].lyricist").type(JsonFieldType.STRING).description("작사"),
+                                                fieldWithPath("data[].composer").type(JsonFieldType.STRING).description("작곡"),
+                                                fieldWithPath("data[].youtubeUrl").type(JsonFieldType.STRING).description("YouTube URL"),
+                                                fieldWithPath("data[].nation").type(JsonFieldType.STRING).description("국가"),
+                                                fieldWithPath("data[].kyNum").type(JsonFieldType.STRING).description("KY 곡번호").optional(),
+                                                fieldWithPath("data[].mrSound").type(JsonFieldType.BOOLEAN).description("MR 음원 여부"),
+                                                fieldWithPath("data[].ranking").type(JsonFieldType.STRING).description("순위"),
+                                                fieldWithPath("pageInfo").type(JsonFieldType.OBJECT).description("페이지 정보"),
+                                                fieldWithPath("pageInfo.page").type(JsonFieldType.NUMBER).description("현재 페이지"),
+                                                fieldWithPath("pageInfo.size").type(JsonFieldType.NUMBER).description("페이지 요소 갯수"),
+                                                fieldWithPath("pageInfo.totalElements").type(JsonFieldType.NUMBER).description("총 요소"),
+                                                fieldWithPath("pageInfo.totalPages").type(JsonFieldType.NUMBER).description("총 페이지")
                                         )
                                 )
 
