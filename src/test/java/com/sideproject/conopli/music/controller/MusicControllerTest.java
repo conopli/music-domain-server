@@ -50,7 +50,7 @@ class MusicControllerTest {
         //Given
         //When
         RequestBuilder result = RestDocumentationRequestBuilders
-                .get("/api/music/search?searchType=1&searchKeyWord=아리랑&searchNation=KOR&page=0")
+                .get("/api/music/search?searchType=1&searchKeyWord=아리랑&page=0")
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON)
                 .characterEncoding(StandardCharsets.UTF_8.displayName());
@@ -65,8 +65,7 @@ class MusicControllerTest {
                                 queryParameters(
                                         parameterWithName("page").description("요청 페이지 정보"),
                                         parameterWithName("searchType").description("검색 타입 (1 = 제목, 2 = 가수 , 4 = 작사가 , 8 = 작곡가, 16 = 곡번호)"),
-                                        parameterWithName("searchKeyWord").description("검색 키워드"),
-                                        parameterWithName("searchNation").description("검색 국가")
+                                        parameterWithName("searchKeyWord").description("검색 키워드")
                                 ),
                                 responseFields(
                                         List.of(

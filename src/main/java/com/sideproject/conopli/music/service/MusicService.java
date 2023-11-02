@@ -44,7 +44,6 @@ public class MusicService {
     private final PopMusicEntityRepository popMusicEntityRepository;
 
     public Page<MusicQueryDto> searchMusic(
-            MusicNation nation,
             SearchType searchType,
             String keyWord,
             Pageable pageable
@@ -56,7 +55,7 @@ public class MusicService {
                 searchType.name().toLowerCase(),
                 "title"
         );
-        return tjMusicRepository.findQueryMusic(nation, searchType, filteringDetailSplitString(keyWord), customPageable);
+        return tjMusicRepository.findQueryMusic(searchType, filteringDetailSplitString(keyWord), customPageable);
     }
 
     public MusicQueryDto searchMusicByNum(String musicNum) {
