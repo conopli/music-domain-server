@@ -149,7 +149,7 @@ class MusicControllerTest {
         //Given
         //When
         RequestBuilder result = RestDocumentationRequestBuilders
-                .get("/api/music/popular?searchType=1&yy=2023&mm=04")
+                .get("/api/music/popular?searchType=1&yy=2023&mm=04&page=1")
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON)
                 .characterEncoding(StandardCharsets.UTF_8.displayName());
@@ -164,7 +164,8 @@ class MusicControllerTest {
                                 queryParameters(
                                         parameterWithName("searchType").description("검색 타입 (1 = 가요 2 = POP 3 = J-POP)"),
                                         parameterWithName("yy").description("연도"),
-                                        parameterWithName("mm").description("월")
+                                        parameterWithName("mm").description("월"),
+                                        parameterWithName("page").description("요청 페이지 정보")
                                 ),
                                 responseFields(
                                         List.of(
