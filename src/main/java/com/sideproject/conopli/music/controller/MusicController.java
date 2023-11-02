@@ -34,7 +34,6 @@ public class MusicController {
     ) {
 
         Page<MusicQueryDto> queryMusic = musicService.searchMusic(
-                MusicNation.valueOf(requestDto.getSearchNation().toUpperCase()),
                 SearchType.getSearchTypeName(requestDto.getSearchType()),
                 requestDto.getSearchKeyWord(),
                 pageable
