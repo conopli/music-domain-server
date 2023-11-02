@@ -4,6 +4,7 @@ package com.sideproject.conopli.music.entity;
 import com.sideproject.conopli.audit.Auditable;
 import com.sideproject.conopli.constant.MusicNation;
 import com.sideproject.conopli.music.dto.MusicDto;
+import com.sideproject.conopli.music.dto.MusicQueryDto;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -13,7 +14,7 @@ import lombok.*;
 @Entity
 @Builder
 @AllArgsConstructor
-public class TjMusic extends Auditable {
+public class PopularMusicEntity extends Auditable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long musicId;
@@ -48,26 +49,35 @@ public class TjMusic extends Auditable {
     @Setter
     boolean mrSound;
 
+    @Column(nullable = false)
+    @Setter
+    String ranking;
+
     @ToString.Exclude
     @ManyToOne(cascade = CascadeType.DETACH, fetch = FetchType.LAZY)
-    private NewMusic newMusic;
+    private PopularMusic popularMusic;
 
-    public void addNewMusic(NewMusic newMusic) {
-        this.newMusic = newMusic;
-        newMusic.addMusic(this);
+    public void addPopularMusic(PopularMusic popularMusic) {
+        this.popularMusic = popularMusic;
+        popularMusic.addMusic(this);
     }
 
-    public static TjMusic of(MusicDto dto) {
-        return new TjMusic(dto);
+    PopularMusicEntity(TjMusic music, String ranking) {
+        this.musicId = music.getMusicId();
+        this.num = music.getNum();
+        this.title = music.getTitle();
+        this.singer = music.getSinger();
+        this.lyricist = music.getLyricist();
+        this.composer = music.getComposer();
+        this.youtubeUrl = music.getYoutubeUrl();
+        this.nation = music.getNation();
+        this.kyNum = music.getKyNum();
+        this.mrSound = music.isMrSound();
+        this.ranking = ranking;
     }
 
-    TjMusic(MusicDto dto) {
-        this.num = dto.getNum();
-        this.title = dto.getTitle();
-        this.singer = dto.getSinger();
-        this.lyricist = dto.getLyricist();
-        this.composer = dto.getComposer();
-        this.youtubeUrl = dto.getYoutubeUrl();
-        this.nation = MusicNation.valueOf(dto.getNation());
+    public static PopularMusicEntity of(TjMusic music, String ranking) {
+        return new PopularMusicEntity(music, ranking);
     }
+
 }

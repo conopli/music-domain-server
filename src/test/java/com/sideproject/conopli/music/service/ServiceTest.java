@@ -2,10 +2,13 @@ package com.sideproject.conopli.music.service;
 
 import com.sideproject.conopli.constant.MusicNation;
 import com.sideproject.conopli.constant.SearchType;
+import com.sideproject.conopli.dto.ResponseDto;
 import com.sideproject.conopli.exception.ServiceLogicException;
+import com.sideproject.conopli.music.dto.MusicDto;
 import com.sideproject.conopli.music.dto.MusicQueryDto;
 import com.sideproject.conopli.music.entity.KyMusic;
 import com.sideproject.conopli.repository.KyMusicRepository;
+import com.sideproject.conopli.repository.NewMusicRepository;
 import com.sideproject.conopli.repository.TjMusicRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Disabled;
@@ -30,6 +33,9 @@ class ServiceTest {
     KyMusicCrawlingService service;
 
     @Autowired
+    TjMusicCrawlingService tjMusicCrawlingService;
+
+    @Autowired
     MusicService musicService;
 
     @Autowired
@@ -37,6 +43,9 @@ class ServiceTest {
 
     @Autowired
     KyMusicRepository kyMusicRepository;
+
+    @Autowired
+    NewMusicRepository newMusicRepository;
 
     @Test
     @DisplayName("String Array Search And TjMusic Matching")

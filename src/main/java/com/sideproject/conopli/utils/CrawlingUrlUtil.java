@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 public class CrawlingUrlUtil {
 
 //    @Value("${CRAWLING_URL}")
-    private static final String TjCrawlingUrl = "http://tjmedia.com/tjsong/";
+    private static final String TjCrawlingUrl = "https://www.tjmedia.com/tjsong/";
     private static final String KyCrawlingUrl = "https://kysing.kr/search/";
     private static final String KyCrawlingNewMusicUrl = "https://kysing.kr/latest/";
 
@@ -97,6 +97,24 @@ public class CrawlingUrlUtil {
         sb.append(searchNation);
         sb.append("&strText=");
         sb.append(searchKeyWord);
+        sb.append("&strCond=1");
+        sb.append("&searchOrderType=&searchOrderItem=&intPage=");
+        sb.append(searchPage);
+        sb.append("&strWord=1");
+        return sb.toString();
+    }
+
+    public static String createTjSearchUrlByNum(String num) {
+        int searchType = 16;
+        int searchPage = 1;
+        // KOR, ENG, JPN
+        StringBuilder sb = new StringBuilder();
+        sb.append(TjCrawlingUrl);
+        sb.append("song_search_list.asp");
+        sb.append("?strType=");
+        sb.append(searchType);
+        sb.append("&strText=");
+        sb.append(num);
         sb.append("&strCond=1");
         sb.append("&searchOrderType=&searchOrderItem=&intPage=");
         sb.append(searchPage);

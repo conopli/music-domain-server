@@ -1,5 +1,6 @@
 package com.sideproject.conopli.repository.impl;
 
+import com.querydsl.core.types.ConstructorExpression;
 import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.JPQLQuery;
 import com.sideproject.conopli.constant.ErrorCode;
@@ -27,6 +28,8 @@ public class TjMusicRepositoryImpl extends QuerydslRepositorySupport implements 
         this.jpaRepository = jpaRepository;
     }
     private final TjMusicJpaRepository jpaRepository;
+
+    QTjMusic tjMusic = QTjMusic.tjMusic;
 
     @Override
     public TjMusic saveMusic(TjMusic music) {
@@ -58,24 +61,10 @@ public class TjMusicRepositoryImpl extends QuerydslRepositorySupport implements 
             List<String> keyWords,
             Pageable pageable
     ) {
-        QTjMusic tjMusic = QTjMusic.tjMusic;
+
 
         JPQLQuery<MusicQueryDto> query = from(tjMusic)
-                .select(
-                        Projections.constructor(
-                                MusicQueryDto.class,
-                                tjMusic.musicId,
-                                tjMusic.num,
-                                tjMusic.title,
-                                tjMusic.singer,
-                                tjMusic.lyricist,
-                                tjMusic.composer,
-                                tjMusic.youtubeUrl,
-                                tjMusic.nation,
-                                tjMusic.kyNum,
-                                tjMusic.mrSound
-                        )
-                );
+                .select(getMusicQueryDtoExpression());
         for (String keyWord : keyWords) {
             if (searchType != null) {
                 if (searchType.equals(SearchType.NUM)) {
@@ -108,34 +97,14 @@ public class TjMusicRepositoryImpl extends QuerydslRepositorySupport implements 
         }
 
 
-        List<MusicQueryDto> musicList = Optional.ofNullable(getQuerydsl())
-                .orElseThrow(() -> new ServiceLogicException(
-                        ErrorCode.DATA_ACCESS_ERROR))
-                .applyPagination(pageable, query)
-                .fetch();
-        return new PageImpl<>(musicList, pageable, query.fetchCount());
+        return getPageImpl(query, pageable);
     }
 
     @Override
     public Page<MusicQueryDto> findQueryMusic(SearchType searchType, List<String> keyWords, Pageable pageable) {
-        QTjMusic tjMusic = QTjMusic.tjMusic;
 
         JPQLQuery<MusicQueryDto> query = from(tjMusic)
-                .select(
-                        Projections.constructor(
-                                MusicQueryDto.class,
-                                tjMusic.musicId,
-                                tjMusic.num,
-                                tjMusic.title,
-                                tjMusic.singer,
-                                tjMusic.lyricist,
-                                tjMusic.composer,
-                                tjMusic.youtubeUrl,
-                                tjMusic.nation,
-                                tjMusic.kyNum,
-                                tjMusic.mrSound
-                        )
-                );
+                .select(getMusicQueryDtoExpression());
         for (String keyWord : keyWords) {
             if (searchType != null) {
                 if (searchType.equals(SearchType.NUM)) {
@@ -163,12 +132,17 @@ public class TjMusicRepositoryImpl extends QuerydslRepositorySupport implements 
         }
 
 
-        List<MusicQueryDto> musicList = Optional.ofNullable(getQuerydsl())
-                .orElseThrow(() -> new ServiceLogicException(
-                        ErrorCode.DATA_ACCESS_ERROR))
-                .applyPagination(pageable, query)
-                .fetch();
-        return new PageImpl<>(musicList, pageable, query.fetchCount());
+        return getPageImpl(query, pageable);
+    }
+
+    @Override
+    public Page<MusicQueryDto> findNewMusicByYyMm(int yy, int mm, Pageable pageable) {
+        JPQLQuery<MusicQueryDto> query = from(tjMusic)
+                .select(getMusicQueryDtoExpression());
+        query.where(
+                tjMusic.newMusic.yy.eq(yy).and(tjMusic.newMusic.mm.eq(mm))
+        );
+        return getPageImpl(query, pageable);
     }
 
     @Override
@@ -215,5 +189,30 @@ public class TjMusicRepositoryImpl extends QuerydslRepositorySupport implements 
                 .orElseThrow(
                         () -> new ServiceLogicException(ErrorCode.NOT_FOUND_MUSIC)
                 );
+    }
+
+    private ConstructorExpression<MusicQueryDto> getMusicQueryDtoExpression() {
+        return Projections.constructor(
+                MusicQueryDto.class,
+                tjMusic.musicId,
+                tjMusic.num,
+                tjMusic.title,
+                tjMusic.singer,
+                tjMusic.lyricist,
+                tjMusic.composer,
+                tjMusic.youtubeUrl,
+                tjMusic.nation,
+                tjMusic.kyNum,
+                tjMusic.mrSound
+        );
+    }
+
+    private Page<MusicQueryDto> getPageImpl(JPQLQuery<MusicQueryDto> query, Pageable pageable) {
+        List<MusicQueryDto> musicList = Optional.ofNullable(getQuerydsl())
+                .orElseThrow(() -> new ServiceLogicException(
+                        ErrorCode.DATA_ACCESS_ERROR))
+                .applyPagination(pageable, query)
+                .fetch();
+        return new PageImpl<>(musicList, pageable, query.fetchCount());
     }
 }

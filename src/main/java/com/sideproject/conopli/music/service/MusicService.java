@@ -1,15 +1,13 @@
 package com.sideproject.conopli.music.service;
 
+import com.sideproject.conopli.constant.ErrorCode;
 import com.sideproject.conopli.constant.MusicNation;
 import com.sideproject.conopli.constant.SearchType;
 import com.sideproject.conopli.dto.ResponseDto;
-import com.sideproject.conopli.music.dto.MusicDto;
-import com.sideproject.conopli.music.dto.MusicQueryDto;
-import com.sideproject.conopli.music.dto.PopularRequestDto;
-import com.sideproject.conopli.music.entity.KyMusic;
-import com.sideproject.conopli.music.entity.TjMusic;
-import com.sideproject.conopli.repository.KyMusicRepository;
-import com.sideproject.conopli.repository.TjMusicRepository;
+import com.sideproject.conopli.exception.ServiceLogicException;
+import com.sideproject.conopli.music.dto.*;
+import com.sideproject.conopli.music.entity.*;
+import com.sideproject.conopli.repository.*;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -22,6 +20,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.Arrays;
+import java.util.LinkedHashSet;
 import java.util.List;
 
 @Service
@@ -37,6 +36,12 @@ public class MusicService {
     private final KyMusicCrawlingService kyMusicCrawlingService;
 
     private final KyMusicRepository kyMusicRepository;
+
+    private final NewMusicRepository newMusicRepository;
+
+    private final PopularMusicRepository popularMusicRepository;
+
+    private final PopMusicEntityRepository popMusicEntityRepository;
 
     public Page<MusicQueryDto> searchMusic(
             MusicNation nation,
@@ -59,12 +64,13 @@ public class MusicService {
         return MusicQueryDto.of(tjMusicByNum);
     }
 
-    public ResponseDto searchNewMusic(String yy, String mm) {
-        return tjMusicCrawlingService.getNewMusicCrawling(yy, mm);
+    public Page<MusicQueryDto> searchNewMusic(String yy, String mm, Pageable pageable) {
+        return tjMusicRepository.findNewMusicByYyMm(Integer.parseInt(yy), Integer.parseInt(mm), pageable);
     }
 
-    public ResponseDto searchPopularMusic(PopularRequestDto requestDto) {
-        return tjMusicCrawlingService.getPopularCrawling(requestDto);
+    public Page<PopularMusicResponseDto> searchPopularMusic(String yy, String mm, String searchType, Pageable pageable) {
+        return popMusicEntityRepository.findPopularMusic(Integer.parseInt(yy), Integer.parseInt(mm), Integer.parseInt(searchType), pageable)
+                .map(PopularMusicResponseDto::of);
     }
 
     public Long updateTjMusicByKyMusicId(Long kyMusicId) {
@@ -127,28 +133,112 @@ public class MusicService {
 
     }
 
+    public void savePopularMusic(int yy, int mm, int searchType) {
+        PopularRequestDto request = PopularRequestDto.builder()
+                .searchType(String.valueOf(searchType))
+                .syy(String.valueOf(yy))
+                .eyy(String.valueOf(yy))
+                .emm(String.format("%02d", mm))
+                .smm(String.format("%02d", mm))
+                .build();
+        PopularMusic popularMusic = PopularMusic.builder()
+                .yy(yy)
+                .mm(mm)
+                .searchType(searchType)
+                .musics(new LinkedHashSet<>())
+                .build();
+        PopularMusic savePopularMusic = popularMusicRepository.savePopularMusic(popularMusic);
+
+    }
+
+    public void savePopularMusicEntity(int yy, int mm, int searchType) {
+        PopularRequestDto request = PopularRequestDto.builder()
+                .searchType(String.valueOf(searchType))
+                .syy(String.valueOf(yy))
+                .eyy(String.valueOf(yy))
+                .emm(String.format("%02d", mm))
+                .smm(String.format("%02d", mm))
+                .build();
+        PopularMusic findPopularMusic = popularMusicRepository.findPopularMusic(yy, mm, searchType)
+                .orElseThrow(() -> new ServiceLogicException(ErrorCode.NOT_FOUND_MUSIC));
+        ResponseDto popularCrawling = tjMusicCrawlingService.getPopularCrawling(request);
+        for (PopularResponseDto music : (List<PopularResponseDto>) popularCrawling.getData()) {
+            TjMusic findTjMusic = tjMusicRepository.findTjMusicByNum(music.getNum());
+            PopularMusicEntity popularMusicEntity = PopularMusicEntity.of(findTjMusic, music.getRanking());
+            popularMusicEntity.addPopularMusic(findPopularMusic);
+            popularMusicRepository.savePopularMusic(findPopularMusic);
+        }
+    }
+
 
     @Scheduled(cron = "0 0 05 * * *")
     public void saveNewSong() {
         log.info("@@ Start SaveNewSong Task!");
+        int year = LocalDateTime.now().getYear();
+        int month = LocalDateTime.now().getMonthValue();
         ResponseDto newMusicCrawling = tjMusicCrawlingService.getNewMusicCrawling(
-                String.valueOf(LocalDateTime.now().getYear()),
-                String.format("%02d", LocalDateTime.now().getMonthValue())
+                String.valueOf(year),
+                String.format("%02d", month)
         );
+        List<MusicDto> newMusicList = (List<MusicDto>) newMusicCrawling.getData();
+        for (MusicNation musicNation : Arrays.asList(MusicNation.KOR, MusicNation.JPN, MusicNation.ENG)) {
+            newMusicList.forEach(music -> {
+                log.info("### # New TjMusic MUSIC = {}", music.getNum());
+                tjMusicCrawlingService.createMusicCrawling(music.getNum(), musicNation);
+            });
+        }
         List<KyMusic> kyMusics = kyMusicCrawlingService.kyNewMusicCrawling();
-        List<MusicDto> newMusic = (List<MusicDto>) newMusicCrawling.getData();
-        newMusic.forEach(music -> tjMusicCrawlingService.createMusicCrawling(music.getNum(), MusicNation.KOR));
-        newMusic.forEach(music -> tjMusicCrawlingService.createMusicCrawling(music.getNum(), MusicNation.JPN));
-        newMusic.forEach(music -> tjMusicCrawlingService.createMusicCrawling(music.getNum(), MusicNation.ENG));
-        newMusic.forEach(musicDto -> {
+        updateKyNumForNewMusic(newMusicList, kyMusics);
+        log.info("@@ Finish SaveNewSong Task!");
+    }
+
+    @Scheduled(cron = "0 0 06 * * *")
+    public void updateNewMusicEntity() {
+        log.info("@@ Start UpdateNewMusicEntity Task!");
+        int year = LocalDateTime.now().getYear();
+        int month = LocalDateTime.now().getMonthValue();
+        ResponseDto newMusicCrawling = tjMusicCrawlingService.getNewMusicCrawling(
+                String.valueOf(year),
+                String.format("%02d", month)
+        );
+        NewMusic findNewMusic = newMusicRepository.findNewMusic(year, month)
+                .orElse(
+                        NewMusic.builder()
+                                .yy(year)
+                                .mm(month)
+                                .musics(new LinkedHashSet<>())
+                                .build()
+                );
+
+        List<MusicDto> newMusicList = (List<MusicDto>) newMusicCrawling.getData();
+        saveNewTjMusic(newMusicList, findNewMusic);
+        log.info("@@ Finish UpdateNewMusicEntity Task!");
+
+    }
+
+    private void saveNewTjMusic(List<MusicDto> newMusicList, NewMusic findNewMusic) {
+        newMusicList.forEach(music -> {
+            try {
+                tjMusicRepository.findTjMusicByNum(music.getNum()).addNewMusic(findNewMusic);
+            } catch (Exception e) {
+                log.info("### # CHINA MUSIC = {}", music.getNum());
+                log.info("### # Error Message = {}", e.getMessage());
+            }
+            newMusicRepository.saveNewMusic(findNewMusic);
+        });
+    }
+
+    private void updateKyNumForNewMusic(List<MusicDto> newMusicList, List<KyMusic> kyMusics) {
+        newMusicList.forEach(musicDto -> {
             try {
                 updateTjMusicByTjMusicNum(musicDto.getNum());
             } catch (Exception e) {
-                log.info("### CHINA MUSIC "+ musicDto.getNum());
+                log.info("### Error Message = {}", e.getMessage());
+                log.info("### Error MUSIC = {}", musicDto.getNum());
             }
         });
         kyMusics.forEach(kyMusic -> updateTjMusicByKyMusicId(kyMusic.getMusicId()));
-        log.info("@@ Finish SaveNewSong Task!");
     }
+
 
 }
