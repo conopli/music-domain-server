@@ -68,7 +68,7 @@ public class MusicController {
             @RequestParam String yy,
             @RequestParam String mm,
             @RequestParam String searchType,
-            @PageableDefault(page = 0, size = 20)
+            @PageableDefault(page = 0, size = 20, sort = "ranking", direction = Sort.Direction.ASC)
             Pageable pageable
     ) {
         Page<PopularMusicResponseDto> response = musicService.searchPopularMusic(yy, mm, searchType, pageable);

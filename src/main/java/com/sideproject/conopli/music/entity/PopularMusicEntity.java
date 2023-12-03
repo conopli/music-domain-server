@@ -51,7 +51,7 @@ public class PopularMusicEntity extends Auditable {
 
     @Column(nullable = false)
     @Setter
-    String ranking;
+    Long ranking;
 
     @ToString.Exclude
     @ManyToOne(cascade = CascadeType.DETACH, fetch = FetchType.LAZY)
@@ -62,7 +62,7 @@ public class PopularMusicEntity extends Auditable {
         popularMusic.addMusic(this);
     }
 
-    PopularMusicEntity(TjMusic music, String ranking) {
+    PopularMusicEntity(TjMusic music, Long ranking) {
         this.musicId = music.getMusicId();
         this.num = music.getNum();
         this.title = music.getTitle();
@@ -76,7 +76,7 @@ public class PopularMusicEntity extends Auditable {
         this.ranking = ranking;
     }
 
-    public static PopularMusicEntity of(TjMusic music, String ranking) {
+    public static PopularMusicEntity of(TjMusic music, Long ranking) {
         return new PopularMusicEntity(music, ranking);
     }
 

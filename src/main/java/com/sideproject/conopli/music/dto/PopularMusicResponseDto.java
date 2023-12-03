@@ -33,7 +33,7 @@ public class PopularMusicResponseDto {
 
     boolean mrSound;
 
-    String ranking;
+    Long ranking;
 
     PopularMusicResponseDto(PopularMusicEntity music) {
         this.musicId = music.getMusicId();

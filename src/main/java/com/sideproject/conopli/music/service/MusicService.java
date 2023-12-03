@@ -163,7 +163,8 @@ public class MusicService {
         ResponseDto popularCrawling = tjMusicCrawlingService.getPopularCrawling(request);
         for (PopularResponseDto music : (List<PopularResponseDto>) popularCrawling.getData()) {
             TjMusic findTjMusic = tjMusicRepository.findTjMusicByNum(music.getNum());
-            PopularMusicEntity popularMusicEntity = PopularMusicEntity.of(findTjMusic, music.getRanking());
+            log.info("### music Title = {}", music.getTitle());
+            PopularMusicEntity popularMusicEntity = PopularMusicEntity.of(findTjMusic, Long.parseLong(music.getRanking()));
             popularMusicEntity.addPopularMusic(findPopularMusic);
             popularMusicRepository.savePopularMusic(findPopularMusic);
         }
