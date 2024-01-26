@@ -77,9 +77,13 @@ public class TjMusicCrawlingService {
     public ResponseDto getNewMusicCrawling() {
         try {
 //Todo 달 변경으로 인해 정상 파싱 되지 않음 임시 조치
+            int searchMonth = LocalDateTime.now().getMonthValue() - 1;
+            if (searchMonth == 0) {
+                searchMonth = 1;
+            }
             String newSongUrl = createTjNewSongUrl(
                     String.valueOf(LocalDateTime.now().getYear()),
-                    String.format("%02d", LocalDateTime.now().getMonthValue()-1)
+                    String.format("%02d", searchMonth)
             );
             log.info("Request Url = {}", newSongUrl);
             Document doc = Jsoup.connect(newSongUrl).get();
