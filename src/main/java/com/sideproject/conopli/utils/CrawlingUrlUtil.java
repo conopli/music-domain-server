@@ -50,6 +50,10 @@ public class CrawlingUrlUtil {
         String smm = dto.getSmm();
         String eyy = dto.getEyy();
         String emm = dto.getEmm();
+        if (smm.equals("00") || emm.equals("00")) {
+            smm = "01";
+            emm = "01";
+        }
 
         StringBuilder sb = new StringBuilder();
         sb.append(TjCrawlingUrl);
